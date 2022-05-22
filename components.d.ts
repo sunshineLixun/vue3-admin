@@ -5,8 +5,13 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AButton: typeof import('ant-design-vue/es')['Button']
-    ADatePicker: typeof import('ant-design-vue/es')['DatePicker']
+    AButton: typeof import("ant-design-vue/es")["Button"];
+    ADatePicker: typeof import("ant-design-vue/es")["DatePicker"];
+    ALayout: typeof import('ant-design-vue/es')['Layout']
+    ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
+    ALayoutFooter: typeof import('ant-design-vue/es')['LayoutFooter']
+    ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
+    ALayoutSider: typeof import('ant-design-vue/es')['LayoutSider']
     LxAlert: typeof import('./src/components/lx-alert.vue')['default']
     LxIcon: typeof import('./src/components/lx-icon.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
