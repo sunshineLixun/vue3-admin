@@ -5,14 +5,14 @@ import Button, { DataSource } from "../components/button";
 import { toRaw } from "@vue/reactivity";
 
 function onAdd(values: DataSource[]) {
-  console.log(toRaw(values));
+	console.log(toRaw(values));
 }
 </script>
 
 <template>
-  <main>
-    <LXIcon icon="xx" />
-    <LXAlert />
-    <Button title="hhhhh" @add="onAdd" />
-  </main>
+	<main>
+		<LXIcon icon="xx" />
+		<LXAlert />
+		<Button title="hhhhh" @add="onAdd" />
+	</main>
 </template>

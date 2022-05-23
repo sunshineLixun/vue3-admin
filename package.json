@@ -8,7 +8,9 @@
 		"test:unit": "vitest --environment jsdom",
 		"typecheck": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"lint:eslint": "eslint --fix --ext .js,.ts,.vue ./src",
+		"lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,ts,json,tsx,css,less,vue,html,md}\""
 	},
 	"dependencies": {
 		"ant-design-vue": "^3.2.3",
