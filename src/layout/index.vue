@@ -4,7 +4,7 @@
 			<div></div>
 		</Layout.Sider>
 		<Layout>
-			<Layout.Header>header</Layout.Header>
+			<Header>header</Header>
 			<Layout.Content>
 				<router-view v-slot="{ Component, route }">
 					<transition appear name="fade-transform" mode="out-in">
@@ -14,7 +14,7 @@
 					</transition>
 				</router-view>
 			</Layout.Content>
-			<Layout.Footer>footer</Layout.Footer>
+			<Footer>footer</Footer>
 		</Layout>
 	</Layout>
 </template>
@@ -22,7 +22,11 @@
 <script lang="ts" setup>
 import { ref } from "@vue/reactivity";
 import { computed } from "@vue/runtime-core";
+
 import { Layout } from "ant-design-vue";
+import Header from "./header";
+import Footer from "./footer";
+
 const collapsed = ref<boolean>(false);
 const asiderWidth = computed(() => (collapsed.value ? 80 : 200));
 </script>
