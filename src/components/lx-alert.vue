@@ -6,7 +6,15 @@
 import { defineComponent, reactive, ref } from "vue";
 
 export default defineComponent({
-	setup() {
+	setup(props, ctx) {
+		function onLoad() {
+			console.log("onload");
+		}
+
+		ctx.expose({
+			onLoad
+		});
+
 		const age = ref({
 			name: "11"
 		});

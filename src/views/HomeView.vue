@@ -1,18 +1,23 @@
+<template>
+	<main>
+		<LXIcon icon="xx" />
+		<LXAlert ref="alert" />
+		<Button title="hhhhh" @add="onAdd" />
+	</main>
+</template>
 <script setup lang="ts">
 import LXIcon from "../components/lx-icon.vue";
 import LXAlert from "../components/lx-alert.vue";
 import Button, { DataSource } from "../components/button";
-import { toRaw } from "@vue/reactivity";
+import { toRaw, ref } from "@vue/reactivity";
+import { onMounted } from "vue";
 
 function onAdd(values: DataSource[]) {
 	console.log(toRaw(values));
 }
-</script>
+const alert = ref(null);
 
-<template>
-	<main>
-		<LXIcon icon="xx" />
-		<LXAlert />
-		<Button title="hhhhh" @add="onAdd" />
-	</main>
-</template>
+onMounted(() => {
+	alert.value.onLoad();
+});
+</script>
