@@ -1,7 +1,7 @@
 <template>
 	<Layout class="layout">
 		<Layout.Sider class="layout-sider" v-model:collapsed="collapsed" :width="asiderWidth" collapsible :trigger="null">
-			<div></div>
+			<Menu />
 		</Layout.Sider>
 		<Layout>
 			<Header>header</Header>
@@ -26,6 +26,7 @@ import { computed } from "@vue/runtime-core";
 import { Layout } from "ant-design-vue";
 import Header from "./header";
 import Footer from "./footer";
+import Menu from "./menu";
 
 const collapsed = ref<boolean>(false);
 const asiderWidth = computed(() => (collapsed.value ? 80 : 200));
