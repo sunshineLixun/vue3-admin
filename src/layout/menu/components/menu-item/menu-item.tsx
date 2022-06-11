@@ -3,7 +3,7 @@ import { Menu as AMenu } from "ant-design-vue";
 import type { RouteRecordRaw } from "vue-router";
 import { computed } from "@vue/reactivity";
 
-const MenuItem = defineComponent({
+export const MenuItem = defineComponent({
 	props: {
 		menuInfo: {
 			type: Object as PropType<RouteRecordRaw>,
@@ -32,5 +32,3 @@ const MenuItem = defineComponent({
 		};
 	}
 });
-
-export default MenuItem;

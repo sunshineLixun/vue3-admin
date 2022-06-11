@@ -1,0 +1,26 @@
+.slider-logo {
+	display: flex;
+	align-items: center;
+	padding: 16px 16px;
+	line-height: 32px;
+	cursor: pointer;
+
+	& a {
+		display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+	}
+
+	& h1 {
+		display: inline-block;
+    height: 32px;
+    margin: 0 0 0 12px;
+    overflow: hidden;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 32px;
+    vertical-align: middle;
+	}
+}
