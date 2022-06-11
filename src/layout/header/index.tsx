@@ -1,20 +1,27 @@
 import { defineComponent } from "vue";
 import { Layout, Space } from "ant-design-vue";
-import { MenuFoldOutlined } from "@ant-design/icons-vue";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons-vue";
 import styles from "./index.module.scss";
 
 const Header = defineComponent({
-	setup() {
+	props: {
+		collapsed: {
+			type: Boolean
+		}
+	},
+	setup(ctx, { emit }) {
 		const onMenuFold = () => {
-			console.log("fold");
+			emit("onCollapsed", !ctx.collapsed);
 		};
 		return () => {
 			return (
 				<Layout.Header class={styles.header}>
 					<Space size={20}>
-						<solt>
+						{ctx.collapsed ? (
+							<MenuUnfoldOutlined class={styles["out-line"]} onClick={onMenuFold} />
+						) : (
 							<MenuFoldOutlined class={styles["out-line"]} onClick={onMenuFold} />
-						</solt>
+						)}
 					</Space>
 				</Layout.Header>
 			);

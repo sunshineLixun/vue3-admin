@@ -1,11 +1,11 @@
 <template>
 	<Layout class="layout">
-		<Layout.Sider class="layout-sider" v-model:collapsed="collapsed" :width="asiderWidth" collapsible :trigger="null">
-			<Logo />
+		<Layout.Sider v-model:collapsed="collapsed" :width="asiderWidth" collapsible :trigger="null">
+			<Logo :collapsed="collapsed" />
 			<Menu />
 		</Layout.Sider>
 		<Layout>
-			<Header>header</Header>
+			<Header :collapsed="collapsed" @onCollapsed="onCollapsed" />
 			<Layout.Content>
 				<router-view v-slot="{ Component, route }">
 					<transition appear name="fade-transform" mode="out-in">
@@ -31,14 +31,16 @@ import Menu from "./menu";
 import Logo from "./logo";
 
 const collapsed = ref<boolean>(false);
-const asiderWidth = computed(() => (collapsed.value ? 80 : 200));
+const asiderWidth = computed(() => (collapsed.value ? 48 : 200));
+
+function onCollapsed(value: boolean) {
+	collapsed.value = value;
+}
 </script>
 
 <style lang="scss" scoped>
 .layout {
 	display: flex;
 	height: 100vh;
-	.layout-sider {
-	}
 }
 </style>
