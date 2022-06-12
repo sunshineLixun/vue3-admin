@@ -6,19 +6,24 @@ import styles from "./index.module.scss";
 const Header = defineComponent({
 	props: {
 		collapsed: {
-			type: Boolean
+			type: Boolean,
+			default: false
 		}
 	},
-	setup(ctx, { emit }) {
+	emits: {
+		onCollapsed: (collapsed: boolean) => void 0
+	},
+	setup(props, { emit }) {
+		const { collapsed } = props;
 		const onMenuFold = () => {
-			emit("onCollapsed", !ctx.collapsed);
+			emit("onCollapsed", !props.collapsed);
 		};
 
 		return () => {
 			return (
 				<Layout.Header class={styles.header}>
 					<Space size={20}>
-						{ctx.collapsed ? (
+						{collapsed ? (
 							<MenuUnfoldOutlined class={styles["out-line"]} onClick={onMenuFold} />
 						) : (
 							<MenuFoldOutlined class={styles["out-line"]} onClick={onMenuFold} />

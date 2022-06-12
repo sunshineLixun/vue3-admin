@@ -10,22 +10,23 @@ export const MenuItem = defineComponent({
 			required: true
 		}
 	},
-	setup(ctx) {
+	setup(props) {
+		const { menuInfo } = props;
 		const isShowSubMenu = computed(() => {
-			return ctx.menuInfo.children?.length;
+			return menuInfo.children?.length;
 		});
 
 		return () => {
 			return (
 				<>
 					{isShowSubMenu.value && isShowSubMenu.value > 0 ? (
-						<AMenu.SubMenu key={ctx.menuInfo.name} title={ctx.menuInfo.meta?.title}>
-							{ctx.menuInfo.children?.map(item => {
+						<AMenu.SubMenu key={menuInfo.name} title={menuInfo.meta?.title}>
+							{menuInfo.children?.map(item => {
 								return <AMenu.Item key={item.name}>{item.meta?.title}</AMenu.Item>;
 							})}
 						</AMenu.SubMenu>
 					) : (
-						<AMenu.Item key={ctx.menuInfo.name}>{ctx.menuInfo.meta?.title}</AMenu.Item>
+						<AMenu.Item key={menuInfo.name}>{menuInfo.meta?.title}</AMenu.Item>
 					)}
 				</>
 			);

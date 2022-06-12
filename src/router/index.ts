@@ -5,18 +5,39 @@ export const routes: RouteRecordRaw[] = [
 	{
 		path: "/",
 		name: "layout",
-		redirect: "/home/home",
+		redirect: "/dashboard",
 		component: Layout,
 		meta: {
-			title: "首页"
+			title: "工作台"
 		},
 		children: []
 	},
 	{
+		path: "/dashboard",
+		name: "dashboard",
+		redirect: "/dashboard/index",
+		component: Layout,
+		meta: {
+			title: "工作台"
+		},
+		children: [
+			{
+				path: "index",
+				name: "dashboard",
+				component: () => import("@/views/dashboard/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "工作台"
+				}
+			}
+		]
+	},
+	{
 		path: "/home",
+		name: "home",
 		redirect: "/home/home",
 		component: Layout,
-		name: "home",
 		meta: {
 			title: "首页"
 		},
@@ -24,7 +45,7 @@ export const routes: RouteRecordRaw[] = [
 			{
 				path: "home",
 				name: "home",
-				component: () => import("@/views/HomeView.vue"),
+				component: () => import("@/views/home.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -45,7 +66,7 @@ export const routes: RouteRecordRaw[] = [
 			{
 				path: "index",
 				name: "about",
-				component: () => import("@/views/AboutView.vue"),
+				component: () => import("@/views/about.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,

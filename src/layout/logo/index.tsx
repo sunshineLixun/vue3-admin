@@ -14,13 +14,13 @@ const Logo = defineComponent({
 			default: false
 		}
 	},
-	setup(ctx) {
+	setup(props) {
 		return () => {
 			return (
 				<div class={styles["slider-logo"]}>
 					<RouterLink to={"/"}>
 						<Image src={LogoSrc} preview={false} width={32} height={32} />
-						{!ctx.collapsed && <h1>Vue3 Admin</h1>}
+						{!props.collapsed && <h1>Vue3 Admin</h1>}
 					</RouterLink>
 				</div>
 			);
