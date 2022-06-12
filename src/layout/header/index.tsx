@@ -14,7 +14,6 @@ const Header = defineComponent({
 		onCollapsed: (collapsed: boolean) => void 0
 	},
 	setup(props, { emit }) {
-		const { collapsed } = props;
 		const onMenuFold = () => {
 			emit("onCollapsed", !props.collapsed);
 		};
@@ -23,7 +22,7 @@ const Header = defineComponent({
 			return (
 				<Layout.Header class={styles.header}>
 					<Space size={20}>
-						{collapsed ? (
+						{props.collapsed ? (
 							<MenuUnfoldOutlined class={styles["out-line"]} onClick={onMenuFold} />
 						) : (
 							<MenuFoldOutlined class={styles["out-line"]} onClick={onMenuFold} />

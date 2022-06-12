@@ -1,7 +1,10 @@
 import { defineComponent, PropType } from "vue";
-import { Menu as AMenu } from "ant-design-vue";
-import type { RouteRecordRaw } from "vue-router";
 import { computed } from "@vue/reactivity";
+import type { RouteRecordRaw } from "vue-router";
+
+import { Menu as AMenu } from "ant-design-vue";
+
+import { Iconfont } from "@/components/basic/iconfont";
 
 export const MenuItem = defineComponent({
 	props: {
@@ -11,22 +14,31 @@ export const MenuItem = defineComponent({
 		}
 	},
 	setup(props) {
-		const { menuInfo } = props;
 		const isShowSubMenu = computed(() => {
-			return menuInfo.children?.length;
+			return props.menuInfo.children?.length;
 		});
 
 		return () => {
 			return (
 				<>
 					{isShowSubMenu.value && isShowSubMenu.value > 0 ? (
-						<AMenu.SubMenu key={menuInfo.name} title={menuInfo.meta?.title}>
-							{menuInfo.children?.map(item => {
-								return <AMenu.Item key={item.name}>{item.meta?.title}</AMenu.Item>;
+						<AMenu.SubMenu
+							key={props.menuInfo.name}
+							title={props.menuInfo.meta?.title}
+							icon={<Iconfont type={props.menuInfo.meta?.icon} />}
+						>
+							{props.menuInfo.children?.map(item => {
+								return (
+									<AMenu.Item key={item.name} icon={<Iconfont type={props.menuInfo.meta?.icon} />}>
+										{item.meta?.title}
+									</AMenu.Item>
+								);
 							})}
 						</AMenu.SubMenu>
 					) : (
-						<AMenu.Item key={menuInfo.name}>{menuInfo.meta?.title}</AMenu.Item>
+						<AMenu.Item key={props.menuInfo.name} icon={<Iconfont type={props.menuInfo.meta?.icon} />}>
+							{props.menuInfo.meta?.title}
+						</AMenu.Item>
 					)}
 				</>
 			);
