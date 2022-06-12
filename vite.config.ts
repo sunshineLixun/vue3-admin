@@ -28,6 +28,9 @@ export default defineConfig({
 		// 	resolvers: [AntDesignVueResolver()]
 		// })
 	],
+	server: {
+		open: true
+	},
 	resolve: {
 		alias: {
 			"@": fileURLToPath(new URL("./src", import.meta.url))

@@ -13,6 +13,7 @@ const Header = defineComponent({
 		const onMenuFold = () => {
 			emit("onCollapsed", !ctx.collapsed);
 		};
+
 		return () => {
 			return (
 				<Layout.Header class={styles.header}>
