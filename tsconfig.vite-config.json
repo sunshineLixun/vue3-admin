@@ -4,6 +4,6 @@
   "compilerOptions": {
     "composite": true,
     "types": ["node", "vitest"],
-    "plugins": [{"name": "typescript-plugin-css-modules"}],
+    "plugins": [{"name": "typescript-plugin-css-modules"}]
   }
 }
