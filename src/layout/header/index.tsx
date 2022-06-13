@@ -10,11 +10,7 @@ const Header = defineComponent({
 			default: false
 		}
 	},
-	emits: {
-		onCollapsed(collapsed: boolean) {
-			return collapsed;
-		}
-	},
+	emits: ["onCollapsed"],
 	setup(props, { emit }) {
 		const onMenuFold = () => {
 			emit("onCollapsed", !props.collapsed);
