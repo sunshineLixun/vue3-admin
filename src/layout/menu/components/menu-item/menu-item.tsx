@@ -19,28 +19,21 @@ export const MenuItem = defineComponent({
 		});
 
 		return () => {
-			return (
-				<>
-					{isShowSubMenu.value && isShowSubMenu.value > 0 ? (
-						<AMenu.SubMenu
-							key={props.menuInfo.name}
-							title={props.menuInfo.meta?.title}
-							icon={<Iconfont type={props.menuInfo.meta?.icon} />}
-						>
-							{props.menuInfo.children?.map(item => {
-								return (
-									<AMenu.Item key={item.name} icon={<Iconfont type={props.menuInfo.meta?.icon} />}>
-										{item.meta?.title}
-									</AMenu.Item>
-								);
-							})}
-						</AMenu.SubMenu>
-					) : (
-						<AMenu.Item key={props.menuInfo.name} icon={<Iconfont type={props.menuInfo.meta?.icon} />}>
-							{props.menuInfo.meta?.title}
-						</AMenu.Item>
-					)}
-				</>
+			return isShowSubMenu && isShowSubMenu.value ? (
+				<AMenu.SubMenu
+					key={props.menuInfo.name}
+					title={props.menuInfo.meta?.title}
+					icon={<Iconfont type={props.menuInfo.meta?.icon} />}
+				>
+					{props.menuInfo.children?.map(item => {
+						// 递归
+						return <MenuItem key={item.name} menuInfo={item} />;
+					})}
+				</AMenu.SubMenu>
+			) : (
+				<AMenu.Item key={props.menuInfo.name} icon={<Iconfont type={props.menuInfo.meta?.icon} />}>
+					{props.menuInfo.meta?.title}
+				</AMenu.Item>
 			);
 		};
 	}

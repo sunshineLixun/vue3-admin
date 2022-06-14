@@ -5,14 +5,13 @@ export const routes: RouteRecordRaw[] = [
 	{
 		path: "/",
 		name: "layout",
-		redirect: "/dashboard",
+		redirect: "/dashboard/index",
 		component: Layout,
 		meta: {
 			title: "工作台",
-			icon: "icon-dianzan",
+			icon: "icon-dashboard",
 			keepAlive: true
-		},
-		children: []
+		}
 	},
 	{
 		path: "/dashboard",
@@ -21,7 +20,7 @@ export const routes: RouteRecordRaw[] = [
 		component: Layout,
 		meta: {
 			title: "工作台",
-			icon: "icon-dianzan"
+			icon: "icon-dashboard"
 		},
 		children: [
 			{
@@ -37,21 +36,21 @@ export const routes: RouteRecordRaw[] = [
 		]
 	},
 	{
-		path: "/home",
-		name: "home",
-		redirect: "/home/home",
+		path: "/table",
 		component: Layout,
+		redirect: "/table/index",
+		name: "table",
 		meta: {
-			title: "首页",
+			title: "列表页",
 			icon: "icon-dianzan"
 		},
 		children: [
 			{
-				path: "home",
-				name: "home",
-				component: () => import("@/views/home.vue"),
+				path: "index",
+				name: "table",
+				component: () => import("@/views/table/index.vue"),
 				meta: {
-					title: "首页",
+					title: "查询表格",
 					icon: "icon-dianzan",
 					keepAlive: true
 				}
@@ -59,21 +58,21 @@ export const routes: RouteRecordRaw[] = [
 		]
 	},
 	{
-		path: "/about",
+		path: "/form",
 		component: Layout,
-		redirect: "/about/index",
-		name: "about",
+		redirect: "/form/index",
+		name: "form",
 		meta: {
-			title: "关于",
+			title: "表单页",
 			icon: "icon-dianzan"
 		},
 		children: [
 			{
 				path: "index",
-				name: "about",
-				component: () => import("@/views/about.vue"),
+				name: "form",
+				component: () => import("@/views/form/index.vue"),
 				meta: {
-					title: "关于",
+					title: "基础表单",
 					icon: "icon-dianzan",
 					keepAlive: true
 				}
