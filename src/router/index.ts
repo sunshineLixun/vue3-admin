@@ -9,7 +9,7 @@ export const routes: RouteRecordRaw[] = [
 		component: Layout,
 		meta: {
 			title: "工作台",
-			icon: "icon-dashboard",
+			icon: "icon-twitter",
 			keepAlive: true
 		}
 	},
@@ -20,7 +20,7 @@ export const routes: RouteRecordRaw[] = [
 		component: Layout,
 		meta: {
 			title: "工作台",
-			icon: "icon-dashboard"
+			icon: "icon-qq"
 		},
 		children: [
 			{
@@ -29,7 +29,7 @@ export const routes: RouteRecordRaw[] = [
 				component: () => import("@/views/dashboard/index.vue"),
 				meta: {
 					title: "工作台",
-					icon: "icon-dianzan",
+					icon: "icon-qq",
 					keepAlive: true
 				}
 			}
@@ -42,7 +42,7 @@ export const routes: RouteRecordRaw[] = [
 		name: "table",
 		meta: {
 			title: "列表页",
-			icon: "icon-dianzan"
+			icon: "icon-github"
 		},
 		children: [
 			{
@@ -51,7 +51,7 @@ export const routes: RouteRecordRaw[] = [
 				component: () => import("@/views/table/index.vue"),
 				meta: {
 					title: "查询表格",
-					icon: "icon-dianzan",
+					icon: "icon-github",
 					keepAlive: true
 				}
 			}
@@ -64,7 +64,7 @@ export const routes: RouteRecordRaw[] = [
 		name: "form",
 		meta: {
 			title: "表单页",
-			icon: "icon-dianzan"
+			icon: "icon-facebook"
 		},
 		children: [
 			{
@@ -73,7 +73,7 @@ export const routes: RouteRecordRaw[] = [
 				component: () => import("@/views/form/index.vue"),
 				meta: {
 					title: "基础表单",
-					icon: "icon-dianzan",
+					icon: "icon-facebook",
 					keepAlive: true
 				}
 			}
