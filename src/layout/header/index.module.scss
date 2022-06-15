@@ -1,9 +1,16 @@
 .header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	background: #ffffff;
 	padding: 0 16px;
 
 	.out-line {
 		font-size: 18px;
 		cursor: pointer;
+	}
+
+	.right {
+		display: flex;
 	}
 }

@@ -1,6 +1,9 @@
 import { defineComponent } from "vue";
 import { Layout, Space } from "ant-design-vue";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons-vue";
+
+import { NotifiBadge, Setting, Language } from "./components";
+
 import styles from "./index.module.scss";
 
 const Header = defineComponent({
@@ -26,6 +29,11 @@ const Header = defineComponent({
 							<MenuFoldOutlined class={styles["out-line"]} onClick={onMenuFold} />
 						)}
 					</Space>
+					<div class={styles.right}>
+						<NotifiBadge count={11} />
+						<Setting />
+						<Language />
+					</div>
 				</Layout.Header>
 			);
 		};
