@@ -30,9 +30,11 @@ const Header = defineComponent({
 						)}
 					</Space>
 					<div class={styles.right}>
-						<NotifiBadge count={11} />
-						<Setting />
-						<Language />
+						<Space size={20}>
+							<NotifiBadge count={11} />
+							<Setting />
+							<Language />
+						</Space>
 					</div>
 				</Layout.Header>
 			);

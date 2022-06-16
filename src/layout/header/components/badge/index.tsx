@@ -13,18 +13,22 @@ export default defineComponent({
 		}
 	},
 	setup(props) {
+		const onVisibleChange = (visible: boolean) => {
+			console.log(visible);
+		};
 		return () => {
 			return (
 				<Dropdown
 					trigger={["click"]}
+					onVisibleChange={onVisibleChange}
 					overlay={
 						<div class={styles.overlay}>
 							<Notification />
 						</div>
 					}
 				>
-					<Badge class={styles.badge} count={props.count} offset={[-8, 14]}>
-						<BellOutlined style="font-size: 16px" />
+					<Badge class={styles.badge} count={props.count} offset={[-3, 0]}>
+						<BellOutlined style="font-size: 18px" />
 					</Badge>
 				</Dropdown>
 			);

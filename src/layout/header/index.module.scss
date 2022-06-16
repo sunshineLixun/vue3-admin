@@ -14,5 +14,13 @@
 
 	.right {
 		display: flex;
+		align-items: center;
+
+		:deep(.ant-space-item) {
+			cursor: pointer;
+			&:hover {
+				background: #c1151506;
+			}
+		}
 	}
 }
