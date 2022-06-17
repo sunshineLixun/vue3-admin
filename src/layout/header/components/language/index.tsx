@@ -4,6 +4,8 @@ import { Dropdown, Menu, Space } from "ant-design-vue";
 import { GlobalOutlined } from "@ant-design/icons-vue";
 import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
 
+import { localesList } from "@/locales/config";
+
 export default defineComponent({
 	setup() {
 		const onLanguage = (info: MenuInfo) => {
@@ -12,12 +14,16 @@ export default defineComponent({
 		const renderMenu = () => {
 			return (
 				<Menu onClick={onLanguage}>
-					<Menu.Item key={1}>
-						<Space size={5}>简体中文</Space>
-					</Menu.Item>
-					<Menu.Item key={2}>
-						<Space size={5}>English</Space>
-					</Menu.Item>
+					{localesList.map(item => {
+						return (
+							<Menu.Item key={item.label}>
+								<Space size={5}>
+									<a href="javascript:;">{item.icon}</a>
+									{item.label}
+								</Space>
+							</Menu.Item>
+						);
+					})}
 				</Menu>
 			);
 		};

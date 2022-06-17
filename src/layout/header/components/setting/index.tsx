@@ -4,7 +4,6 @@ import { UserOutlined, SettingOutlined, LogoutOutlined } from "@ant-design/icons
 
 import { avatar } from "@/utils/constant";
 
-import styles from "./index.module.scss";
 import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
 
 export default defineComponent({

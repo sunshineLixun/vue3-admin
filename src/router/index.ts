@@ -1,3 +1,4 @@
+import type { App } from "vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import { Layout } from "@/router/layout";
 
@@ -85,5 +86,9 @@ const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes
 });
+
+export function setUpRouter(app: App) {
+	app.use(router);
+}
 
 export default router;
