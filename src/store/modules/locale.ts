@@ -1,5 +1,8 @@
 import { defineStore } from "pinia";
-import type { localeEnum } from "@/locales/config";
+import type { localeEnum } from "@/enum/localeEnum";
+import { LOCALE_KEY } from "@/enum/cacheEnum";
+import { Storage } from "@/utils/storage";
+
 type LocaleType = keyof typeof localeEnum;
 
 interface LocaleState {
@@ -9,7 +12,7 @@ interface LocaleState {
 export const useLocaleStore = defineStore("locale", {
 	state: (): LocaleState => {
 		return {
-			locale: "zh_CN"
+			locale: Storage.get(LOCALE_KEY, "zh_CN")
 		};
 	},
 	getters: {
@@ -20,6 +23,7 @@ export const useLocaleStore = defineStore("locale", {
 	actions: {
 		setLocale(locale: LocaleType) {
 			this.locale = locale;
+			Storage.set(LOCALE_KEY, locale);
 		}
 	}
 });

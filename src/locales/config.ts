@@ -1,7 +1,4 @@
-export enum localeEnum {
-	zh_CN = "zh_CN",
-	en_US = "en_US"
-}
+import { localeEnum } from "@/enum/localeEnum";
 
 export const localesList = [
 	{
