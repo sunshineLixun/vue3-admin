@@ -1,10 +1,10 @@
 import antdLocale from "ant-design-vue/es/locale/zh_CN";
+import { getMessgae } from "../utils";
 
-const modileFiles = import.meta.globEager("./zh_CH/**/*.ts");
-
-console.log(modileFiles);
+const moduleFiles = import.meta.globEager("./zh_CH/**/*.ts");
 export default {
 	message: {
+		...getMessgae(moduleFiles),
 		antdLocale
 	}
 };

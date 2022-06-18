@@ -11,18 +11,19 @@ function createOptions(): I18nOptions {
 	const localeStore = useLocaleStore(store);
 	const locale = localeStore.getLocale;
 	const message = locale === "zh_CN" ? zh_CN.message : en_US.message;
-	console.log(message);
 	return {
 		locale,
 		// 失败默认用中文
-		fallbackLocale: localeEnum.zh_CN
-		// messages: {
-		// 	[locale]: message
-		// }
+		fallbackLocale: localeEnum.zh_CN,
+		messages: {
+			[locale]: message as { [key: string]: any }
+		}
 	};
 }
 
 export const i18n = createI18n(createOptions());
+
+console.log(i18n);
 
 export function setUpI18n(app: App) {
 	app.use(i18n);
