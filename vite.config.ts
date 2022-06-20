@@ -31,6 +31,7 @@ export default defineConfig({
 			// compositionOnly: false,
 
 			// you need to set i18n resource including paths !
+			// fix：https://github.com/intlify/vue-i18n-next/issues/789
 			include: path.resolve(__dirname, "/src/locales/lang/json/**")
 		})
 		// Components({
