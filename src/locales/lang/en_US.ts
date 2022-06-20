@@ -1,10 +1,8 @@
 import antdLocale from "ant-design-vue/es/locale/en_US";
-import { getMessgae } from "../utils";
-
-const moduleFiles = import.meta.globEager("./en_US/**/*.ts");
+import json from "./json/en_US.json";
 export default {
 	message: {
-		...getMessgae(moduleFiles),
+		...json,
 		antdLocale
 	}
 };

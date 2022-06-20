@@ -8,8 +8,8 @@
 
 <script setup lang="ts">
 import { ConfigProvider } from "ant-design-vue";
-import { useLocale } from "@/locales/useLocale";
-const { getAntdLocale } = useLocale();
+import { useI18nv } from "@/hooks/useI18n";
+const { getAntdLocale } = useI18nv();
 // import dayjs from "dayjs";
 // import "dayjs/locale/zh-cn";
 // dayjs.locale("zh-cn");

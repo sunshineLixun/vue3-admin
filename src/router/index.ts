@@ -1,4 +1,3 @@
-import type { App } from "vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import { Layout } from "@/router/layout";
 
@@ -9,7 +8,7 @@ export const routes: RouteRecordRaw[] = [
 		redirect: "/dashboard/index",
 		component: Layout,
 		meta: {
-			title: "工作台",
+			title: "routes.dashboard.dashboard",
 			icon: "icon-twitter",
 			keepAlive: true
 		}
@@ -20,7 +19,7 @@ export const routes: RouteRecordRaw[] = [
 		redirect: "/dashboard/index",
 		component: Layout,
 		meta: {
-			title: "工作台",
+			title: "routes.dashboard.dashboard",
 			icon: "icon-qq"
 		},
 		children: [
@@ -29,7 +28,7 @@ export const routes: RouteRecordRaw[] = [
 				name: "dashboard",
 				component: () => import("@/views/dashboard/index.vue"),
 				meta: {
-					title: "工作台",
+					title: "routes.dashboard.dashboard",
 					icon: "icon-qq",
 					keepAlive: true
 				}
@@ -42,7 +41,7 @@ export const routes: RouteRecordRaw[] = [
 		redirect: "/table/index",
 		name: "table",
 		meta: {
-			title: "列表页",
+			title: "routes.table.table",
 			icon: "icon-github"
 		},
 		children: [
@@ -51,7 +50,7 @@ export const routes: RouteRecordRaw[] = [
 				name: "table",
 				component: () => import("@/views/table/index.vue"),
 				meta: {
-					title: "查询表格",
+					title: "routes.table.searchTable",
 					icon: "icon-github",
 					keepAlive: true
 				}
@@ -64,7 +63,7 @@ export const routes: RouteRecordRaw[] = [
 		redirect: "/form/index",
 		name: "form",
 		meta: {
-			title: "表单页",
+			title: "routes.form.form",
 			icon: "icon-facebook"
 		},
 		children: [
@@ -73,7 +72,7 @@ export const routes: RouteRecordRaw[] = [
 				name: "form",
 				component: () => import("@/views/form/index.vue"),
 				meta: {
-					title: "基础表单",
+					title: "routes.form.basicForm",
 					icon: "icon-facebook",
 					keepAlive: true
 				}
@@ -82,13 +81,7 @@ export const routes: RouteRecordRaw[] = [
 	}
 ];
 
-const router = createRouter({
+export const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes
 });
-
-export function setUpRouter(app: App) {
-	app.use(router);
-}
-
-export default router;

@@ -1,0 +1,15 @@
+{
+	"routes": {
+		"dashboard": {
+			"dashboard": "Dashboard"
+		},
+		"form": {
+			"form": "From",
+			"basicForm": "BasicForm"
+		},
+		"table": {
+			"table": "Table",
+			"searchTable": "SearchTable"
+		}
+	}
+}

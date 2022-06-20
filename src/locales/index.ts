@@ -1,30 +1,15 @@
-import type { App } from "vue";
 import { createI18n, I18nOptions } from "vue-i18n";
 import { store } from "@/store";
 import { useLocaleStore } from "@/store/modules/locale";
-import { localeEnum } from "@/enum/localeEnum";
-import zh_CN from "./lang/zh_CN";
-import en_US from "./lang/en_US";
 
-function createOptions(): I18nOptions {
-	// active pinia
+function i18nOptions(): I18nOptions {
 	const localeStore = useLocaleStore(store);
-	const locale = localeStore.getLocale;
-	const message = locale === "zh_CN" ? zh_CN.message : en_US.message;
+	const storageLocale = localeStore.getLocale;
 	return {
-		locale,
-		// 失败默认用中文
-		fallbackLocale: localeEnum.zh_CN,
-		messages: {
-			[locale]: message as { [key: string]: any }
-		}
+		legacy: false,
+		locale: storageLocale,
+		globalInjection: true
 	};
 }
 
-export const i18n = createI18n(createOptions());
-
-console.log(i18n);
-
-export function setUpI18n(app: App) {
-	app.use(i18n);
-}
+export const i18n = createI18n(i18nOptions());

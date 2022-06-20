@@ -1,10 +1,9 @@
-import { defineComponent, PropType } from "vue";
-import { computed } from "@vue/reactivity";
+import { defineComponent, PropType, computed } from "vue";
 import type { RouteRecordRaw } from "vue-router";
-
 import { Menu as AMenu } from "ant-design-vue";
-
 import { Iconfont } from "@/components/basic/iconfont";
+
+import { useI18nv } from "@/hooks/useI18n";
 
 export const MenuItem = defineComponent({
 	props: {
@@ -14,6 +13,7 @@ export const MenuItem = defineComponent({
 		}
 	},
 	setup(props) {
+		const { t } = useI18nv();
 		const isShowSubMenu = computed(() => {
 			return props.menuInfo.children?.length;
 		});
@@ -23,7 +23,7 @@ export const MenuItem = defineComponent({
 				return (
 					<AMenu.SubMenu
 						key={props.menuInfo.name}
-						title={props.menuInfo.meta?.title}
+						title={t(props.menuInfo.meta?.title || "")}
 						icon={<Iconfont type={props.menuInfo.meta?.icon} />}
 					>
 						{props.menuInfo.children?.map(item => {
@@ -35,7 +35,7 @@ export const MenuItem = defineComponent({
 			} else {
 				return (
 					<AMenu.Item key={props.menuInfo.name} icon={<Iconfont type={props.menuInfo.meta?.icon} />}>
-						{props.menuInfo.meta?.title}
+						{t(props.menuInfo.meta?.title || "")}
 					</AMenu.Item>
 				);
 			}
