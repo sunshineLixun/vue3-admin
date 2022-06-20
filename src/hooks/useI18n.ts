@@ -30,12 +30,14 @@ export function useI18nv() {
 	const getLocale = computed(() => localeStore.getLocale);
 	const getAntdLocale = computed<Locale>((): any => {
 		// 从i18n全局中获取已经注册的antdLocale
-		return (getLocaleMessage(unref(getLocale)) as MessageSchema).antdLocale;
+		return getLocaleMessage(unref(getLocale)).antdLocale;
 	});
 
 	const changeLocale = (value: localeEnum) => {
 		locale.value = value;
 		localeStore.setLocale(value);
+		// 这里貌似必须的刷新页面，暂时没找到更好的解决办法
+		location.reload();
 	};
 	return {
 		t,
