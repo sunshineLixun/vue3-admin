@@ -7,8 +7,7 @@ function i18nOptions(): I18nOptions {
 	const storageLocale = localeStore.getLocale;
 	return {
 		legacy: false,
-		locale: storageLocale,
-		globalInjection: true
+		locale: storageLocale
 	};
 }
 
