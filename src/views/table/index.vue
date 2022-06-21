@@ -1,7 +1,7 @@
 <template>
 	<div>
 		{{ t("routes.form.basicForm") }}
-		{{ t("routes.table.searchTable") }}
+		{{ t("routes.table.table") }}
 	</div>
 </template>
 <script setup lang="ts">

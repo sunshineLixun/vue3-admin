@@ -1,7 +1,8 @@
 <template>
-	<DatePicker />
+	{{ t("routes.dashboard.dashboard") }}
 </template>
 
 <script lang="ts" setup>
-import { DatePicker } from "ant-design-vue";
+import { useI18nv } from "@/hooks/useI18n";
+const { t } = useI18nv();
 </script>
