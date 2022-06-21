@@ -4,7 +4,8 @@
 
 ## 技术栈
 
-- 😁  vue3,vite2
+- 😁  vue3(tsx+template),vite2
+- 🤓  ts
 - 😋  antdV
 - 😆  vue-router
 - 😊  pinia
