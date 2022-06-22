@@ -10,6 +10,7 @@
 - 😆  vue-router
 - 😊  pinia
 - 🧐  vue-i18n
+- 👉  axios
 - ...
 
 ## 代码风格
