@@ -39,7 +39,14 @@ export default defineConfig({
 		// })
 	],
 	server: {
-		open: true
+		open: true,
+		proxy: {
+			"/api": {
+				target: "https://www.dgtle.com",
+				changeOrigin: true,
+				rewrite: path => path.replace(/^\/api/, "")
+			}
+		}
 	},
 	resolve: {
 		alias: {

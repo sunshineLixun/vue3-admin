@@ -8,6 +8,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "preserveValueImports": false
+    "preserveValueImports": false,
+		"useUnknownInCatchVariables": true
   }
 }
