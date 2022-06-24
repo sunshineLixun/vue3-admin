@@ -1,4 +1,5 @@
 import http from "../index";
+import type { SelectOptionData } from "../interface";
 import { List } from "../interface/modules/list";
 
 export const listApi = (params: List.ListParams) => {
@@ -11,5 +12,5 @@ export const listApi = (params: List.ListParams) => {
 };
 
 export const selectListApi = () => {
-	return http.get<any>(List.selectUrl);
+	return http.get<SelectOptionData[]>(List.selectUrl);
 };
