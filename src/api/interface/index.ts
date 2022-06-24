@@ -8,3 +8,7 @@ export interface CommonResult {
 export interface ResponsetData<T = any> extends CommonResult {
 	data?: T;
 }
+export interface SelectOptionData {
+	key: number;
+	value: string;
+}

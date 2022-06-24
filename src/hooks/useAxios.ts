@@ -1,10 +1,10 @@
-import { Ref, ref, watchEffect } from "vue";
+import { ref, watchEffect, Ref } from "vue";
 import type { ResponsetData } from "@/api/interface";
 import { AxiosError } from "axios";
 
-type API<P, R> = (params: P) => Promise<ResponsetData<R>>;
+export type APIType<P, R> = (params: P) => Promise<ResponsetData<R>>;
 
-export const useAxios = <P, R>(api: API<P, R>, params: Ref<P>) => {
+export const useAxios = <P, R>(api: APIType<P, R>, params: Ref<P>) => {
 	const data = ref<R>();
 	const error = ref("");
 	const loaded = ref(false);

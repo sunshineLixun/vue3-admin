@@ -1,5 +1,7 @@
 export namespace List {
 	export const url = "/home/getItemsList";
+
+	export const selectUrl = "https://jsonplaceholder.typicode.com/todos";
 	export interface ListParams {
 		page?: number;
 		adv_flag?: number;
