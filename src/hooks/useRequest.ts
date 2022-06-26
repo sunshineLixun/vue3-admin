@@ -1,16 +1,16 @@
-import { ref, watchEffect, Ref } from "vue";
+import { ref, shallowRef } from "vue";
 import type { ResponsetData } from "@/api/interface";
 import { AxiosError } from "axios";
 
 export type APIType<P, R> = (params: P) => Promise<ResponsetData<R>>;
 
-export const useAxios = <P, R>(api: APIType<P, R>, params: Ref<P>) => {
-	const data = ref<R>();
+export const useRequest = <R, P = Partial<any>>(api: APIType<P, R>, params: P) => {
+	const data = shallowRef<R>();
 	const error = ref("");
 	const loaded = ref(false);
-	watchEffect(async () => {
+	(async function () {
 		try {
-			const json = await api(params.value);
+			const json = await api(params);
 			data.value = json.data;
 		} catch (resError) {
 			// fix: https://github.com/microsoft/TypeScript/issues/36775
@@ -20,6 +20,6 @@ export const useAxios = <P, R>(api: APIType<P, R>, params: Ref<P>) => {
 		} finally {
 			loaded.value = true;
 		}
-	});
+	})();
 	return { data, error, loaded };
 };

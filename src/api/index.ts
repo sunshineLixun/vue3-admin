@@ -85,8 +85,8 @@ class HttpRequest {
 		);
 	}
 
-	get<T>(url: string, params?: object, config?: AxiosRequestConfig): Promise<ResponsetData<T>> {
-		return this.service.get(url, { params: params, ...config });
+	get<T>(url: string, config?: AxiosRequestConfig): Promise<ResponsetData<T>> {
+		return this.service.get(url, config);
 	}
 
 	post<T>(url: string, params?: object, config?: AxiosRequestConfig): Promise<ResponsetData<T>> {
