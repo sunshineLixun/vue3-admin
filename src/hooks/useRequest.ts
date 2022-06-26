@@ -1,4 +1,4 @@
-import { ref, shallowRef } from "vue";
+import { Ref, ref, shallowRef, watchEffect } from "vue";
 import type { ResponsetData } from "@/api/interface";
 import { AxiosError } from "axios";
 
@@ -22,4 +22,21 @@ export const useRequest = <R, P = Partial<any>>(api: APIType<P, R>, params: P) =
 		}
 	})();
 	return { data, error, loaded };
+};
+
+export const useWatchEffectRequest = <R, P = Partial<any>>(api: APIType<P, R>, params: Ref<P>) => {
+	const effectData = shallowRef<R>();
+	const effecError = ref("");
+	const effecLoaded = ref(false);
+	watchEffect(() => {
+		const { data, error, loaded } = useRequest<R, P>(api, params.value);
+		effectData.value = data.value;
+		effecError.value = error.value;
+		effecLoaded.value = loaded.value;
+	});
+	return {
+		effectData,
+		effecError,
+		effecLoaded
+	};
 };
