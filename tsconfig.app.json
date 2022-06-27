@@ -1,9 +1,11 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "typings/*.d.ts"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "typings/*.d.ts", "mock/**/*"],
   "exclude": ["src/**/__tests__/*", "node_modules", "dist"],
   "compilerOptions": {
     "composite": true,
+		"module": "esnext",
+		"moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

@@ -1,8 +1,8 @@
 import { useRequest } from "../useRequest";
 import type { Service } from "../useRequest/types";
-import type { Data, Params, AntdTableOptions, ListItem } from "./types";
+import type { Data, Params, AntdTableOptions } from "./types";
 
-const useAntdTable = <TData extends Data<ListItem>, TParams extends Params>(
+export const useAntdTable = <TData extends Data<any>, TParams extends Params>(
 	service: Service<TData, TParams>,
 	options: AntdTableOptions<TParams>
 ) => {
@@ -12,5 +12,3 @@ const useAntdTable = <TData extends Data<ListItem>, TParams extends Params>(
 	// TODO
 	console.log(data.value.itemList);
 };
-
-export default useAntdTable;

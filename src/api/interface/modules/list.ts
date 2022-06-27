@@ -1,14 +1,13 @@
 export namespace List {
-	export const url = "/home/getItemsList";
+	export const url = "/mock-api/userList";
 
-	export const selectUrl = "https://jsonplaceholder.typicode.com/todos";
-	export interface ListParams {
-		page?: number;
-		adv_flag?: number;
-		left_type?: string;
-		last_id?: number;
-	}
-	export interface ListResponse {
-		dataList: any[];
+	export type UserListData = {
+		itemList: UserListItem[];
+		total: number;
+	};
+
+	export interface UserListItem {
+		id: number;
+		name: string;
 	}
 }

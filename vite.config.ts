@@ -29,8 +29,13 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
 			vueJsx(),
 			viteMockServe({
 				mockPath: "mock",
+				logger: true,
 				localEnabled: !isBuild,
-				prodEnabled: isBuild
+				prodEnabled: isBuild,
+				injectCode: `
+          import { setupProdMockServer } from '../mock/mockProdServer';
+          setupProdMockServer();
+        `
 			}),
 			createStyleImportPlugin({
 				resolves: [AndDesignVueResolve()]
@@ -51,7 +56,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
 			open: true,
 			proxy: {
 				"/api": {
-					target: "https://www.dgtle.com",
+					target: "http://localhost:3000",
 					changeOrigin: true,
 					rewrite: path => path.replace(/^\/api/, "")
 				}
