@@ -9,8 +9,9 @@
 - 😋  antdV
 - 😆  vue-router
 - 😊  pinia
-- 🧐  vue-i18n
+- 🧐  vue-i18n (support typescript)
 - 👉  axios
+- 😍  mock
 - ...
 
 ## 代码风格

@@ -49,6 +49,7 @@
 		"unplugin-vue-components": "^0.19.5",
 		"unplugin-vue-define-options": "^0.6.1",
 		"vite": "^2.9.5",
+		"vite-plugin-mock": "^2.9.6",
 		"vite-plugin-style-import": "^2.0.0",
 		"vitest": "^0.9.3",
 		"vue-tsc": "^0.34.7"

@@ -1,16 +1,17 @@
 import { Ref, ref, shallowRef, watchEffect } from "vue";
-import type { ResponsetData } from "@/api/interface";
 import { AxiosError } from "axios";
+import type { Service, Options, Result, EffectResult } from "./types";
 
-export type APIType<P, R> = (params: P) => Promise<ResponsetData<R>>;
-
-export const useRequest = <R, P = Partial<any>>(api: APIType<P, R>, params: P) => {
-	const data = shallowRef<R>();
+export const useRequest = <TData, TPrams = Partial<Record<string, any>>>(
+	service: Service<TData, TPrams>,
+	options: Options<TPrams>
+) => {
+	const data = shallowRef<TData>();
 	const error = ref("");
 	const loaded = ref(false);
 	(async function () {
 		try {
-			const json = await api(params);
+			const json = await service(options.params);
 			data.value = json.data;
 		} catch (resError) {
 			// fix: https://github.com/microsoft/TypeScript/issues/36775
@@ -21,15 +22,18 @@ export const useRequest = <R, P = Partial<any>>(api: APIType<P, R>, params: P) =
 			loaded.value = true;
 		}
 	})();
-	return { data, error, loaded };
+	return { data, error, loaded } as Result<TData>;
 };
 
-export const useWatchEffectRequest = <R, P = Partial<any>>(api: APIType<P, R>, params: Ref<P>) => {
-	const effectData = shallowRef<R>();
+export const useWatchEffectRequest = <TData, TPrams = Partial<Record<string, any>>>(
+	service: Service<TData, TPrams>,
+	options: Ref<Options<TPrams>>
+) => {
+	const effectData = shallowRef<TData>();
 	const effecError = ref("");
 	const effecLoaded = ref(false);
 	watchEffect(() => {
-		const { data, error, loaded } = useRequest<R, P>(api, params.value);
+		const { data, error, loaded } = useRequest<TData, TPrams>(service, options.value);
 		effectData.value = data.value;
 		effecError.value = error.value;
 		effecLoaded.value = loaded.value;
@@ -38,5 +42,5 @@ export const useWatchEffectRequest = <R, P = Partial<any>>(api: APIType<P, R>, p
 		effectData,
 		effecError,
 		effecLoaded
-	};
+	} as EffectResult<TData>;
 };
