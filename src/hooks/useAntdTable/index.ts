@@ -10,5 +10,5 @@ export const useAntdTable = <TData extends Data<any>, TParams extends Params>(
 		params: options.params
 	});
 	// TODO
-	console.log(data.value.itemList);
+	console.log(data.value);
 };

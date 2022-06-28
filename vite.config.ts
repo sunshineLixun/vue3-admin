@@ -28,12 +28,13 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
 			vue(),
 			vueJsx(),
 			viteMockServe({
+				ignore: /^_/, // 忽略自动读取以_开头的文件
 				mockPath: "mock",
 				logger: true,
 				localEnabled: !isBuild,
 				prodEnabled: isBuild,
 				injectCode: `
-          import { setupProdMockServer } from '../mock/mockProdServer';
+          import { setupProdMockServer } from '../mock/_mockProdServer';
           setupProdMockServer();
         `
 			}),
@@ -53,12 +54,19 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
 			// })
 		],
 		server: {
+			host: "0.0.0.0",
+			port: 8888,
 			open: true,
 			proxy: {
 				"/api": {
-					target: "http://localhost:3000",
+					target: "http://localhost:8888",
 					changeOrigin: true,
 					rewrite: path => path.replace(/^\/api/, "")
+				},
+				"/mock-api": {
+					target: "http://localhost:8888",
+					changeOrigin: true,
+					rewrite: path => path.replace(/^\/mock-api/, "")
 				}
 			}
 		},

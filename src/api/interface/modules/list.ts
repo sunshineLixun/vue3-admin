@@ -1,5 +1,5 @@
 export namespace List {
-	export const url = "/mock-api/userList";
+	export const url = "/userList";
 
 	export type UserListData = {
 		itemList: UserListItem[];

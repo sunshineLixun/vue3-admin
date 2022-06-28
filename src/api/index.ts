@@ -6,29 +6,35 @@ import { checkStatus } from "./helper/checkStatus";
 import { isNullOrUnDef } from "@/utils/is";
 
 const config: AxiosRequestConfig = {
-	baseURL: import.meta.env.VITE_BASE_API,
-	timeout: 1000,
+	timeout: 60000,
 	withCredentials: false
 	// ... 其他配置
 };
 
+export interface RequestOptions {
+	isMock: boolean;
+}
+
 class HttpRequest {
 	private static instance: HttpRequest;
 	private service: AxiosInstance;
+	private options?: RequestOptions;
 	// TODO: 取消请求
 	private controller = new AbortController();
-	private constructor(config: AxiosRequestConfig) {
+	private constructor(config: AxiosRequestConfig, options?: RequestOptions) {
 		this.service = axios.create({
+			baseURL: options?.isMock ? import.meta.env.VITE_MOCK_API : import.meta.env.VITE_BASE_API,
 			...config,
 			signal: this.controller.signal
 		});
+		this.options = options;
 		this.setInterceptorsRequest();
 		this.setInterceptorsResponse();
 	}
 
-	public static getInstance(config: AxiosRequestConfig) {
+	public static getInstance(config: AxiosRequestConfig, options?: RequestOptions) {
 		if (!HttpRequest.instance) {
-			HttpRequest.instance = new HttpRequest(config);
+			HttpRequest.instance = new HttpRequest(config, options);
 		}
 		return HttpRequest.instance;
 	}
@@ -102,4 +108,8 @@ class HttpRequest {
 	}
 }
 
-export default HttpRequest.getInstance(config);
+export const useService = (options: RequestOptions) => {
+	return HttpRequest.getInstance(config, options);
+};
+
+export const service = HttpRequest.getInstance(config);

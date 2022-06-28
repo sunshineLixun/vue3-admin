@@ -4,20 +4,18 @@ export default [
 		url: "/mock-api/userList",
 		timeout: 1000,
 		method: "get",
-		response: () => {
-			return {
-				code: 0,
-				msg: "",
-				data: {
-					total: 1,
-					itemList: [
-						{
-							id: 1,
-							name: "vit"
-						}
-					]
-				}
-			};
+		response: {
+			code: 0,
+			msg: "",
+			data: {
+				total: 1,
+				itemList: [
+					{
+						id: 1,
+						name: "vite"
+					}
+				]
+			}
 		}
 	}
 ] as MockMethod[];
