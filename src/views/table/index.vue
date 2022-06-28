@@ -1,24 +1,36 @@
 <template>
-	<div>
-		{{ t("routes.form.basicForm") }}
-		{{ t("routes.table.table") }}
-	</div>
+	<Table :data-source="data?.itemList" :columns="columns" :loading="loading" :pagination="pagination" />
 </template>
 <script setup lang="ts">
-import { useI18nv } from "@/hooks/useI18n";
+import { Table } from "ant-design-vue";
 import { useAntdTable } from "@/hooks/useAntdTable";
 import { listApi } from "@/api/modules/list";
+import type { List } from "@/api/interface/modules/list";
+import { computed } from "@vue/reactivity";
 
-useAntdTable(listApi, {
-	params: [
-		{
-			current: 1,
-			pageSize: 10
-		}
-	]
+const columns = [
+	{
+		title: "序号",
+		dataIndex: "id"
+	},
+	{
+		title: "姓名",
+		dataIndex: "name"
+	}
+];
+
+const pagination = computed(() => ({
+	total: data.value?.total,
+	current: 1,
+	pageSize: 10
+}));
+
+const { data, loading } = useAntdTable<List.UserListData, List.ListParams>(listApi, {
+	params: {
+		current: 1,
+		pageSize: 10
+	}
 });
-
-const { t } = useI18nv();
 </script>
 
 <style lang="scss">

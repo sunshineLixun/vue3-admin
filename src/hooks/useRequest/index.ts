@@ -8,8 +8,9 @@ export const useRequest = <TData, TPrams = Partial<Record<string, any>>>(
 ) => {
 	const data = shallowRef<TData>();
 	const error = ref("");
-	const loaded = ref(false);
-	(async function () {
+	const loading = ref(false);
+	async function request() {
+		loading.value = true;
 		try {
 			const json = await service(options.params);
 			data.value = json.data;
@@ -19,10 +20,11 @@ export const useRequest = <TData, TPrams = Partial<Record<string, any>>>(
 				error.value = resError.message;
 			}
 		} finally {
-			loaded.value = true;
+			loading.value = false;
 		}
-	})();
-	return { data, error, loaded } as Result<TData>;
+	}
+	request();
+	return { data, error, loading } as Result<TData | undefined>;
 };
 
 export const useWatchEffectRequest = <TData, TPrams = Partial<Record<string, any>>>(
@@ -31,16 +33,16 @@ export const useWatchEffectRequest = <TData, TPrams = Partial<Record<string, any
 ) => {
 	const effectData = shallowRef<TData>();
 	const effecError = ref("");
-	const effecLoaded = ref(false);
+	const effecLoading = ref(false);
 	watchEffect(() => {
-		const { data, error, loaded } = useRequest<TData, TPrams>(service, options.value);
+		const { data, error, loading } = useRequest<TData, TPrams>(service, options.value);
 		effectData.value = data.value;
 		effecError.value = error.value;
-		effecLoaded.value = loaded.value;
+		effecLoading.value = loading.value;
 	});
 	return {
 		effectData,
 		effecError,
-		effecLoaded
-	} as EffectResult<TData>;
+		effecLoading
+	} as EffectResult<TData | undefined>;
 };

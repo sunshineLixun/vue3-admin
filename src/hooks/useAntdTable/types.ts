@@ -7,14 +7,11 @@ export type Data<T> = {
 	total: number;
 };
 
-export type Params = [
-	{
-		current: number;
-		pageSize: number;
-		[key: string]: any;
-	},
-	...any[]
-];
+export type Params = {
+	current: number;
+	pageSize: number;
+	[key: string]: any;
+};
 
 export interface AntdTableOptions<TParams extends Params> extends Options<TParams> {
 	form?: FormInstance;

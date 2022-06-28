@@ -59,7 +59,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
 			open: true,
 			proxy: {
 				"/api": {
-					target: "http://localhost:8888",
+					// 真实地址
+					target: "xxxxx",
 					changeOrigin: true,
 					rewrite: path => path.replace(/^\/api/, "")
 				},

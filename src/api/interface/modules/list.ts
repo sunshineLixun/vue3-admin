@@ -10,4 +10,9 @@ export namespace List {
 		id: number;
 		name: string;
 	}
+
+	export interface ListParams {
+		current: number;
+		pageSize: number;
+	}
 }

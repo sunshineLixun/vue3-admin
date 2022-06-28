@@ -15,13 +15,13 @@ export interface FetchState<TData, TParams> {
 }
 
 export type Result<TData> = {
-	loaded: Ref<boolean>;
+	loading: Ref<boolean>;
 	data: ShallowRef<TData>;
 	error: Ref<string>;
 };
 
 export type EffectResult<TData> = {
-	effecLoaded: Ref<boolean>;
+	effecLoading: Ref<boolean>;
 	effectData: ShallowRef<TData>;
 	effecError: Ref<string>;
 };
