@@ -2,17 +2,16 @@ import { Ref, ref, shallowRef, watchEffect } from "vue";
 import { AxiosError } from "axios";
 import type { Service, Options, Result, EffectResult } from "./types";
 
-export const useRequest = <TData, TPrams = Partial<Record<string, any>>>(
-	service: Service<TData, TPrams>,
-	options: Options<TPrams>
-) => {
+export const useRequest = <TData, TParams extends any[]>(service: Service<TData, TParams>, options?: Options<TParams>) => {
 	const data = shallowRef<TData>();
 	const error = ref("");
 	const loading = ref(false);
+	const defaultParams = options?.defaultParams || ([] as any);
 	async function request() {
 		loading.value = true;
 		try {
-			const json = await service(options.params);
+			console.log(...defaultParams);
+			const json = await service(...defaultParams);
 			data.value = json.data;
 		} catch (resError) {
 			// fix: https://github.com/microsoft/TypeScript/issues/36775
@@ -27,15 +26,15 @@ export const useRequest = <TData, TPrams = Partial<Record<string, any>>>(
 	return { data, error, loading } as Result<TData | undefined>;
 };
 
-export const useWatchEffectRequest = <TData, TPrams = Partial<Record<string, any>>>(
-	service: Service<TData, TPrams>,
-	options: Ref<Options<TPrams>>
+export const useWatchEffectRequest = <TData, TParams extends any[]>(
+	service: Service<TData, TParams>,
+	options?: Ref<Options<TParams>>
 ) => {
 	const effectData = shallowRef<TData>();
 	const effecError = ref("");
 	const effecLoading = ref(false);
 	watchEffect(() => {
-		const { data, error, loading } = useRequest<TData, TPrams>(service, options.value);
+		const { data, error, loading } = useRequest<TData, TParams>(service, options?.value);
 		effectData.value = data.value;
 		effecError.value = error.value;
 		effecLoading.value = loading.value;
