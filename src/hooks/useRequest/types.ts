@@ -14,14 +14,14 @@ export type Options<TParams extends any[]> = {
 // 	error: Error;
 // }
 
-export type Result<TData> = {
+export interface Result<TData> {
 	loading: Ref<boolean>;
 	data: ShallowRef<TData>;
 	error: Ref<string>;
-};
+}
 
-export type EffectResult<TData> = {
+export interface EffectResult<TData> {
 	effecLoading: Ref<boolean>;
 	effectData: ShallowRef<TData>;
 	effecError: Ref<string>;
-};
+}

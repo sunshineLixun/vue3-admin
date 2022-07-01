@@ -7,7 +7,7 @@ export const useRequest = <TData, TParams extends any[]>(service: Service<TData,
 	const error = ref("");
 	const loading = ref(false);
 	const defaultParams = options?.defaultParams || ([] as any);
-	async function request() {
+	(async function () {
 		loading.value = true;
 		try {
 			console.log(...defaultParams);
@@ -21,8 +21,7 @@ export const useRequest = <TData, TParams extends any[]>(service: Service<TData,
 		} finally {
 			loading.value = false;
 		}
-	}
-	request();
+	})();
 	return { data, error, loading } as Result<TData | undefined>;
 };
 

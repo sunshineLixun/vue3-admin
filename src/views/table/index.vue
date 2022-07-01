@@ -5,8 +5,6 @@
 import { Table } from "ant-design-vue";
 import { useAntdTable } from "@/hooks/useAntdTable";
 import { listApi } from "@/api/modules/list";
-import { computed } from "@vue/reactivity";
-import { useRequest } from "@/hooks/useRequest";
 
 const columns = [
 	{
@@ -19,21 +17,7 @@ const columns = [
 	}
 ];
 
-const pagination = computed(() => ({
-	total: data.value?.total,
-	current: 1,
-	pageSize: 10
-}));
-
-const { data, loading } = useAntdTable(listApi, {
-	defaultParams: [
-		{
-			current: 1,
-			pageSize: 10
-		}
-	]
-});
-useRequest(listApi);
+const { data, loading, pagination } = useAntdTable(listApi);
 </script>
 
 <style lang="scss">
