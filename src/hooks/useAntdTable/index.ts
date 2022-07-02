@@ -8,25 +8,21 @@ export const useAntdTable = <TData extends Data, TParams extends Params>(
 ) => {
 	const { form } = options;
 	console.log(form);
-	const { data, loading, total, current, pageSize } = usePagination(service);
+	const { data, loading, total, current, pageSize, change } = usePagination(service);
 
 	const tableProps = computed(() => {
 		return {
 			dataSource: data.value?.itemList,
-			loading: loading.value
+			loading: loading.value,
+			onChange: change,
+			pagination: {
+				current: current.value,
+				total: total.value,
+				pageSize: pageSize.value
+			}
 		};
 	});
-
-	const pagination = computed(() => {
-		return {
-			current: current.value,
-			total: total.value,
-			pageSize: pageSize.value
-		};
-	});
-
 	return {
-		tableProps,
-		pagination
+		tableProps
 	};
 };

@@ -1,4 +1,6 @@
 import { ref } from "vue";
+import type { FilterValue, SorterResult, TableCurrentDataSource } from "ant-design-vue/es/table/interface";
+import type { TablePaginationConfig, TableProps } from "ant-design-vue";
 import type { PaginationOptions, Data, Params } from "./types";
 import type { Service, PaginationResult } from "./types";
 import { useRequest } from "../useRequest";
@@ -23,15 +25,15 @@ export function usePagination<TData extends Data, TParams extends Params>(
 	});
 	const total = computed(() => data.value?.total || 0);
 
-	const onChange = (page: number, _pageSize: number) => {
-		let toCurrent = page <= 0 ? 1 : page;
-		const toPageSize = _pageSize <= 0 ? 1 : _pageSize;
-		const tempTotalPage = Math.ceil(total?.value / toPageSize);
-		if (toCurrent > tempTotalPage) {
-			toCurrent = Math.max(1, tempTotalPage);
-		}
-		current.value = toCurrent;
-		pageSize.value = toPageSize;
+	const onChange: TableProps["onChange"] = (
+		pagination: TablePaginationConfig,
+		filters: Record<string, FilterValue | null>,
+		sorter: SorterResult<any> | SorterResult<any>[],
+		extra: TableCurrentDataSource<any>
+	) => {
+		console.log(pagination, filters, sorter, extra);
+		current.value = pagination.current || 0;
+		pageSize.value = pagination.pageSize || defaultPageSize;
 	};
 
 	const showSizeChange = (current: number, size: number) => {

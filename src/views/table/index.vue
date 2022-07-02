@@ -1,11 +1,16 @@
 <template>
-	<Table :data-source="tableProps.dataSource" :columns="columns" :loading="tableProps.loading" :pagination="pagination" />
+	<Table
+		:data-source="tableProps.dataSource"
+		:columns="columns"
+		:loading="tableProps.loading"
+		:pagination="tableProps.pagination"
+		@change="tableProps.onChange"
+	/>
 </template>
 <script setup lang="ts">
 import { Table } from "ant-design-vue";
 import { useAntdTable } from "@/hooks/useAntdTable";
 import { listApi } from "@/api/modules/list";
-import { watch } from "vue";
 
 const columns = [
 	{
@@ -18,8 +23,7 @@ const columns = [
 	}
 ];
 
-const { tableProps, pagination } = useAntdTable(listApi);
-watch(pagination, newVal => console.log(newVal));
+const { tableProps } = useAntdTable(listApi);
 </script>
 
 <style lang="scss">
