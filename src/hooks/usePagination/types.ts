@@ -1,4 +1,4 @@
-import type { Ref } from "vue";
+import type { ComputedRef, Ref } from "vue";
 import type { Options, Result } from "../useRequest/types";
 import type { ResponsetData } from "@/api/interface";
 export type Data = {
@@ -22,7 +22,7 @@ export interface PaginationOptions<TParams extends Params> extends Options<TPara
 
 export interface PaginationResult<TData extends Data> extends Result<TData> {
 	current: Ref<number>;
-	total: Ref<number>;
+	total: ComputedRef<number>;
 	pageSize: Ref<number>;
 	change: (page: number, pageSize: number) => void;
 	showSizeChange: (current: number, size: number) => void;

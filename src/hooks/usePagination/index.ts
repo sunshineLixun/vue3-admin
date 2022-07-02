@@ -2,6 +2,7 @@ import { ref } from "vue";
 import type { PaginationOptions, Data, Params } from "./types";
 import type { Service, PaginationResult } from "./types";
 import { useRequest } from "../useRequest";
+import { computed } from "@vue/reactivity";
 
 export function usePagination<TData extends Data, TParams extends Params>(
 	service: Service<TData, TParams>,
@@ -10,7 +11,6 @@ export function usePagination<TData extends Data, TParams extends Params>(
 	const { defaultPageSize = 10 } = options;
 
 	const current = ref(1);
-	const total = ref(0);
 	const pageSize = ref(defaultPageSize);
 
 	const { data, loading } = useRequest(service, {
@@ -21,14 +21,12 @@ export function usePagination<TData extends Data, TParams extends Params>(
 			}
 		]
 	});
-	if (data.value) {
-		total.value = data.value.total;
-	}
+	const total = computed(() => data.value?.total || 0);
 
 	const onChange = (page: number, _pageSize: number) => {
 		let toCurrent = page <= 0 ? 1 : page;
 		const toPageSize = _pageSize <= 0 ? 1 : _pageSize;
-		const tempTotalPage = Math.ceil(total.value / toPageSize);
+		const tempTotalPage = Math.ceil(total?.value / toPageSize);
 		if (toCurrent > tempTotalPage) {
 			toCurrent = Math.max(1, tempTotalPage);
 		}
@@ -43,8 +41,8 @@ export function usePagination<TData extends Data, TParams extends Params>(
 	return {
 		data,
 		loading,
-		current,
 		total,
+		current,
 		pageSize,
 		change: onChange,
 		showSizeChange
