@@ -3,6 +3,8 @@ import type { TableProps } from "ant-design-vue";
 import type { Options, Result } from "../useRequest/types";
 import type { ResponsetData } from "@/api/interface";
 
+export type RecordType = any;
+
 export type Data = {
 	itemList: any[];
 	total: number;

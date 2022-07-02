@@ -1,11 +1,5 @@
 <template>
-	<Table
-		:data-source="tableProps.dataSource"
-		:columns="columns"
-		:loading="tableProps.loading"
-		:pagination="tableProps.pagination"
-		@change="tableProps.onChange"
-	/>
+	<Table v-bind.prop="tableProps" :columns="columns" />
 </template>
 <script setup lang="ts">
 import { Table } from "ant-design-vue";

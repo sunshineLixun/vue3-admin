@@ -1,10 +1,10 @@
 import { ref } from "vue";
+import { computed } from "@vue/reactivity";
 import type { FilterValue, SorterResult, TableCurrentDataSource } from "ant-design-vue/es/table/interface";
 import type { TablePaginationConfig, TableProps } from "ant-design-vue";
 import type { PaginationOptions, Data, Params } from "./types";
-import type { Service, PaginationResult } from "./types";
+import type { Service, PaginationResult, RecordType } from "./types";
 import { useRequest } from "../useRequest";
-import { computed } from "@vue/reactivity";
 
 export function usePagination<TData extends Data, TParams extends Params>(
 	service: Service<TData, TParams>,
@@ -28,8 +28,8 @@ export function usePagination<TData extends Data, TParams extends Params>(
 	const onChange: TableProps["onChange"] = (
 		pagination: TablePaginationConfig,
 		filters: Record<string, FilterValue | null>,
-		sorter: SorterResult<any> | SorterResult<any>[],
-		extra: TableCurrentDataSource<any>
+		sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
+		extra: TableCurrentDataSource<RecordType>
 	) => {
 		console.log(pagination, filters, sorter, extra);
 		current.value = pagination.current || 0;
