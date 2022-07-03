@@ -5,7 +5,7 @@ import type { Service, Options, Result } from "./types";
 
 export const useRequest = <TData, TParams extends any[]>(
 	service: Service<TData, TParams>,
-	options?: Options<TParams> | Ref<UnwrapRef<TParams | any[]>>
+	options?: Options<TParams> | Ref<UnwrapRef<TParams> | any[]>
 ) => {
 	const data = shallowRef<TData>();
 	const error = ref("");

@@ -21,7 +21,7 @@ export function usePagination<TData extends Data, TParams extends Params>(
 				current: current.value,
 				pageSize: pageSize.value
 			}
-		])
+		] as Params)
 	);
 	const { data, loading } = useRequest(service, params);
 
