@@ -12,7 +12,7 @@
 - 🧐  vue-i18n (support typescript)
 - 👉  axios
 - 😍  mock
-- 🤓  hooks(useRequest、usePagination、useAntdTable)
+- 🤓  hooks(useRequest、usePagination、useAntdTable、useI18n)
 - ...
 
 ## 代码风格

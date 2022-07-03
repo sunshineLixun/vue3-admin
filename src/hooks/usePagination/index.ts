@@ -1,4 +1,4 @@
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { merge } from "lodash";
 import { computed } from "@vue/reactivity";
 import type { FilterValue, SorterResult } from "ant-design-vue/es/table/interface";
@@ -26,10 +26,6 @@ export function usePagination<TData extends Data, TParams extends Params>(
 	const { data, loading } = useRequest(service, params);
 
 	const total = computed(() => data.value?.total || 0);
-
-	watch(params, newVal => {
-		console.log(newVal);
-	});
 
 	const onChange: TableProps["onChange"] = (
 		pagination: TablePaginationConfig,
