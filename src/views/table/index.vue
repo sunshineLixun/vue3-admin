@@ -17,7 +17,13 @@ const columns = [
 	}
 ];
 
-const { tableProps } = useAntdTable(listApi);
+const { tableProps } = useAntdTable(listApi, {
+	defaultParams: [
+		{
+			name: "123"
+		}
+	]
+});
 </script>
 
 <style lang="scss">

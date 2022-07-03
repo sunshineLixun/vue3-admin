@@ -14,6 +14,7 @@
 	},
 	"dependencies": {
 		"@ant-design/icons-vue": "^6.1.0",
+		"@types/lodash": "^4.14.182",
 		"ant-design-vue": "^3.2.3",
 		"axios": "^0.27.2",
 		"dayjs": "^1.11.2",

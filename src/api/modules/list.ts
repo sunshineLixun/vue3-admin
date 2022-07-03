@@ -6,7 +6,7 @@ const http = useService({
 	isMock: true
 });
 
-export const listApi = (params: { current: number; pageSize: number }) => {
+export const listApi = (params: { current?: number; pageSize?: number; name: string }) => {
 	return http.get<List.UserListData>(List.url, {
 		params
 	});

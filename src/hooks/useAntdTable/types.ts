@@ -10,8 +10,8 @@ export type Data = {
 
 export type Params = [
 	{
-		current: number;
-		pageSize: number;
+		current?: number;
+		pageSize?: number;
 		[key: string]: any;
 	},
 	...any[]

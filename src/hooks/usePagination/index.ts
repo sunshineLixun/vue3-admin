@@ -1,6 +1,7 @@
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { merge } from "lodash";
 import { computed } from "@vue/reactivity";
-import type { FilterValue, SorterResult, TableCurrentDataSource } from "ant-design-vue/es/table/interface";
+import type { FilterValue, SorterResult } from "ant-design-vue/es/table/interface";
 import type { TablePaginationConfig, TableProps } from "ant-design-vue";
 import type { PaginationOptions, Data, Params } from "./types";
 import type { Service, PaginationResult, RecordType } from "./types";
@@ -10,28 +11,32 @@ export function usePagination<TData extends Data, TParams extends Params>(
 	service: Service<TData, TParams>,
 	options: PaginationOptions<TParams> = {}
 ) {
-	const { defaultPageSize = 10 } = options;
-
+	let { defaultPageSize = 10, defaultParams } = options;
 	const current = ref(1);
 	const pageSize = ref(defaultPageSize);
 
-	const { data, loading } = useRequest(service, {
-		defaultParams: [
+	const params = computed(() =>
+		merge(defaultParams, [
 			{
 				current: current.value,
 				pageSize: pageSize.value
 			}
-		]
-	});
+		])
+	);
+	const { data, loading } = useRequest(service, params);
+
 	const total = computed(() => data.value?.total || 0);
+
+	watch(params, newVal => {
+		console.log(newVal);
+	});
 
 	const onChange: TableProps["onChange"] = (
 		pagination: TablePaginationConfig,
 		filters: Record<string, FilterValue | null>,
-		sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
-		extra: TableCurrentDataSource<RecordType>
+		sorter: SorterResult<RecordType> | SorterResult<RecordType>[]
 	) => {
-		console.log(pagination, filters, sorter, extra);
+		console.log(pagination, filters, sorter);
 		current.value = pagination.current || 0;
 		pageSize.value = pagination.pageSize || defaultPageSize;
 	};

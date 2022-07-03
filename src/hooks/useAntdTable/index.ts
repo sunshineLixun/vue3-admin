@@ -6,9 +6,11 @@ export const useAntdTable = <TData extends Data, TParams extends Params>(
 	service: Service<TData, TParams>,
 	options: AntdTableOptions<TParams> = {}
 ) => {
-	const { form } = options;
+	const { form, ...rest } = options;
 	console.log(form);
-	const { data, loading, total, current, pageSize, change } = usePagination(service);
+	const { data, loading, total, current, pageSize, change } = usePagination(service, {
+		...rest
+	});
 
 	const tableProps = computed(() => {
 		return {

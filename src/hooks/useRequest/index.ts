@@ -1,16 +1,22 @@
-import { Ref, ref, shallowRef, watchEffect } from "vue";
+import { isRef, Ref, ref, shallowRef, unref, watchEffect } from "vue";
+import type { UnwrapRef } from "vue";
 import { AxiosError } from "axios";
-import type { Service, Options, Result, EffectResult } from "./types";
+import type { Service, Options, Result } from "./types";
 
-export const useRequest = <TData, TParams extends any[]>(service: Service<TData, TParams>, options?: Options<TParams>) => {
+export const useRequest = <TData, TParams extends any[]>(
+	service: Service<TData, TParams>,
+	options?: Options<TParams> | Ref<UnwrapRef<TParams | any[]>>
+) => {
 	const data = shallowRef<TData>();
 	const error = ref("");
 	const loading = ref(false);
-	const defaultParams = options?.defaultParams || ([] as any);
-	(async function () {
+
+	async function doFetch() {
+		error.value = "";
 		loading.value = true;
+		const defaultParams = isRef(options) ? unref(options) : options?.defaultParams || ([] as any);
+
 		try {
-			console.log(...defaultParams);
 			const json = await service(...defaultParams);
 			data.value = json.data;
 		} catch (resError) {
@@ -21,26 +27,11 @@ export const useRequest = <TData, TParams extends any[]>(service: Service<TData,
 		} finally {
 			loading.value = false;
 		}
-	})();
+	}
+	if (isRef(options)) {
+		watchEffect(doFetch);
+	} else {
+		doFetch();
+	}
 	return { data, error, loading } as Result<TData | undefined>;
-};
-
-export const useWatchEffectRequest = <TData, TParams extends any[]>(
-	service: Service<TData, TParams>,
-	options?: Ref<Options<TParams>>
-) => {
-	const effectData = shallowRef<TData>();
-	const effecError = ref("");
-	const effecLoading = ref(false);
-	watchEffect(() => {
-		const { data, error, loading } = useRequest<TData, TParams>(service, options?.value);
-		effectData.value = data.value;
-		effecError.value = error.value;
-		effecLoading.value = loading.value;
-	});
-	return {
-		effectData,
-		effecError,
-		effecLoading
-	} as EffectResult<TData | undefined>;
 };
