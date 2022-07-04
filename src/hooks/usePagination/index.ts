@@ -14,12 +14,16 @@ export function usePagination<TData extends Data, TParams extends Params>(
 	let { defaultPageSize = 10, defaultParams } = options;
 	const current = ref(1);
 	const pageSize = ref(defaultPageSize);
+	const sortedInfo = ref<SorterResult<RecordType> | SorterResult<RecordType>[]>();
+	const filteredInfo = ref<Record<string, FilterValue | null>>();
 
 	const params = computed(() =>
 		merge(defaultParams, [
 			{
 				current: current.value,
-				pageSize: pageSize.value
+				pageSize: pageSize.value,
+				sorter: sortedInfo.value,
+				filter: filteredInfo.value
 			}
 		] as Params)
 	);
@@ -36,6 +40,8 @@ export function usePagination<TData extends Data, TParams extends Params>(
 		console.log(pagination, filters, sorter);
 		current.value = pagination.current || 0;
 		pageSize.value = pagination.pageSize || defaultPageSize;
+		filteredInfo.value = filters;
+		sortedInfo.value = sorter;
 	};
 
 	const showSizeChange = (current: number, size: number) => {

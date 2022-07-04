@@ -5,11 +5,13 @@
 import { Table } from "ant-design-vue";
 import { useAntdTable } from "@/hooks/useAntdTable";
 import { listApi } from "@/api/modules/list";
+import type { ColumnsType } from "ant-design-vue/es/table/interface";
 
-const columns = [
+const columns: ColumnsType = [
 	{
 		title: "序号",
-		dataIndex: "id"
+		dataIndex: "id",
+		sorter: true
 	},
 	{
 		title: "姓名",
