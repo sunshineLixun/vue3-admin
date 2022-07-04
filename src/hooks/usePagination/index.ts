@@ -32,6 +32,7 @@ export function usePagination<TData extends Data, TParams extends Params>(
 		filters: Record<string, FilterValue | null>,
 		sorter: SorterResult<RecordType> | SorterResult<RecordType>[]
 	) => {
+		// TODO: filters sorter
 		console.log(pagination, filters, sorter);
 		current.value = pagination.current || 0;
 		pageSize.value = pagination.pageSize || defaultPageSize;

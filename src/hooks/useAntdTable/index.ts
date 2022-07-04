@@ -1,13 +1,16 @@
-import type { Service } from "./types";
+import { computed } from "@vue/reactivity";
+import type { Service, AntdTableResult } from "./types";
 import type { Data, Params, AntdTableOptions } from "./types";
 import { usePagination } from "../usePagination";
-import { computed } from "@vue/reactivity";
+
 export const useAntdTable = <TData extends Data, TParams extends Params>(
 	service: Service<TData, TParams>,
 	options: AntdTableOptions<TParams> = {}
 ) => {
 	const { form, ...rest } = options;
 	console.log(form);
+
+	// TODO: form
 	const { data, loading, total, current, pageSize, change } = usePagination(service, {
 		...rest
 	});
@@ -26,5 +29,5 @@ export const useAntdTable = <TData extends Data, TParams extends Params>(
 	});
 	return {
 		tableProps
-	};
+	} as AntdTableResult;
 };

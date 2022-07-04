@@ -1,4 +1,5 @@
-import type { FormInstance } from "ant-design-vue";
+import type { Ref } from "vue";
+import type { FormInstance, TableProps } from "ant-design-vue";
 import type { PaginationOptions } from "@/hooks/usePagination/types";
 import type { ResponsetData } from "@/api/interface";
 
@@ -21,4 +22,17 @@ export type Service<TData extends Data, TParams extends Params> = (...args: TPar
 
 export interface AntdTableOptions<TParams extends Params> extends PaginationOptions<TParams> {
 	form?: FormInstance;
+}
+
+export interface AntdTableResult {
+	tableProps: Ref<{
+		dataSource: any[] | undefined;
+		loading: boolean;
+		onChange: TableProps["onChange"];
+		pagination: {
+			current: number;
+			total: number;
+			pageSize: number;
+		};
+	}>;
 }

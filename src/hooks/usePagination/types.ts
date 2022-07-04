@@ -20,6 +20,7 @@ export type Params = [
 ];
 
 export type Service<TData extends Data, TParams extends Params> = (...args: TParams) => Promise<ResponsetData<TData>>;
+
 export interface PaginationOptions<TParams extends Params> extends Options<TParams> {
 	defaultPageSize?: number;
 }
