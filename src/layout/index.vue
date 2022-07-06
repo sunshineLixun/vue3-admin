@@ -10,7 +10,7 @@
 				<router-view v-slot="{ Component, route }">
 					<transition appear name="fade-transform" mode="out-in">
 						<keep-alive>
-							<div>
+							<div class="content">
 								<component :is="Component" :key="route.fullPath"></component>
 							</div>
 						</keep-alive>
@@ -44,5 +44,10 @@ function onCollapsed(value: boolean) {
 .layout {
 	display: flex;
 	height: 100vh;
+
+	.content {
+		max-height: 100%;
+		overflow-y: scroll;
+	}
 }
 </style>

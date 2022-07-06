@@ -10,8 +10,8 @@ import { useRequest } from "../useRequest";
 export function usePagination<TData extends Data, TParams extends Params>(
 	service: Service<TData, TParams>,
 	options: PaginationOptions<TParams> = {}
-) {
-	let { defaultPageSize = 10, defaultParams } = options;
+): PaginationResult<TData> {
+	let { defaultPageSize = 10, defaultParams = [], ...rest } = options;
 	const current = ref(1);
 	const pageSize = ref(defaultPageSize);
 	const sortedInfo = ref<SorterResult<RecordType> | SorterResult<RecordType>[]>();
@@ -23,11 +23,13 @@ export function usePagination<TData extends Data, TParams extends Params>(
 				current: current.value,
 				pageSize: pageSize.value,
 				sorter: sortedInfo.value,
-				filter: filteredInfo.value
+				filter: filteredInfo.value,
+				...rest
 			}
 		] as Params)
 	);
-	const { data, loading } = useRequest(service, params);
+
+	const { data, error, loading } = useRequest(service, params);
 
 	const total = computed(() => data.value?.total || 0);
 
@@ -36,16 +38,11 @@ export function usePagination<TData extends Data, TParams extends Params>(
 		filters: Record<string, FilterValue | null>,
 		sorter: SorterResult<RecordType> | SorterResult<RecordType>[]
 	) => {
-		// TODO: filters sorter
-		console.log(pagination, filters, sorter);
 		current.value = pagination.current || 0;
 		pageSize.value = pagination.pageSize || defaultPageSize;
+		// sorter filters
 		filteredInfo.value = filters;
 		sortedInfo.value = sorter;
-	};
-
-	const showSizeChange = (current: number, size: number) => {
-		console.log(current, size);
 	};
 
 	return {
@@ -54,7 +51,7 @@ export function usePagination<TData extends Data, TParams extends Params>(
 		total,
 		current,
 		pageSize,
-		change: onChange,
-		showSizeChange
-	} as PaginationResult<TData>;
+		error,
+		onChange
+	};
 }

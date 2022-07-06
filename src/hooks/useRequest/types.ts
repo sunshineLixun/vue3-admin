@@ -5,6 +5,7 @@ export type Service<TData, TParams extends any[]> = (...args: TParams) => Promis
 
 export type Options<TParams extends any[]> = {
 	defaultParams?: TParams;
+	[key: string]: any;
 };
 
 // export interface FetchState<TData, TParams> {

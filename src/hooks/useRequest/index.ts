@@ -33,5 +33,5 @@ export const useRequest = <TData, TParams extends any[]>(
 	} else {
 		doFetch();
 	}
-	return { data, error, loading } as Result<TData | undefined>;
+	return { data, error, loading } as Result<TData>;
 };

@@ -1,11 +1,65 @@
 <template>
+	<Form ref="formRef" name="formRef" :model="formData" @finish="search.onSumbit">
+		<Row :gutter="24">
+			<Col span="8">
+				<Form.Item name="name" label="姓名"> <Input v-model:value="formData.name" /> </Form.Item
+			></Col>
+			<Col span="8">
+				<Form.Item name="selectValue" required label="年龄" :rules="[{ required: true, message: 'Please input your username!' }]">
+					<Select v-model:value="formData.selectValue" :options="selectData" allowClear /> </Form.Item
+			></Col>
+			<Col span="8">
+				<Form.Item name="switchValue" label="开启"> <Switch v-model:checked="formData.switchValue" /> </Form.Item
+			></Col>
+		</Row>
+		<Row justify="end">
+			<Form.Item>
+				<Button type="primary" :html-type="'submit'">
+					<template #icon><SearchOutlined /></template>
+					查询</Button
+				>
+				<Button @click.prevent="search.onReset">
+					<template #icon><UndoOutlined /></template>
+					重置</Button
+				>
+			</Form.Item>
+		</Row>
+	</Form>
 	<Table v-bind.prop="tableProps" :columns="columns" />
 </template>
 <script setup lang="ts">
-import { Table } from "ant-design-vue";
+import { ref } from "vue";
+import type { FormInstance } from "ant-design-vue";
+import { SearchOutlined, UndoOutlined } from "@ant-design/icons-vue";
+import { Table, Form, Input, Row, Col, Select, Switch, Button } from "ant-design-vue";
+import type { ColumnsType } from "ant-design-vue/es/table/interface";
 import { useAntdTable } from "@/hooks/useAntdTable";
 import { listApi } from "@/api/modules/list";
-import type { ColumnsType } from "ant-design-vue/es/table/interface";
+
+interface FormState {
+	name: string;
+	selectValue: number;
+	switchValue: boolean;
+}
+
+const formRef = ref<FormInstance>();
+
+const formData = ref<FormState>({
+	name: "123",
+	selectValue: 2,
+	switchValue: true
+});
+
+const selectData = ref([
+	{
+		value: 1,
+		label: "1"
+	},
+	{
+		value: 2,
+		label: "2"
+	}
+]);
 
 const columns: ColumnsType = [
 	{
@@ -19,17 +73,9 @@ const columns: ColumnsType = [
 	}
 ];
 
-const { tableProps } = useAntdTable(listApi, {
-	defaultParams: [
-		{
-			name: "123"
-		}
-	]
+const { tableProps, search } = useAntdTable(listApi, {
+	form: formRef
 });
 </script>
 
-<style lang="scss">
-.select {
-	width: 100px;
-}
-</style>
+<style lang="scss"></style>

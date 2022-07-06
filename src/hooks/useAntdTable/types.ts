@@ -18,10 +18,14 @@ export type Params = [
 	...any[]
 ];
 
+export type FormParams = {
+	[key: string]: any;
+};
+
 export type Service<TData extends Data, TParams extends Params> = (...args: TParams) => Promise<ResponsetData<TData>>;
 
 export interface AntdTableOptions<TParams extends Params> extends PaginationOptions<TParams> {
-	form?: FormInstance;
+	form?: Ref<FormInstance | undefined>;
 }
 
 export interface AntdTableResult {
@@ -35,4 +39,8 @@ export interface AntdTableResult {
 			pageSize: number;
 		};
 	}>;
+	search: {
+		onSumbit: () => void;
+		onReset: () => void;
+	};
 }
