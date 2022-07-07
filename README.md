@@ -12,10 +12,18 @@
 - 🧐  vue-i18n (support typescript)
 - 👉  axios
 - 😍  mock
-- 🤓  hooks(useRequest、usePagination、useAntdTable、useI18n)
+- 🤓  hooks(useRequest、usePagination、useAntdTable、useI18n  ...)
 - ...
 
 ## 代码风格
 
 - 👻  prettierrc+eslint+commitlint+husky+editorconfig
 
+
+## TODO:
+
+- [ ] Components
+	- [ ] FormTable
+	- [ ] Form
+- [ ] Directives
+- ...
