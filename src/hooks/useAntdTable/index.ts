@@ -1,20 +1,27 @@
-import { unref, nextTick, watch, computed, shallowRef, ref } from "vue";
-import type { Service, AntdTableResult, Data, Params, AntdTableOptions, FormParams } from "./types";
-import { usePagination } from "../usePagination";
-import { isEmpty } from "lodash";
+import { unref, nextTick, watch, ref } from "vue";
+import type { TablePaginationConfig, TableProps } from "ant-design-vue";
+import type { FilterValue, SorterResult } from "ant-design-vue/es/table/interface";
+import type { Service, AntdTableResult, Data, Params, AntdTableOptions, FormParams, RecordType, AntdTableProps } from "./types";
+import { useRequest } from "../useRequest";
+import { isEmpty, merge } from "lodash";
 
 export const useAntdTable = <TData extends Data, TParams extends Params>(
 	service: Service<TData, TParams>,
 	options: AntdTableOptions<TParams> = {}
 ) => {
-	const { form, ...rest } = options;
+	const { form, defaultParams = [], defaultPageSize, ...rest } = options;
 
-	const _data = shallowRef();
-	const _loading = ref(true);
-	const _current = ref(1);
-	const _total = ref(0);
-	const _pageSize = ref(rest.defaultPageSize);
-	const _onChange = ref();
+	const state = ref<AntdTableProps>({
+		dataSource: [],
+		loading: true,
+		sorter: {},
+		filters: {},
+		pagination: {
+			current: 1,
+			total: 0,
+			pageSize: defaultPageSize || 10
+		}
+	});
 
 	const getFormInstance = async () => {
 		await nextTick();
@@ -26,17 +33,18 @@ export const useAntdTable = <TData extends Data, TParams extends Params>(
 	};
 
 	const _sumbit = (formParams?: FormParams) => {
-		const { data, loading, current, total, pageSize, onChange } = usePagination(service, {
-			...(formParams || {}),
-			...rest
-		});
-		watch([data, loading, current, total, pageSize], ([newData, newLoading, newCurr, newTotal, newPageSize]) => {
-			_data.value = newData;
-			_loading.value = newLoading;
-			_current.value = newCurr;
-			_total.value = newTotal;
-			_pageSize.value = newPageSize;
-			_onChange.value = onChange;
+		const params = merge(defaultParams, [
+			{
+				current: unref(state.value.pagination.current),
+				pageSize: unref(state.value.pagination.pageSize),
+				...(formParams || {}),
+				...rest
+			}
+		] as Params);
+		const { data, loading } = useRequest(service, params);
+		watch([data, loading], ([newData, newLoading]) => {
+			state.value.dataSource = newData.itemList;
+			state.value.loading = newLoading;
 		});
 	};
 	const validateFields = async (isReset: boolean = false) => {
@@ -66,25 +74,20 @@ export const useAntdTable = <TData extends Data, TParams extends Params>(
 		validateFields(true);
 	};
 
-	watch(_data, newVal => {
-		console.log(newVal);
-	});
-
-	const tableProps = computed(() => {
-		return {
-			dataSource: _data.value?.itemList,
-			loading: _loading.value,
-			onChange: _onChange.value,
-			pagination: {
-				current: _current.value,
-				total: _total.value,
-				pageSize: _pageSize.value
-			}
-		};
-	});
-
+	const onChange: TableProps["onChange"] = (
+		pagination: TablePaginationConfig,
+		filters: Record<string, FilterValue | null>,
+		sorter: SorterResult<RecordType> | SorterResult<RecordType>[]
+	) => {
+		state.value.pagination.current = pagination.current || 0;
+		state.value.pagination.pageSize = pagination.pageSize || 10;
+		state.value.sorter = sorter;
+		state.value.filters = filters;
+		onSumbit();
+	};
 	return {
-		tableProps,
+		tableProps: state,
+		onChange,
 		search: {
 			onSumbit,
 			onReset

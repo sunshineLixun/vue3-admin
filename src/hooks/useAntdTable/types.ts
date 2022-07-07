@@ -3,6 +3,8 @@ import type { FormInstance, TableProps } from "ant-design-vue";
 import type { PaginationOptions } from "@/hooks/usePagination/types";
 import type { ResponsetData } from "@/api/interface";
 
+export type RecordType = any;
+
 // 表格返回数据解构
 export type Data = {
 	itemList: any[];
@@ -28,17 +30,21 @@ export interface AntdTableOptions<TParams extends Params> extends PaginationOpti
 	form?: Ref<FormInstance | undefined>;
 }
 
+export type AntdTableProps = {
+	dataSource: any[];
+	loading: boolean;
+	sorter?: any;
+	filters?: any;
+	pagination: {
+		current: number;
+		total: number;
+		pageSize: number;
+	};
+};
+
 export interface AntdTableResult {
-	tableProps: Ref<{
-		dataSource: any[] | undefined;
-		loading: boolean;
-		onChange: TableProps["onChange"];
-		pagination: {
-			current: number;
-			total: number;
-			pageSize: number;
-		};
-	}>;
+	tableProps: Ref<AntdTableProps>;
+	onChange: TableProps["onChange"];
 	search: {
 		onSumbit: () => void;
 		onReset: () => void;

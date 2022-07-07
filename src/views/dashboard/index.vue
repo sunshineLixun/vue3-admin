@@ -1,22 +1,28 @@
 <template>
 	{{ t("routes.dashboard.dashboard") }}
+	<Pagination
+		v-model:current="current"
+		:total="total"
+		:page-size="pageSize"
+		@change="change"
+		@show-size-change="showSizeChange"
+	/>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { Pagination } from "ant-design-vue";
 import { useI18nv } from "@/hooks/useI18n";
+import { usePagination } from "@/hooks/usePagination";
+import { listApi } from "@/api/modules/list";
 const { t } = useI18nv();
 
-const state = ref(1);
-
-const state2 = ref(2);
-state.value = state2.value;
-
-setTimeout(() => {
-	state2.value = 3;
-}, 1000);
-
-watch([state, state2], ([newVal, newVal2]) => {
-	console.log(newVal, newVal2);
+const { current, total, pageSize, change, showSizeChange } = usePagination(listApi, {
+	// 其他参数
+	defaultParams: [
+		{
+			name: "123"
+		}
+	],
+	defaultPageSize: 30
 });
 </script>

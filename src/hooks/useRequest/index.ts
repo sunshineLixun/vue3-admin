@@ -14,12 +14,13 @@ export const useRequest = <TData, TParams extends any[]>(
 	async function doFetch() {
 		error.value = "";
 		loading.value = true;
-		const defaultParams = isRef(options) ? unref(options) : options?.defaultParams || ([] as any);
+		const defaultParams = isRef(options) ? unref(options) : options || ([] as any);
 
 		try {
 			const json = await service(...defaultParams);
 			data.value = json.data;
 		} catch (resError) {
+			console.log(resError);
 			// fix: https://github.com/microsoft/TypeScript/issues/36775
 			if (resError instanceof AxiosError) {
 				error.value = resError.message;

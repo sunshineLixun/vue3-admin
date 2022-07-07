@@ -1,9 +1,6 @@
 import type { Ref } from "vue";
-import type { TableProps } from "ant-design-vue";
 import type { Options, Result } from "../useRequest/types";
 import type { ResponsetData } from "@/api/interface";
-
-export type RecordType = any;
 
 export type Data = {
 	itemList: any[];
@@ -30,5 +27,6 @@ export interface PaginationResult<TData extends Data> extends Result<TData> {
 	current: Ref<number>;
 	total: Ref<number>;
 	pageSize: Ref<number>;
-	onChange: TableProps["onChange"];
+	change: (page: number, pageSize: number) => void;
+	showSizeChange: (current: number, size: number) => void;
 }

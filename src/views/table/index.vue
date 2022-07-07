@@ -5,11 +5,11 @@
 				<Form.Item name="name" label="姓名"> <Input v-model:value="formData.name" /> </Form.Item
 			></Col>
 			<Col span="8">
-				<Form.Item name="selectValue" required label="年龄" :rules="[{ required: true, message: 'Please input your username!' }]">
-					<Select v-model:value="formData.selectValue" :options="selectData" allowClear /> </Form.Item
+				<Form.Item name="age" required label="年龄" :rules="[{ required: true, message: 'Please input your username!' }]">
+					<Select v-model:value="formData.age" :options="selectData" allowClear /> </Form.Item
 			></Col>
 			<Col span="8">
-				<Form.Item name="switchValue" label="开启"> <Switch v-model:checked="formData.switchValue" /> </Form.Item
+				<Form.Item name="switch" label="开启"> <Switch v-model:checked="formData.switch" /> </Form.Item
 			></Col>
 		</Row>
 		<Row justify="end">
@@ -25,7 +25,7 @@
 			</Form.Item>
 		</Row>
 	</Form>
-	<Table v-bind.prop="tableProps" :columns="columns" />
+	<Table v-bind.prop="tableProps" :columns="columns" @change="onChange" />
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
@@ -38,16 +38,16 @@ import { listApi } from "@/api/modules/list";
 
 interface FormState {
 	name: string;
-	selectValue: number;
-	switchValue: boolean;
+	age: number;
+	switch: boolean;
 }
 
 const formRef = ref<FormInstance>();
 
 const formData = ref<FormState>({
 	name: "123",
-	selectValue: 2,
-	switchValue: true
+	age: 2,
+	switch: true
 });
 
 const selectData = ref([
@@ -73,7 +73,7 @@ const columns: ColumnsType = [
 	}
 ];
 
-const { tableProps, search } = useAntdTable(listApi, {
+const { tableProps, search, onChange } = useAntdTable(listApi, {
 	form: formRef
 });
 </script>
