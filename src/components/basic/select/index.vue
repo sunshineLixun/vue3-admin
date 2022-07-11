@@ -64,7 +64,13 @@ async function fetch() {
 	if (!api || !isFunction(api)) {
 		return;
 	}
-	const { data } = useRequest<SelectOptionData[]>(api, props.params);
+	const { data } = useRequest<SelectOptionData[], any[]>(api, {
+		defaultParams: [
+			{
+				...props.params
+			}
+		]
+	});
 	if (data.value) {
 		options.value = data.value;
 		if (props.isShowFirst) {
