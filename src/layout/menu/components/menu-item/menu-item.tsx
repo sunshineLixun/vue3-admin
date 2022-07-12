@@ -19,7 +19,7 @@ export const MenuItem = defineComponent({
 		});
 
 		const renderMenu = () => {
-			if (isShowSubMenu && isShowSubMenu.value) {
+			if (isShowSubMenu.value) {
 				return (
 					<AMenu.SubMenu
 						key={props.menuInfo.name}

@@ -22,9 +22,8 @@ const Iconfont = defineComponent({
 		}
 	},
 	setup(props, { attrs }) {
-		const { type } = props;
 		return () => {
-			return <MyIconFont type={type} {...attrs} />;
+			return <MyIconFont type={props.type} {...attrs} />;
 		};
 	}
 });
