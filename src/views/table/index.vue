@@ -1,6 +1,6 @@
 <template>
 	<Form class="search-form" ref="formRef" name="formRef" :model="formData" @finish="search.onSumbit">
-		<Row :gutter="24">
+		<Row :gutter="24" wrap align="bottom">
 			<Col span="3">
 				<Form.Item name="name">
 					<Input v-model:value="formData.name" placeholder="姓名" allowClear />
@@ -27,31 +27,51 @@
 				</Form.Item>
 			</Col>
 			<Col span="3">
-				<Form.Item name="navigation">
-					<ApiSelect :datas="navigaDatas" />
+				<Form.Item name="weight">
+					<Input v-model:value="formData.weight" placeholder="请输入体重" allowClear />
 				</Form.Item>
 			</Col>
+			<!-- <Col span="3">
+				<Form.Item name="weight">
+					<Input v-model:value="formData.weight" placeholder="请输入体重" allowClear />
+				</Form.Item>
+			</Col>
+			<Col span="3">
+				<Form.Item name="navigation">
+					<ApiSelect :datas="navigaDatas" placeholder="请选择民族" />
+				</Form.Item>
+			</Col>
+			<Col span="3">
+				<Form.Item name="navigation">
+					<ApiSelect :datas="navigaDatas" placeholder="请选择民族" />
+				</Form.Item>
+			</Col> -->
+			<Col span="3">
+				<Form.Item name="navigation">
+					<ApiSelect :datas="navigaDatas" placeholder="请选择民族" />
+				</Form.Item>
+			</Col>
+			<Col span="8" class="btn-searchs">
+				<Space>
+					<Button type="primary" :html-type="'submit'" :loading="tableProps.loading">
+						<template #icon>
+							<SearchOutlined />
+						</template>
+						查询
+					</Button>
+					<Button @click.prevent="search.onReset">
+						<template #icon>
+							<UndoOutlined />
+						</template>
+						重置
+					</Button>
+					<Button type="link">
+						展开
+						<DownOutlined />
+					</Button>
+				</Space>
+			</Col>
 		</Row>
-		<div class="btn-searchs">
-			<Space>
-				<Button type="primary" :html-type="'submit'" :loading="tableProps.loading">
-					<template #icon>
-						<SearchOutlined />
-					</template>
-					查询
-				</Button>
-				<Button @click.prevent="search.onReset">
-					<template #icon>
-						<UndoOutlined />
-					</template>
-					重置
-				</Button>
-				<Button type="link">
-					展开
-					<DownOutlined />
-				</Button>
-			</Space>
-		</div>
 	</Form>
 	<Table v-bind.prop="tableProps" :columns="columns" @change="onChange" />
 </template>
@@ -74,6 +94,8 @@ interface FormState {
 	weight: string;
 	navigation: string;
 }
+
+// TODO: 切割筛选项
 
 const formRef = ref<FormInstance>();
 
@@ -128,10 +150,14 @@ const { tableProps, search, onChange } = useAntdTable(listApi, {
 <style lang="scss" scoped>
 .search-form {
 	position: relative;
-}
-.btn-searchs {
-	position: absolute;
-	top: 0;
-	right: 0;
+
+	.btn-searchs {
+		position: absolute;
+		right: 0;
+		bottom: 10px;
+	}
+	.ant-form-item {
+		margin-bottom: 10px;
+	}
 }
 </style>
