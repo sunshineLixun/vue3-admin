@@ -1,6 +1,6 @@
 <template>
 	<Select v-model:value="selectValue" v-bind="$attrs">
-		<Select.Option v-for="item in _datas" :key="item.id">{{ item.title }}</Select.Option>
+		<Select.Option v-for="item in _datas" :key="item.value">{{ item.title }}</Select.Option>
 	</Select>
 </template>
 
@@ -14,7 +14,7 @@ import { isFunction } from "@/utils/is";
 import { useRequest } from "@/hooks/useRequest";
 
 interface Emits {
-	(e: "update:value", val: number): void;
+	(e: "update:value", val: string | number): void;
 }
 
 const props = defineProps({
@@ -74,7 +74,7 @@ async function fetch() {
 	if (data.value) {
 		options.value = data.value;
 		if (props.isShowFirst) {
-			selectValue.value = options.value[0].id;
+			selectValue.value = options.value[0].value;
 			emit("update:value", selectValue.value);
 		}
 	}

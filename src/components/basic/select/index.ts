@@ -1,2 +1,2 @@
-import Select from "./index.vue";
-export { Select };
+import ApiSelect from "./index.vue";
+export { ApiSelect };

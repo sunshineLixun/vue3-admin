@@ -33,6 +33,7 @@ export const useAntdTable = <TData extends Data, TParams extends Params>(
 	};
 
 	const _sumbit = (formParams?: FormParams) => {
+		state.value.loading = true;
 		const params = merge(defaultParams, [
 			{
 				current: unref(state.value.pagination.current),

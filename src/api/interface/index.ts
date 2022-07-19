@@ -9,6 +9,6 @@ export interface ResponsetData<T = any> extends CommonResult {
 	data?: T;
 }
 export interface SelectOptionData {
-	id: number;
+	value: string | number;
 	title: string;
 }

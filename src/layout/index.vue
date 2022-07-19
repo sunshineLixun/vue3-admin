@@ -46,7 +46,7 @@ function onCollapsed(value: boolean) {
 	height: 100vh;
 
 	.content {
-		height: 100%;
+		padding: 20px;
 		max-height: 100%;
 		overflow-y: scroll;
 	}
