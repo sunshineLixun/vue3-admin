@@ -7,7 +7,7 @@
 				</Form.Item>
 			</Col>
 			<Col :span="3">
-				<Form.Item name="12.5%age">
+				<Form.Item name="gender">
 					<Select v-model:value="formData.gender" :options="selectData" allowClear placeholder="请选择性别" />
 				</Form.Item>
 			</Col>
@@ -147,6 +147,9 @@ const { tableProps, search, onChange } = useAntdTable(listApi, {
 
 	.ant-form-item {
 		margin-bottom: 10px;
+		.ant-picker {
+			width: 100%;
+		}
 	}
 
 	.btn-searchs {
