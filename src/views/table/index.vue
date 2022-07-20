@@ -1,77 +1,67 @@
 <template>
 	<Form class="search-form" ref="formRef" name="formRef" :model="formData" @finish="search.onSumbit">
-		<Row :gutter="24" wrap align="bottom">
-			<Col span="3">
+		<Row :gutter="[8, 0]">
+			<Col :span="3">
 				<Form.Item name="name">
 					<Input v-model:value="formData.name" placeholder="姓名" allowClear />
 				</Form.Item>
 			</Col>
-			<Col span="3">
-				<Form.Item name="age">
+			<Col :span="3">
+				<Form.Item name="12.5%age">
 					<Select v-model:value="formData.gender" :options="selectData" allowClear placeholder="请选择性别" />
 				</Form.Item>
 			</Col>
-			<Col span="3">
+			<Col :span="3">
 				<Form.Item name="height">
 					<Input v-model:value="formData.height" placeholder="请输入身高" allowClear />
 				</Form.Item>
 			</Col>
-			<Col span="3">
+			<Col :span="3">
 				<Form.Item name="time">
 					<DatePicker v-model:value="formData.time" placeholder="请选择时间" allowClear />
 				</Form.Item>
 			</Col>
-			<Col span="3">
+			<Col :span="3">
 				<Form.Item name="weight">
 					<Input v-model:value="formData.weight" placeholder="请输入体重" allowClear />
 				</Form.Item>
 			</Col>
-			<Col span="3">
-				<Form.Item name="weight">
-					<Input v-model:value="formData.weight" placeholder="请输入体重" allowClear />
-				</Form.Item>
-			</Col>
-			<!-- <Col span="3">
-				<Form.Item name="weight">
-					<Input v-model:value="formData.weight" placeholder="请输入体重" allowClear />
-				</Form.Item>
-			</Col>
-			<Col span="3">
+			<Col :span="3">
 				<Form.Item name="navigation">
-					<ApiSelect :datas="navigaDatas" placeholder="请选择民族" />
+					<ApiSelect v-model:value="formData.navigation" :datas="navigaDatas" placeholder="请选择民族" />
 				</Form.Item>
 			</Col>
-			<Col span="3">
-				<Form.Item name="navigation">
-					<ApiSelect :datas="navigaDatas" placeholder="请选择民族" />
-				</Form.Item>
-			</Col> -->
-			<Col span="3">
-				<Form.Item name="navigation">
-					<ApiSelect :datas="navigaDatas" placeholder="请选择民族" />
+			<Col :span="3">
+				<Form.Item name="birthday">
+					<DatePicker v-model:value="formData.birthday" placeholder="请选择出生日期" allowClear />
 				</Form.Item>
 			</Col>
-			<Col span="8" class="btn-searchs">
-				<Space>
-					<Button type="primary" :html-type="'submit'" :loading="tableProps.loading">
-						<template #icon>
-							<SearchOutlined />
-						</template>
-						查询
-					</Button>
-					<Button @click.prevent="search.onReset">
-						<template #icon>
-							<UndoOutlined />
-						</template>
-						重置
-					</Button>
-					<Button type="link">
-						展开
-						<DownOutlined />
-					</Button>
-				</Space>
+			<Col :span="3">
+				<Form.Item name="course">
+					<Input v-model:value="formData.course" placeholder="请输入班级" allowClear />
+				</Form.Item>
 			</Col>
 		</Row>
+		<div class="btn-searchs">
+			<Space>
+				<Button type="primary" :html-type="'submit'" :loading="tableProps.loading">
+					<template #icon>
+						<SearchOutlined />
+					</template>
+					查询
+				</Button>
+				<Button @click.prevent="search.onReset">
+					<template #icon>
+						<UndoOutlined />
+					</template>
+					重置
+				</Button>
+				<Button class="expand" type="link" @click="isExpand === !isExpand">
+					展开
+					<DownOutlined />
+				</Button>
+			</Space>
+		</div>
 	</Form>
 	<Table v-bind.prop="tableProps" :columns="columns" @change="onChange" />
 </template>
@@ -92,10 +82,10 @@ interface FormState {
 	height: string;
 	time: string;
 	weight: string;
-	navigation: string;
+	navigation?: string;
+	birthday: string;
+	course: string;
 }
-
-// TODO: 切割筛选项
 
 const formRef = ref<FormInstance>();
 
@@ -105,8 +95,12 @@ const formData = ref<FormState>({
 	height: "",
 	time: "",
 	weight: "",
-	navigation: ""
+	navigation: undefined,
+	birthday: "",
+	course: "小班"
 });
+
+const isExpand = ref(false);
 
 const selectData = [
 	{
@@ -151,13 +145,19 @@ const { tableProps, search, onChange } = useAntdTable(listApi, {
 .search-form {
 	position: relative;
 
-	.btn-searchs {
-		position: absolute;
-		right: 0;
-		bottom: 10px;
-	}
 	.ant-form-item {
 		margin-bottom: 10px;
+	}
+
+	.btn-searchs {
+		display: flex;
+		justify-content: end;
+		margin-bottom: 10px;
+		float: right;
+		right: 0;
+		.ant-btn-link {
+			padding: 0;
+		}
 	}
 }
 </style>

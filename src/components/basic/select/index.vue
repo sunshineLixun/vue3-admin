@@ -1,5 +1,5 @@
 <template>
-	<Select v-bind="props">
+	<Select v-model:value="selectValue" v-bind="props">
 		<Select.Option v-for="item in _datas" :key="item.value">{{ item.title }}</Select.Option>
 	</Select>
 </template>
@@ -51,9 +51,11 @@ watch(
 	}
 );
 
-// watch(selectValue, newVal => {
-// 	emit("update:value", newVal);
-// });
+watch(selectValue, newVal => {
+	if (newVal) {
+		emit("update:value", newVal as string | number);
+	}
+});
 
 watchEffect(() => {
 	fetch();
