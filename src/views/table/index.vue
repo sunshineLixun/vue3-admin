@@ -31,44 +31,44 @@
 					<ApiSelect v-model:value="formData.navigation" :datas="navigaDatas" placeholder="请选择民族" />
 				</Form.Item>
 			</Col>
-			<Col :span="3">
+			<Col :span="isExpand ? 3 : 0">
 				<Form.Item name="birthday">
 					<DatePicker v-model:value="formData.birthday" placeholder="请选择出生日期" allowClear />
 				</Form.Item>
 			</Col>
-			<Col :span="3">
+			<Col :span="isExpand ? 3 : 0">
 				<Form.Item name="course">
 					<Input v-model:value="formData.course" placeholder="请输入班级" allowClear />
 				</Form.Item>
 			</Col>
+			<Col :span="6" :offset="isExpand ? 18 : 0" class="btn-searchs">
+				<Space>
+					<Button type="primary" :html-type="'submit'" :loading="tableProps.loading">
+						<template #icon>
+							<SearchOutlined />
+						</template>
+						查询
+					</Button>
+					<Button @click.prevent="search.onReset">
+						<template #icon>
+							<UndoOutlined />
+						</template>
+						重置
+					</Button>
+					<Button class="expand" type="link" @click="isExpand = !isExpand">
+						{{ isExpand ? "收起" : "展开" }}
+						<DownOutlined v-if="!isExpand" />
+						<UpOutlined v-else-if="isExpand" />
+					</Button> </Space
+			></Col>
 		</Row>
-		<div class="btn-searchs">
-			<Space>
-				<Button type="primary" :html-type="'submit'" :loading="tableProps.loading">
-					<template #icon>
-						<SearchOutlined />
-					</template>
-					查询
-				</Button>
-				<Button @click.prevent="search.onReset">
-					<template #icon>
-						<UndoOutlined />
-					</template>
-					重置
-				</Button>
-				<Button class="expand" type="link" @click="isExpand === !isExpand">
-					展开
-					<DownOutlined />
-				</Button>
-			</Space>
-		</div>
 	</Form>
 	<Table v-bind.prop="tableProps" :columns="columns" @change="onChange" />
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
 import type { FormInstance } from "ant-design-vue";
-import { SearchOutlined, UndoOutlined, DownOutlined } from "@ant-design/icons-vue";
+import { SearchOutlined, UndoOutlined, DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 import { Table, Form, Input, Row, Col, Select, Button, Space, DatePicker } from "ant-design-vue";
 import type { ColumnsType } from "ant-design-vue/es/table/interface";
 import { useAntdTable } from "@/hooks/useAntdTable";
@@ -153,8 +153,6 @@ const { tableProps, search, onChange } = useAntdTable(listApi, {
 		display: flex;
 		justify-content: end;
 		margin-bottom: 10px;
-		float: right;
-		right: 0;
 		.ant-btn-link {
 			padding: 0;
 		}
