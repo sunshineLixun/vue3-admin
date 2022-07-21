@@ -1,6 +1,6 @@
 <template>
-	<Form class="search-form" ref="formRef" name="formRef" :model="formData" @finish="search.onSumbit">
-		<Row :gutter="[8, 0]">
+	<TableForm>
+		<template #formItem>
 			<Col :span="3">
 				<Form.Item name="name">
 					<Input v-model:value="formData.name" placeholder="姓名" allowClear />
@@ -41,40 +41,20 @@
 					<Input v-model:value="formData.course" placeholder="请输入班级" allowClear />
 				</Form.Item>
 			</Col>
-			<Col :span="6" :offset="isExpand ? 18 : 0" class="btn-searchs">
-				<Space>
-					<Button type="primary" :html-type="'submit'" :loading="tableProps.loading">
-						<template #icon>
-							<SearchOutlined />
-						</template>
-						查询
-					</Button>
-					<Button @click.prevent="search.onReset">
-						<template #icon>
-							<UndoOutlined />
-						</template>
-						重置
-					</Button>
-					<Button class="expand" type="link" @click="isExpand = !isExpand">
-						{{ isExpand ? "收起" : "展开" }}
-						<DownOutlined v-if="!isExpand" />
-						<UpOutlined v-else-if="isExpand" />
-					</Button> </Space
-			></Col>
-		</Row>
-	</Form>
+		</template>
+	</TableForm>
 	<Table v-bind.prop="tableProps" :columns="columns" @change="onChange" />
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
 import type { FormInstance } from "ant-design-vue";
-import { SearchOutlined, UndoOutlined, DownOutlined, UpOutlined } from "@ant-design/icons-vue";
-import { Table, Form, Input, Row, Col, Select, Button, Space, DatePicker } from "ant-design-vue";
+import { Table, Form, Input, Col, Select, DatePicker } from "ant-design-vue";
 import type { ColumnsType } from "ant-design-vue/es/table/interface";
 import { useAntdTable } from "@/hooks/useAntdTable";
 import { listApi } from "@/api/modules/list";
 import { ApiSelect } from "@/components/basic/select";
 import type { SelectOptionData } from "@/api/interface/index";
+import { TableForm } from "@/components/core/table-form/index";
 
 interface FormState {
 	name: string;
@@ -136,29 +116,9 @@ const columns: ColumnsType = [
 	}
 ];
 
-const { tableProps, search, onChange } = useAntdTable(listApi, {
+const { tableProps, onChange } = useAntdTable(listApi, {
 	form: formRef
 });
 </script>
 
-<style lang="scss" scoped>
-.search-form {
-	position: relative;
-
-	.ant-form-item {
-		margin-bottom: 10px;
-		.ant-picker {
-			width: 100%;
-		}
-	}
-
-	.btn-searchs {
-		display: flex;
-		justify-content: end;
-		margin-bottom: 10px;
-		.ant-btn-link {
-			padding: 0;
-		}
-	}
-}
-</style>
+<style lang="scss" scoped></style>
