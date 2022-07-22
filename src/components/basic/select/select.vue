@@ -1,5 +1,5 @@
 <template>
-	<Select v-model:value="selectValue" v-bind="props">
+	<Select v-bind="props">
 		<Select.Option v-for="item in _datas" :key="item.value">{{ item.title }}</Select.Option>
 	</Select>
 </template>

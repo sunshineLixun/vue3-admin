@@ -1,6 +1,6 @@
 <template>
-	<TableForm>
-		<template #formItem>
+	<ProTable :columns="columns" :formData="formData">
+		<template #form>
 			<Col :span="3">
 				<Form.Item name="name">
 					<Input v-model:value="formData.name" placeholder="姓名" allowClear />
@@ -42,19 +42,18 @@
 				</Form.Item>
 			</Col>
 		</template>
-	</TableForm>
-	<Table v-bind.prop="tableProps" :columns="columns" @change="onChange" />
+	</ProTable>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-import type { FormInstance } from "ant-design-vue";
-import { Table, Form, Input, Col, Select, DatePicker } from "ant-design-vue";
+// import type { FormInstance } from "ant-design-vue";
+import { Form, Input, Col, Select, DatePicker } from "ant-design-vue";
 import type { ColumnsType } from "ant-design-vue/es/table/interface";
-import { useAntdTable } from "@/hooks/useAntdTable";
-import { listApi } from "@/api/modules/list";
+// import { useAntdTable } from "@/hooks/useAntdTable";
+// import { listApi } from "@/api/modules/list";
 import { ApiSelect } from "@/components/basic/select";
 import type { SelectOptionData } from "@/api/interface/index";
-import { TableForm } from "@/components/core/table-form/index";
+import { ProTable } from "@/components/core/pro-table";
 
 interface FormState {
 	name: string;
@@ -67,7 +66,7 @@ interface FormState {
 	course: string;
 }
 
-const formRef = ref<FormInstance>();
+// const formRef = ref<FormInstance>();
 
 const formData = ref<FormState>({
 	name: "123",
@@ -116,9 +115,9 @@ const columns: ColumnsType = [
 	}
 ];
 
-const { tableProps, onChange } = useAntdTable(listApi, {
-	form: formRef
-});
+// const { tableProps, onChange, search } = useAntdTable(listApi, {
+// 	form: formRef
+// });
 </script>
 
 <style lang="scss" scoped></style>
