@@ -1,5 +1,5 @@
 <template>
-	<TableForm :formData="props.formData">
+	<TableForm :formData="props.formProps?.formModel">
 		<template #formItem>
 			<slot name="form" />
 		</template>
@@ -9,20 +9,9 @@
 
 <script lang="ts" setup>
 import { defineProps } from "vue";
-import type { PropType } from "vue";
-import type { ColumnsType } from "ant-design-vue/es/table/interface";
 import { Table } from "ant-design-vue";
-import TableForm from "../table-form/table-form.vue";
+import { proTableProps } from "./pro-table-types";
+import TableForm from "./components/table-form/table-form.vue";
 
-// TODO: table request、 table props
-
-const props = defineProps({
-	formData: {
-		type: Object as PropType<object>,
-		default: () => {}
-	},
-	columns: {
-		type: Array as PropType<ColumnsType>
-	}
-});
+const props = defineProps(proTableProps);
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<ProTable :columns="columns" :formData="formData">
+	<ProTable :columns="columns" :formModel="formData">
 		<template #form>
 			<Col :span="3">
 				<Form.Item name="name">
