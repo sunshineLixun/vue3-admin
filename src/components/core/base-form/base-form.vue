@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, defineExpose } from "vue";
 import { Form } from "ant-design-vue";
 import { baseFormProps } from "./base-from-types";
 import { useFormState } from "./hooks/useFormState";
@@ -21,6 +21,7 @@ const instance = {
 };
 
 createFromInstance(instance);
+defineExpose(instance);
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,6 @@
 import type { PropType, ExtractPropTypes } from "vue";
 import { formProps, type FormProps } from "ant-design-vue/es/form";
+import type BaseFrom from "./base-form.vue";
 
 export const baseFormProps = {
 	...formProps(),
@@ -17,3 +18,5 @@ export const baseFormProps = {
 };
 
 export type BaseFormPropsType = ExtractPropTypes<typeof baseFormProps>;
+
+export type BaseFromInstance = InstanceType<typeof BaseFrom>;

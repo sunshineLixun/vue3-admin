@@ -1,5 +1,5 @@
 <template>
-	<TableForm v-if="props.showSearch" :formModel="props.formProps?.formModel">
+	<TableForm ref="tableFromRef" v-if="props.showSearch" :formModel="props.formProps?.formModel">
 		<template #formItem>
 			<slot name="form" />
 		</template>
@@ -12,10 +12,10 @@ import { defineProps } from "vue";
 import { Table } from "ant-design-vue";
 import { proTableProps } from "./pro-table-types";
 import TableForm from "./components/table-form/table-form.vue";
-import { useFormRef } from "@/components/core/base-form/hooks/useFormInstance";
+import { useProTableState } from "./hooks/useProTableState";
+
+const state = useProTableState();
+const { tableFromRef } = state;
 
 const props = defineProps(proTableProps);
-
-const formRef = useFormRef();
-console.log(formRef);
 </script>
