@@ -2,7 +2,9 @@ import { reactive, ref } from "vue";
 import type { FormInstance } from "ant-design-vue";
 import type { BaseFormPropsType } from "../base-from-types";
 
-type useFormStateParams = {
+export type FormState = ReturnType<typeof useFormState>;
+
+export type useFormStateParams = {
 	props: BaseFormPropsType;
 };
 

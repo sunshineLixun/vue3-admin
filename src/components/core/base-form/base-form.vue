@@ -9,9 +9,18 @@ import { defineProps } from "vue";
 import { Form } from "ant-design-vue";
 import { baseFormProps } from "./base-from-types";
 import { useFormState } from "./hooks/useFormState";
+import { createFromInstance } from "./hooks/useFormInstance";
+
 const props = defineProps(baseFormProps);
 
-const { formModel, fromInstanceRef } = useFormState({ props });
+const fromState = useFormState({ props });
+const { formModel, fromInstanceRef } = fromState;
+
+const instance = {
+	...fromState
+};
+
+createFromInstance(instance);
 </script>
 
 <style lang="scss" scoped>

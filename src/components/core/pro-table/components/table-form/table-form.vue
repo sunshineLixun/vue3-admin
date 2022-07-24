@@ -15,8 +15,8 @@
 import { ref, defineProps } from "vue";
 import { Row, Col } from "ant-design-vue";
 import Action from "./action.vue";
-import { BaseForm } from "../../../base-form";
-import { baseFormProps } from "../../../base-form/base-from-types.ts";
+import { BaseForm } from "@/components/core/base-form";
+import { baseFormProps } from "@/components/core/base-form/base-from-types";
 
 // TODO: 计算Col的offset
 
