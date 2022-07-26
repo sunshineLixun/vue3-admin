@@ -1,12 +1,12 @@
 <template>
 	<Space :style="props.style" class="btn-searchs">
-		<Button type="primary">
+		<Button type="primary" @click="submit">
 			<template #icon>
 				<SearchOutlined />
 			</template>
 			查询
 		</Button>
-		<Button>
+		<Button @click="resetForm">
 			<template #icon>
 				<UndoOutlined />
 			</template>
@@ -22,14 +22,17 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue";
+import { Space, Button } from "ant-design-vue";
 import type { CSSProperties } from "@vue/runtime-dom";
 import { SearchOutlined, UndoOutlined, DownOutlined, UpOutlined } from "@ant-design/icons-vue";
-import { Space, Button } from "ant-design-vue";
+import { useFormInstance } from "@/components/core/base-form/hooks/useFormInstance";
 
 type ActionsProps = {
 	style?: CSSProperties;
 	collapsed?: boolean;
 };
+
+const { submit, resetForm } = useFormInstance();
 
 const props = defineProps<ActionsProps>();
 

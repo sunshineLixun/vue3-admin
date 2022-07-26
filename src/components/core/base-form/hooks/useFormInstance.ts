@@ -7,6 +7,6 @@ export const createFromInstance = (instance: BaseFormType) => {
 	provide(key, instance);
 };
 
-export const useFormRef = () => {
+export const useFormInstance = () => {
 	return inject(key) as BaseFormType;
 };

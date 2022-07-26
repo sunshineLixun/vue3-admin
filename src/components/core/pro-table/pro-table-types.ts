@@ -14,7 +14,7 @@ export const proTableProps = {
 	/**表单数据配置 */
 	formProps: {
 		type: Object as PropType<BaseFormPropsType>,
-		default: () => {}
+		default: () => ({})
 	},
 	/**表格列配置 */
 	columns: {

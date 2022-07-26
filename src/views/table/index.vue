@@ -1,5 +1,5 @@
 <template>
-	<ProTable :columns="columns" :formModel="formData">
+	<ProTable :columns="columns" :formProps="formProps">
 		<template #form>
 			<Col :span="3">
 				<Form.Item name="name">
@@ -54,6 +54,7 @@ import type { ColumnsType } from "ant-design-vue/es/table/interface";
 import { ApiSelect } from "@/components/basic/select";
 import type { SelectOptionData } from "@/api/interface/index";
 import { ProTable } from "@/components/core/pro-table";
+import type { BaseFormPropsType } from "@/components/core/base-form/base-from-types";
 
 interface FormState {
 	name: string;
@@ -66,8 +67,6 @@ interface FormState {
 	course: string;
 }
 
-// const formRef = ref<FormInstance>();
-
 const formData = ref<FormState>({
 	name: "123",
 	gender: "2",
@@ -78,6 +77,10 @@ const formData = ref<FormState>({
 	birthday: "",
 	course: "小班"
 });
+
+const formProps: BaseFormPropsType = {
+	formModel: formData.value
+};
 
 const isExpand = ref(false);
 
@@ -115,6 +118,7 @@ const columns: ColumnsType = [
 	}
 ];
 
+// const formRef = ref<FormInstance>();
 // const { tableProps, onChange, search } = useAntdTable(listApi, {
 // 	form: formRef
 // });

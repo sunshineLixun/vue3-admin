@@ -1,5 +1,5 @@
 <template>
-	<TableForm ref="tableFromRef" v-if="props.showSearch" :formModel="props.formProps?.formModel">
+	<TableForm ref="tableFromRef" v-if="props.showSearch" @submit="handleSumbit" :formModel="props.formProps?.formModel">
 		<template #formItem>
 			<slot name="form" />
 		</template>
@@ -18,4 +18,8 @@ const state = useProTableState();
 const { tableFromRef } = state;
 
 const props = defineProps(proTableProps);
+
+const handleSumbit = (params: any) => {
+	console.log(params);
+};
 </script>

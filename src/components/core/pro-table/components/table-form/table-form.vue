@@ -1,5 +1,5 @@
 <template>
-	<BaseForm ref="tableFromRef" class="search-form" :formModel="props.formModel">
+	<BaseForm ref="tableFromRef" class="search-form">
 		<template #formContent>
 			<Row :gutter="[8, 0]">
 				<slot name="formItem" />
@@ -16,14 +16,18 @@ import { ref, defineProps } from "vue";
 import { Row, Col } from "ant-design-vue";
 import Action from "./action.vue";
 import { BaseForm } from "@/components/core/base-form";
-import { baseFormProps } from "@/components/core/base-form/base-from-types";
 import { useTableFromState } from "./hooks/useTableFromState";
+import { tableFormProps } from "./table-form-types";
 
 const state = useTableFromState();
 const { tableFromRef } = state;
 // TODO: 计算Col的offset
 
-const props = defineProps(baseFormProps);
+// const attrs = useAttrs();
+
+// TODO: 绑定props
+const props = defineProps(tableFormProps);
+console.log(props);
 
 const collapsed = ref(false);
 

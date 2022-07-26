@@ -1,5 +1,5 @@
 <template>
-	<Form class="base-form" ref="fromInstanceRef" :model="formModel">
+	<Form class="base-form" ref="formInstanceRef" v-bind="pick(getFormProps, aFormPropKeys)" :model="formModel">
 		<slot name="formContent" />
 	</Form>
 </template>
@@ -7,7 +7,8 @@
 <script setup lang="ts">
 import { defineProps, defineExpose, useAttrs } from "vue";
 import { Form } from "ant-design-vue";
-import { baseFormProps, baseFromEmits } from "./base-from-types";
+import { pick } from "lodash";
+import { baseFormProps, baseFromEmits, aFormPropKeys } from "./base-from-types";
 import { useFormState } from "./hooks/useFormState";
 import { useFromEvents } from "./hooks/useFormEvents";
 import { useFormMethods } from "./hooks/useFormMethods";
@@ -16,18 +17,19 @@ import { createFromInstance } from "./hooks/useFormInstance";
 const props = defineProps(baseFormProps);
 const emit = defineEmits(baseFromEmits);
 const attrs = useAttrs();
-console.log(attrs);
 
-const fromState = useFormState({ props });
-const { formModel, fromInstanceRef } = fromState;
+const fromState = useFormState({ props, attrs });
+const { formModel, formInstanceRef, getFormProps } = fromState;
 
-const { handleFormValues } = useFormMethods();
+const formMethods = useFormMethods();
+const { handleFormValues } = formMethods;
 
 const formEvents = useFromEvents({ ...fromState, emit, handleFormValues });
 
 const instance = {
 	...fromState,
-	...formEvents
+	...formEvents,
+	...formMethods
 };
 
 createFromInstance(instance);
