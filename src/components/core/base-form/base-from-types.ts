@@ -1,6 +1,7 @@
 import type { PropType, ExtractPropTypes } from "vue";
 import { formProps, type FormProps } from "ant-design-vue/es/form";
 import type BaseFrom from "./base-form.vue";
+import { isObject } from "@/utils/is";
 
 export const baseFormProps = {
 	...formProps(),
@@ -11,11 +12,15 @@ export const baseFormProps = {
 	formModel: {
 		type: Object as PropType<Recordable>,
 		default: () => {}
-	},
-	onFinish: {
-		type: Function as PropType<(values: any) => void>
 	}
 };
+
+export const baseFromEmits = {
+	/**表单提交 */
+	sumbit: (fromModel: Recordable<any>) => isObject(fromModel)
+};
+
+export type BaseFromEmits = typeof baseFromEmits;
 
 export type BaseFormPropsType = ExtractPropTypes<typeof baseFormProps>;
 
