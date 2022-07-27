@@ -1,7 +1,7 @@
 import { tableProps } from "ant-design-vue/es/table";
 import type { PropType, ExtractPropTypes } from "vue";
 import type { ColumnsType } from "ant-design-vue/es/table/interface";
-import type { BaseFormPropsType } from "../base-form/base-from-types";
+import type { TableFormProps } from "./components/table-form/types";
 import type { Service, Data, Params } from "@/hooks/useAntdTable/types";
 
 export const proTableProps = {
@@ -13,7 +13,7 @@ export const proTableProps = {
 	},
 	/**表单数据配置 */
 	formProps: {
-		type: Object as PropType<BaseFormPropsType>,
+		type: Object as PropType<TableFormProps>,
 		default: () => ({})
 	},
 	/**表格列配置 */
@@ -28,4 +28,5 @@ export const proTableProps = {
 	}
 };
 
-export type PropTypeProps = ExtractPropTypes<typeof proTableProps>;
+export type ProTableProps = Partial<ExtractPropTypes<typeof proTableProps>>;
+export type FormProps = TableFormProps;

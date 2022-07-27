@@ -1,6 +1,6 @@
 import { reactive, ref, computed, type SetupContext } from "vue";
 import type { FormInstance } from "ant-design-vue";
-import type { BaseFormPropsType } from "../base-from-types";
+import type { BaseFormPropsType } from "../types";
 import { cloneDeep } from "lodash";
 
 export type FormState = ReturnType<typeof useFormState>;

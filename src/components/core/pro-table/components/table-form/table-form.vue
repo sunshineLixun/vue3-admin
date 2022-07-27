@@ -1,5 +1,5 @@
 <template>
-	<BaseForm ref="tableFromRef" class="search-form">
+	<BaseForm ref="tableFromRef" class="search-form" v-bind="pick(props, baseFormPropsKeys)">
 		<template #formContent>
 			<Row :gutter="[8, 0]">
 				<slot name="formItem" />
@@ -12,24 +12,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps } from "vue";
+import { ref, defineProps, useAttrs } from "vue";
 import { Row, Col } from "ant-design-vue";
 import Action from "./action.vue";
+import { pick } from "lodash";
 import { BaseForm } from "@/components/core/base-form";
 import { useTableFromState } from "./hooks/useTableFromState";
-import { tableFormProps } from "./table-form-types";
+import { tableFormProps, baseFormPropsKeys } from "./types";
 
-const state = useTableFromState();
-const { tableFromRef } = state;
-// TODO: 计算Col的offset
+const attrs = useAttrs();
 
-// const attrs = useAttrs();
-
-// TODO: 绑定props
 const props = defineProps(tableFormProps);
-console.log(props);
 
-const collapsed = ref(false);
+const state = useTableFromState({ props, attrs });
+const { tableFromRef } = state;
+
+// TODO: 计算Col的offset
+const collapsed = ref(props.collapsed);
 
 const onCollapsed = (_collapsed: boolean) => {
 	collapsed.value = _collapsed;
@@ -40,6 +39,7 @@ const instance = {
 };
 
 defineExpose(instance);
+console.log(pick(props, baseFormPropsKeys));
 </script>
 
 <style lang="scss" scoped>

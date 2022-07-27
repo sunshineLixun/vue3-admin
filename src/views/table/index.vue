@@ -54,7 +54,7 @@ import type { ColumnsType } from "ant-design-vue/es/table/interface";
 import { ApiSelect } from "@/components/basic/select";
 import type { SelectOptionData } from "@/api/interface/index";
 import { ProTable } from "@/components/core/pro-table";
-import type { BaseFormPropsType } from "@/components/core/base-form/base-from-types";
+import type { FormProps } from "@/components/core/pro-table/types";
 
 interface FormState {
 	name: string;
@@ -78,8 +78,9 @@ const formData = ref<FormState>({
 	course: "小班"
 });
 
-const formProps: BaseFormPropsType = {
-	formModel: formData.value
+const formProps: FormProps = {
+	formModel: formData.value,
+	labelCol: { span: 4 }
 };
 
 const isExpand = ref(false);

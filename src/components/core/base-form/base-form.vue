@@ -8,7 +8,7 @@
 import { defineProps, defineExpose, useAttrs } from "vue";
 import { Form } from "ant-design-vue";
 import { pick } from "lodash";
-import { baseFormProps, baseFromEmits, aFormPropKeys } from "./base-from-types";
+import { baseFromEmits, aFormPropKeys, baseFormProps } from "./types";
 import { useFormState } from "./hooks/useFormState";
 import { useFromEvents } from "./hooks/useFormEvents";
 import { useFormMethods } from "./hooks/useFormMethods";

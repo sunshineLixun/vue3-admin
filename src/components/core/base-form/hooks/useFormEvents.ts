@@ -1,4 +1,4 @@
-import type { BaseFromEmits } from "../base-from-types";
+import type { BaseFromEmits } from "../types";
 import type { FormState } from "./index";
 import type { FormMethods } from "./useFormMethods";
 import type { NamePath } from "ant-design-vue/lib/form/interface";

@@ -7,6 +7,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import { createStyleImportPlugin, AndDesignVueResolve } from "vite-plugin-style-import";
 import vueI18n from "@intlify/vite-plugin-vue-i18n";
 import { viteMockServe } from "vite-plugin-mock";
+import VueTypeImports from "vite-plugin-vue-type-imports";
 // import Components from "unplugin-vue-components/vite";
 // import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 
@@ -26,6 +27,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
 		},
 		plugins: [
 			vue(),
+			VueTypeImports(),
 			vueJsx(),
 			viteMockServe({
 				ignore: /^_/, // 忽略自动读取以_开头的文件

@@ -53,6 +53,7 @@
 		"vite": "^2.9.5",
 		"vite-plugin-mock": "^2.9.6",
 		"vite-plugin-style-import": "^2.0.0",
+		"vite-plugin-vue-type-imports": "^0.2.0",
 		"vitest": "^0.9.3",
 		"vue-tsc": "^0.34.7"
 	}
