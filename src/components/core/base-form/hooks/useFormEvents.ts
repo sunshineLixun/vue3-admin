@@ -11,7 +11,7 @@ export type EventsParams = FormState & {
 export type FormEvents = ReturnType<typeof useFromEvents>;
 
 export const useFromEvents = (params: EventsParams) => {
-	const { formInstanceRef, emit, handleFormValues, formModel } = params;
+	const { formInstanceRef, emit, handleFormValues, model } = params;
 	/**
 	 * 校验表单数据
 	 */
@@ -45,7 +45,7 @@ export const useFromEvents = (params: EventsParams) => {
 	const resetFields = (name?: NamePath) => {
 		// TODO: 恢复默认值
 		formInstanceRef.value?.resetFields(name);
-		emit("reset", formModel);
+		emit("reset", model);
 	};
 
 	return {

@@ -1,5 +1,5 @@
 <template>
-	<Form class="base-form" ref="formInstanceRef" v-bind="pick(getFormProps, aFormPropKeys)" :model="formModel">
+	<Form class="base-form" ref="formInstanceRef" v-bind="pick(getFormProps, aFormPropKeys)" :model="model">
 		<slot name="formContent" />
 	</Form>
 </template>
@@ -19,7 +19,7 @@ const emit = defineEmits(baseFromEmits);
 const attrs = useAttrs();
 
 const fromState = useFormState({ props, attrs });
-const { formModel, formInstanceRef, getFormProps } = fromState;
+const { model, formInstanceRef, getFormProps } = fromState;
 
 const formMethods = useFormMethods();
 const { handleFormValues } = formMethods;

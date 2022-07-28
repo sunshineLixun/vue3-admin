@@ -37,11 +37,11 @@ const { submit, resetForm } = useFormInstance();
 const props = defineProps<ActionsProps>();
 
 const emit = defineEmits<{
-	(e: "onCollapsed", collapsed: boolean): void;
+	(e: "collapsed", collapsed: boolean): void;
 }>();
 
 const onCollapsed = () => {
-	emit("onCollapsed", !props.collapsed);
+	emit("collapsed", !props.collapsed);
 };
 </script>
 

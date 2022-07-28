@@ -79,8 +79,10 @@ const formData = ref<FormState>({
 });
 
 const formProps: FormProps = {
-	formModel: formData.value,
-	labelCol: { span: 4 }
+	model: formData,
+	rules: {
+		name: [{ required: true, max: 4, message: "请输入姓名" }]
+	}
 };
 
 const isExpand = ref(false);

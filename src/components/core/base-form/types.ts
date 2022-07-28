@@ -2,23 +2,15 @@ import type { PropType, ExtractPropTypes } from "vue";
 import { formProps, type FormProps } from "ant-design-vue/es/form";
 import type BaseFrom from "./base-form.vue";
 import { isObject } from "@/utils/is";
-import { omit } from "lodash";
 
 export const aFormPropKeys = Object.keys(formProps());
 
-const _formProps = omit(formProps(), ["model", "onFinish"]);
-console.log(_formProps);
-
 /** baseForm基础props */
 export const baseFormProps = {
-	..._formProps,
+	...formProps(),
 	layout: {
 		type: String as PropType<FormProps["layout"]>,
 		default: "horizontal"
-	},
-	formModel: {
-		type: Object as PropType<Recordable>,
-		default: () => ({})
 	}
 };
 

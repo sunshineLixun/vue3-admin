@@ -1,10 +1,10 @@
 <template>
-	<BaseForm ref="tableFromRef" class="search-form" v-bind="pick(props, baseFormPropsKeys)">
+	<BaseForm ref="tableFromRef" class="search-form" v-bind="pick(getFormProps, baseFormPropsKeys)">
 		<template #formContent>
 			<Row :gutter="[8, 0]">
 				<slot name="formItem" />
 				<Col :span="6" :offset="collapsed ? 18 : 0">
-					<Action :collapsed="collapsed" @onCollapsed="onCollapsed" />
+					<Action :collapsed="collapsed" @collapsed="onCollapsed" />
 				</Col>
 			</Row>
 		</template>
@@ -25,7 +25,7 @@ const attrs = useAttrs();
 const props = defineProps(tableFormProps);
 
 const state = useTableFromState({ props, attrs });
-const { tableFromRef } = state;
+const { tableFromRef, getFormProps } = state;
 
 // TODO: 计算Col的offset
 const collapsed = ref(props.collapsed);
@@ -39,7 +39,6 @@ const instance = {
 };
 
 defineExpose(instance);
-console.log(pick(props, baseFormPropsKeys));
 </script>
 
 <style lang="scss" scoped>
