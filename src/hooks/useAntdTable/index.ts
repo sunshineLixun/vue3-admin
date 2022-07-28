@@ -61,6 +61,7 @@ export const useAntdTable = <TData extends Data, TParams extends Params>(
 		}
 	};
 
+	// init
 	if (form) {
 		validateFields();
 	} else {
