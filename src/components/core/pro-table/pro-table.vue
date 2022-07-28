@@ -12,14 +12,13 @@ import { defineProps } from "vue";
 import { Table } from "ant-design-vue";
 import { proTableProps } from "./types";
 import TableForm from "./components/table-form/table-form.vue";
-import { useProTableState } from "./hooks/useProTableState";
+import { useProTableState } from "./hooks/useTableState";
+import { useTableMethods } from "./hooks/useTableMethods";
 
 const state = useProTableState();
 const { tableFromRef } = state;
 
 const props = defineProps(proTableProps);
 
-const handleSumbit = (params: any) => {
-	console.log(params);
-};
+const { handleSumbit } = useTableMethods();
 </script>

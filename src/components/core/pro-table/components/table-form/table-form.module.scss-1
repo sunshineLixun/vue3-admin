@@ -1,0 +1,10 @@
+.search-form {
+	position: relative;
+
+	.ant-form-item {
+		margin-bottom: 10px;
+		.ant-picker {
+			width: 100%;
+		}
+	}
+}

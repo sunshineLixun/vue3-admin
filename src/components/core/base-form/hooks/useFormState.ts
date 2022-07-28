@@ -18,7 +18,7 @@ export const useFormState = ({ props, attrs }: useFormStateParams) => {
 	const getFormProps = computed(() => {
 		return {
 			...attrs,
-			...formPropsRef
+			...formPropsRef.value
 		} as BaseFormPropsType;
 	});
 

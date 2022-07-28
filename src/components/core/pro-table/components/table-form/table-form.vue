@@ -1,5 +1,5 @@
 <template>
-	<BaseForm ref="tableFromRef" class="search-form" v-bind="pick(getFormProps, baseFormPropsKeys)">
+	<BaseForm ref="tableFromRef" class="search-form" v-bind="merge(getFormProps)">
 		<template #formContent>
 			<Row :gutter="[8, 0]">
 				<slot name="formItem" />
@@ -15,10 +15,10 @@
 import { ref, defineProps, useAttrs } from "vue";
 import { Row, Col } from "ant-design-vue";
 import Action from "./action.vue";
-import { pick } from "lodash";
+import { merge } from "lodash";
 import { BaseForm } from "@/components/core/base-form";
 import { useTableFromState } from "./hooks/useTableFromState";
-import { tableFormProps, baseFormPropsKeys } from "./types";
+import { tableFormProps } from "./types";
 
 const attrs = useAttrs();
 

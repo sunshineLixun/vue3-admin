@@ -81,7 +81,7 @@ const formData = ref<FormState>({
 const formProps: FormProps = {
 	model: formData,
 	rules: {
-		name: [{ required: true, max: 4, message: "请输入姓名" }]
+		name: [{ required: true, message: "请输入姓名" }]
 	}
 };
 

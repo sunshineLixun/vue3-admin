@@ -4,7 +4,6 @@ import type BaseFrom from "./base-form.vue";
 import { isObject } from "@/utils/is";
 
 export const aFormPropKeys = Object.keys(formProps());
-
 /** baseForm基础props */
 export const baseFormProps = {
 	...formProps(),
