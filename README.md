@@ -21,12 +21,12 @@
 
 ## TODO:
 
-- [ ] Components
-  - [ ] BaseFrom
-  - [ ] TableFrom
+- [] Components
+  - [x] BaseFrom
+  - [x] TableFrom
+  - [x] ProTable
   - [ ] LoginFrom
   - [ ] ModalFrom
   - [ ] DrawerFrom
-  - [ ] ...
 - [ ] Directives
 - [ ] ...
