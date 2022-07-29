@@ -1,5 +1,5 @@
 <template>
-	<ProTable :columns="columns" :formProps="formProps">
+	<ProTable v-bind="proTableProps">
 		<template #form>
 			<Col :span="3">
 				<Form.Item name="name">
@@ -50,11 +50,11 @@ import { ref } from "vue";
 import { Form, Input, Col, Select, DatePicker } from "ant-design-vue";
 import type { ColumnsType } from "ant-design-vue/es/table/interface";
 // import { useAntdTable } from "@/hooks/useAntdTable";
-// import { listApi } from "@/api/modules/list";
+import { listApi } from "@/api/modules/list";
 import { ApiSelect } from "@/components/basic/select";
 import type { SelectOptionData } from "@/api/interface/index";
 import { ProTable } from "@/components/core/pro-table";
-import type { FormProps } from "@/components/core/pro-table/types";
+import type { FormProps, ProTableProps } from "@/components/core/pro-table/types";
 
 interface FormState {
 	name: string;
@@ -120,6 +120,12 @@ const columns: ColumnsType = [
 		dataIndex: "name"
 	}
 ];
+
+const proTableProps: ProTableProps = {
+	columns,
+	formProps,
+	requestApi: listApi
+};
 
 // const formRef = ref<FormInstance>();
 // const { tableProps, onChange, search } = useAntdTable(listApi, {

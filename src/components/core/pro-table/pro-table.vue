@@ -4,11 +4,11 @@
 			<slot name="form" />
 		</template>
 	</TableForm>
-	<Table :columns="props.columns" />
+	<Table ref="tableFromRef" v-bind="getTableProps" :dataSource="dataSource" />
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from "vue";
+import { defineProps, onMounted } from "vue";
 import { Table } from "ant-design-vue";
 import { proTableProps } from "./types";
 import TableForm from "./components/table-form/table-form.vue";
@@ -17,7 +17,11 @@ import { useTableMethods } from "./hooks/useTableMethods";
 const props = defineProps(proTableProps);
 
 const state = useProTableState({ props });
-const { tableFromRef } = state;
+const { tableFromRef, dataSource, getTableProps } = state;
 
-const { handleSumbit } = useTableMethods({ props, state });
+const { handleSumbit, fetch } = useTableMethods({ props, state });
+
+onMounted(() => {
+	fetch();
+});
 </script>
