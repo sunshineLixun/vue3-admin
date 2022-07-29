@@ -3,6 +3,7 @@ import type { PropType, ExtractPropTypes } from "vue";
 import type { ColumnsType } from "ant-design-vue/es/table/interface";
 import type { TableFormProps } from "./components/table-form/types";
 import type { Service, Data, Params } from "@/hooks/useAntdTable/types";
+import type { TableProps } from "ant-design-vue";
 
 export const proTableProps = {
 	...tableProps(),
@@ -30,3 +31,5 @@ export const proTableProps = {
 
 export type ProTableProps = Partial<ExtractPropTypes<typeof proTableProps>>;
 export type FormProps = TableFormProps;
+
+export type TableChangeProps = Parameters<NonNullable<TableProps["onChange"]>>;

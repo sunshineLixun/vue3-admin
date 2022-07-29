@@ -4,7 +4,7 @@
 			<slot name="form" />
 		</template>
 	</TableForm>
-	<Table ref="tableFromRef" v-bind="getTableProps" :dataSource="dataSource" />
+	<Table ref="tableFromRef" v-bind="getTableProps" :dataSource="dataSource" @change="onTableChange" />
 </template>
 
 <script lang="ts" setup>
@@ -19,7 +19,7 @@ const props = defineProps(proTableProps);
 const state = useProTableState({ props });
 const { tableFromRef, dataSource, getTableProps } = state;
 
-const { handleSumbit, fetch } = useTableMethods({ props, state });
+const { handleSumbit, fetch, onTableChange } = useTableMethods({ props, state });
 
 onMounted(() => {
 	fetch();

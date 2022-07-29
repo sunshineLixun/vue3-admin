@@ -1,8 +1,9 @@
 import { unref } from "vue";
-import type { ProTableProps } from "../types";
+import type { ProTableProps, TableChangeProps } from "../types";
 import type { UseTableState } from "./useTableState";
 import { merge } from "lodash";
 import { isObject } from "@/utils/is";
+
 export type UseTableMethodsParams = {
 	props: ProTableProps;
 	state: UseTableState;
@@ -41,5 +42,15 @@ export function useTableMethods({ props, state }: UseTableMethodsParams) {
 	function handleSumbit(params = {}) {
 		fetch(params);
 	}
-	return { handleSumbit, fetch };
+
+	// TODO: table change
+	const onTableChange = (...params: TableChangeProps) => {
+		console.log(params);
+	};
+
+	return {
+		handleSumbit,
+		fetch,
+		onTableChange
+	};
 }
