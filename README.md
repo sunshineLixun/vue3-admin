@@ -21,7 +21,7 @@
 
 ## TODO:
 
-- [] Components
+- [ ] Components
   - [x] BaseFrom
   - [x] TableFrom
   - [x] ProTable
