@@ -10,7 +10,7 @@ export type UseTableFormStateParams = {
 
 export const useTableFromState = ({ props, attrs }: UseTableFormStateParams) => {
 	const propsRef = ref(props);
-	const tableFromRef = ref<BaseFromInstance>();
+	const baseFromRef = ref<BaseFromInstance>();
 
 	const getFormProps = computed(() => {
 		return {
@@ -20,7 +20,7 @@ export const useTableFromState = ({ props, attrs }: UseTableFormStateParams) => 
 	});
 	return {
 		getFormProps,
-		tableFromRef
+		baseFromRef
 	};
 };
 export type TableFromInstance = InstanceType<typeof TableFrom>;

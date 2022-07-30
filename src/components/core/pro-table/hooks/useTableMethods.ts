@@ -10,7 +10,7 @@ export type UseTableMethodsParams = {
 };
 
 export function useTableMethods({ props, state }: UseTableMethodsParams) {
-	const { dataSource, loadingRef, paginationRef } = state;
+	const { tableFromRef, dataSource, loadingRef, paginationRef } = state;
 
 	async function fetch(params = {}) {
 		const pagination = unref(paginationRef);
@@ -43,9 +43,17 @@ export function useTableMethods({ props, state }: UseTableMethodsParams) {
 		fetch(params);
 	}
 
-	// TODO: table change
-	const onTableChange = (...params: TableChangeProps) => {
-		console.log(params);
+	const onTableChange = async (...rest: TableChangeProps) => {
+		const [pagination] = rest;
+		let params = {};
+		if (tableFromRef.value) {
+			const values = await unref(tableFromRef)?.baseFromRef?.validate();
+			if (values) {
+				params = unref(tableFromRef)?.baseFromRef?.handleFormValues(values) || {};
+			}
+		}
+		paginationRef.value = merge(paginationRef.value, pagination);
+		fetch(params);
 	};
 
 	return {

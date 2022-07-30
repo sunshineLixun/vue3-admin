@@ -1,5 +1,5 @@
 <template>
-	<BaseForm ref="tableFromRef" class="search-form" v-bind="merge(getFormProps)">
+	<BaseForm ref="baseFromRef" class="search-form" v-bind="merge(getFormProps)">
 		<template #formContent>
 			<Row :gutter="[8, 0]">
 				<slot name="formItem" />
@@ -25,7 +25,7 @@ const attrs = useAttrs();
 const props = defineProps(tableFormProps);
 
 const state = useTableFromState({ props, attrs });
-const { tableFromRef, getFormProps } = state;
+const { baseFromRef, getFormProps } = state;
 
 // TODO: 计算Col的offset
 const collapsed = ref(props.collapsed);

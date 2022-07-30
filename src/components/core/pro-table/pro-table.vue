@@ -4,7 +4,7 @@
 			<slot name="form" />
 		</template>
 	</TableForm>
-	<Table ref="tableFromRef" v-bind="getTableProps" :dataSource="dataSource" @change="onTableChange" />
+	<Table v-bind="getTableProps" :dataSource="dataSource" @change="onTableChange" />
 </template>
 
 <script lang="ts" setup>
