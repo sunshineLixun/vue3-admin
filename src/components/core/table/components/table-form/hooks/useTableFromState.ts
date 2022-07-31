@@ -1,7 +1,7 @@
 import { ref, SetupContext, computed } from "vue";
 import type { TableFormProps } from "../types";
 import type TableFrom from "../table-form.vue";
-import type { BaseFromInstance } from "@/components/core/base-form/types";
+import type { BaseFromInstance } from "@/components/core/form/base-form/types";
 
 export type UseTableFormStateParams = {
 	props: TableFormProps;
