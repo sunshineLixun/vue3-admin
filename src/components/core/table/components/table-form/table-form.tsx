@@ -2,7 +2,7 @@ import { defineComponent, ref } from "vue";
 import { Row } from "ant-design-vue";
 import Action from "./action.vue";
 import { merge } from "lodash";
-import { BaseForm } from "@/components/core/base-form";
+import { BaseForm } from "@/components/core/form/base-form";
 import { useTableFromState } from "./hooks/useTableFromState";
 import { tableFormProps } from "./types";
 import styles from "./table-form.module.scss";

@@ -16,7 +16,7 @@ import { ref, defineProps, useAttrs } from "vue";
 import { Row, Col } from "ant-design-vue";
 import Action from "./action.vue";
 import { merge } from "lodash";
-import { BaseForm } from "@/components/core/base-form";
+import { BaseForm } from "@/components/core/form/base-form";
 import { useTableFromState } from "./hooks/useTableFromState";
 import { tableFormProps } from "./types";
 

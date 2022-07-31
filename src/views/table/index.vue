@@ -53,8 +53,8 @@ import type { ColumnsType } from "ant-design-vue/es/table/interface";
 import { listApi } from "@/api/modules/list";
 import { ApiSelect } from "@/components/basic/select";
 import type { SelectOptionData } from "@/api/interface/index";
-import { ProTable } from "@/components/core/pro-table";
-import type { FormProps, ProTableProps } from "@/components/core/pro-table/types";
+import { ProTable } from "@/components/core/table";
+import type { FormProps, ProTableProps } from "@/components/core/table/types";
 
 interface FormState {
 	name: string;

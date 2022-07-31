@@ -25,7 +25,7 @@ import { defineProps } from "vue";
 import { Space, Button } from "ant-design-vue";
 import type { CSSProperties } from "@vue/runtime-dom";
 import { SearchOutlined, UndoOutlined, DownOutlined, UpOutlined } from "@ant-design/icons-vue";
-import { useFormInstance } from "@/components/core/base-form/hooks/useFormInstance";
+import { useFormInstance } from "@/components/core/form/base-form/hooks/useFormInstance";
 
 type ActionsProps = {
 	style?: CSSProperties;
