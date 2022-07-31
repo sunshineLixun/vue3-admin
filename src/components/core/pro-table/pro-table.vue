@@ -11,7 +11,7 @@
 import { defineProps, onMounted } from "vue";
 import { Table } from "ant-design-vue";
 import { proTableProps } from "./types";
-import TableForm from "./components/table-form/table-form.vue";
+import { TableForm } from "./components/table-form";
 import { useProTableState } from "./hooks/useTableState";
 import { useTableMethods } from "./hooks/useTableMethods";
 const props = defineProps(proTableProps);

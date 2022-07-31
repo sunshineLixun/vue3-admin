@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, shallowRef, ref, watch, watchEffect } from "vue";
+import { computed, shallowRef, ref, watch, watchEffect, defineProps } from "vue";
 import type { PropType } from "vue";
 import { Select } from "ant-design-vue";
 import { selectProps } from "ant-design-vue/es/select";

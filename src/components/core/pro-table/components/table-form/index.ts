@@ -1,2 +1,2 @@
-import TableForm from "./table-form.vue";
-export { TableForm };
+export { TableForm } from "./table-form";
+// export { TableForm };

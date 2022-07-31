@@ -17,4 +17,5 @@ const { getAntdLocale } = useI18nv();
 
 <style>
 @import "@/assets/base.css";
+@import "@/styles/index.scss";
 </style>

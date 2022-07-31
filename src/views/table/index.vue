@@ -31,12 +31,12 @@
 					<ApiSelect v-model:value="formData.navigation" :datas="navigaDatas" placeholder="请选择民族" />
 				</Form.Item>
 			</Col>
-			<Col :span="isExpand ? 3 : 0">
+			<Col :span="3">
 				<Form.Item name="birthday">
 					<DatePicker v-model:value="formData.birthday" placeholder="请选择出生日期" allowClear />
 				</Form.Item>
 			</Col>
-			<Col :span="isExpand ? 3 : 0">
+			<Col :span="3">
 				<Form.Item name="course">
 					<Input v-model:value="formData.course" placeholder="请输入班级" allowClear />
 				</Form.Item>
@@ -84,8 +84,6 @@ const formProps: FormProps = {
 		name: [{ required: true, message: "请输入姓名" }]
 	}
 };
-
-const isExpand = ref(false);
 
 const selectData = [
 	{
