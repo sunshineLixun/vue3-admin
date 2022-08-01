@@ -38,20 +38,24 @@ const TableForm = defineComponent({
 				});
 			});
 
+		const FormContent = () => {
+			return (
+				<>
+					<Row gutter={props.searchGutter}>{doms}</Row>
+					<Row gutter={24} justify={"end"}>
+						<Action collapsed={collapsed.value} onCollapsed={onCollapsed} />
+					</Row>
+				</>
+			);
+		};
+
 		return () => {
 			return (
 				<BaseForm
 					ref={baseFromRef}
 					class={styles["search-form"]}
 					v-slots={{
-						formContent: () => (
-							<>
-								<Row gutter={[8, 0]}>{doms}</Row>
-								<Row gutter={24} justify={"end"}>
-									<Action collapsed={collapsed.value} onCollapsed={onCollapsed} />
-								</Row>
-							</>
-						)
+						formContent: FormContent
 					}}
 					{...rest}
 				></BaseForm>
