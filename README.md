@@ -30,3 +30,7 @@
   - [ ] DrawerFrom
 - [ ] Directives
 - [ ] ...
+
+## License
+
+MIT
