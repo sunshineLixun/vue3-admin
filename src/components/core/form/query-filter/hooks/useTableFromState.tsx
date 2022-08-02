@@ -2,7 +2,7 @@ import { ref, computed, unref, watchEffect, cloneVNode, isVNode } from "vue";
 import type { SetupContext, VNode, VNodeProps } from "vue";
 import { Col } from "ant-design-vue";
 import type { TableFormProps } from "../types";
-import type { TableForm } from "../table-form";
+import type { QueryFilter } from "../table-form";
 import type { BaseFromInstance } from "@/components/core/form/base-form/types";
 import { getSpanConfig } from "../utils";
 
@@ -46,7 +46,7 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 		return Math.max(1, 24 / unref(spanSize).span - 1);
 	});
 
-	const childrens = slots.formItem ? slots.formItem().flatMap(v => v.children as VNode[]) : [];
+	const childrens = slots.default ? slots.default().flatMap(v => v.children as VNode[]) : [];
 
 	// 计算form.item占据的位置
 	function getDoms() {
@@ -143,5 +143,5 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 		doms
 	};
 };
-export type TableFromInstance = InstanceType<typeof TableForm>;
+export type TableFromInstance = InstanceType<typeof QueryFilter>;
 export type UseTableFromState = ReturnType<typeof useTableFromState>;

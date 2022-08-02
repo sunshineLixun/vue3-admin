@@ -65,6 +65,16 @@ export const routes: RouteRecordRaw[] = [
 					icon: "icon-facebook",
 					keepAlive: true
 				}
+			},
+			{
+				path: "query-filter",
+				name: "queryFilter",
+				component: () => import("@/views/form/query-filter/index.vue"),
+				meta: {
+					title: "routes.form.queryFilter",
+					icon: "icon-facebook",
+					keepAlive: true
+				}
 			}
 		]
 	}

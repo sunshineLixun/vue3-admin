@@ -1,39 +1,35 @@
 <template>
 	<ProTable v-bind="proTableProps">
-		<template #form>
-			<Form.Item name="name">
-				<Input v-model:value="formData.name" placeholder="姓名" allowClear />
-			</Form.Item>
-			<Form.Item name="gender">
-				<Select v-model:value="formData.gender" :options="selectData" allowClear placeholder="请选择性别" />
-			</Form.Item>
-			<Form.Item name="height">
-				<Input v-model:value="formData.height" placeholder="请输入身高" allowClear />
-			</Form.Item>
-			<Form.Item name="time">
-				<DatePicker v-model:value="formData.time" placeholder="请选择时间" allowClear />
-			</Form.Item>
-			<Form.Item name="weight">
-				<Input v-model:value="formData.weight" placeholder="请输入体重" allowClear />
-			</Form.Item>
-			<Form.Item name="navigation">
-				<ApiSelect v-model:value="formData.navigation" :datas="navigaDatas" placeholder="请选择民族" />
-			</Form.Item>
-			<Form.Item name="birthday">
-				<DatePicker v-model:value="formData.birthday" placeholder="请选择出生日期" allowClear />
-			</Form.Item>
-			<Form.Item name="course">
-				<Input v-model:value="formData.course" placeholder="请输入班级" allowClear />
-			</Form.Item>
-		</template>
+		<Form.Item name="name">
+			<Input v-model:value="formData.name" placeholder="姓名" allowClear />
+		</Form.Item>
+		<Form.Item name="gender">
+			<Select v-model:value="formData.gender" :options="selectData" allowClear placeholder="请选择性别" />
+		</Form.Item>
+		<Form.Item name="height">
+			<Input v-model:value="formData.height" placeholder="请输入身高" allowClear />
+		</Form.Item>
+		<Form.Item name="time">
+			<DatePicker v-model:value="formData.time" placeholder="请选择时间" allowClear />
+		</Form.Item>
+		<Form.Item name="weight">
+			<Input v-model:value="formData.weight" placeholder="请输入体重" allowClear />
+		</Form.Item>
+		<Form.Item name="navigation">
+			<ApiSelect v-model:value="formData.navigation" :datas="navigaDatas" placeholder="请选择民族" />
+		</Form.Item>
+		<Form.Item name="birthday">
+			<DatePicker v-model:value="formData.birthday" placeholder="请选择出生日期" allowClear />
+		</Form.Item>
+		<Form.Item name="course">
+			<Input v-model:value="formData.course" placeholder="请输入班级" allowClear />
+		</Form.Item>
 	</ProTable>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-// import type { FormInstance } from "ant-design-vue";
 import { Form, Input, Select, DatePicker } from "ant-design-vue";
 import type { ColumnsType } from "ant-design-vue/es/table/interface";
-// import { useAntdTable } from "@/hooks/useAntdTable";
 import { listApi } from "@/api/modules/list";
 import { ApiSelect } from "@/components/basic/select";
 import type { SelectOptionData } from "@/api/interface/index";
@@ -108,11 +104,6 @@ const proTableProps: ProTableProps = {
 	formProps,
 	requestApi: listApi
 };
-
-// const formRef = ref<FormInstance>();
-// const { tableProps, onChange, search } = useAntdTable(listApi, {
-// 	form: formRef
-// });
 </script>
 
 <style lang="scss" scoped></style>

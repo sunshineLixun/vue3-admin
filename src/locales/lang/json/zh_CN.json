@@ -5,7 +5,8 @@
 		},
 		"form": {
 			"form": "表单页",
-			"basicForm": "基础表单"
+			"basicForm": "基础表单",
+			"queryFilter": "QueryFilter"
 		},
 		"table": {
 			"table": "列表页",

@@ -1,3 +1,4 @@
+import { unref } from "vue";
 import type { BaseFromEmits } from "../types";
 import type { FormState } from "./index";
 import type { FormMethods } from "./useFormMethods";
@@ -16,7 +17,7 @@ export const useFromEvents = (params: EventsParams) => {
 	 * 校验表单数据
 	 */
 	const validate = async (nameList?: NamePath[] | undefined) => {
-		return formInstanceRef?.value?.validate(nameList);
+		return unref(formInstanceRef)?.validate(nameList);
 	};
 
 	/**
@@ -27,7 +28,7 @@ export const useFromEvents = (params: EventsParams) => {
 			const values = await validate();
 			if (values) {
 				const res = handleFormValues(values);
-				emit("submit", res);
+				emit("finish", res);
 			}
 		} catch (error) {
 			return Promise.reject(error);
@@ -44,7 +45,7 @@ export const useFromEvents = (params: EventsParams) => {
 	/** 重置表单某一项或者整个表单 */
 	const resetFields = (name?: NamePath) => {
 		// TODO: 恢复默认值
-		formInstanceRef.value?.resetFields(name);
+		unref(formInstanceRef)?.resetFields(name);
 		emit("reset", model);
 	};
 

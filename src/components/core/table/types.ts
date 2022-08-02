@@ -1,7 +1,7 @@
 import { tableProps } from "ant-design-vue/es/table";
 import type { PropType, ExtractPropTypes } from "vue";
 import type { ColumnsType } from "ant-design-vue/es/table/interface";
-import type { TableFormProps } from "./components/table-form/types";
+import type { TableFormProps } from "@/components/core/form/query-filter/types";
 import type { Service, Data, Params } from "@/hooks/useAntdTable/types";
 import type { TableProps } from "ant-design-vue";
 

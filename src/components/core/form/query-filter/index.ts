@@ -1,2 +1,1 @@
-export { TableForm } from "./table-form";
-// export { TableForm };
+export { QueryFilter } from "./table-form";

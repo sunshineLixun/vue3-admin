@@ -1,6 +1,6 @@
 <template>
 	<Form class="base-form" ref="formInstanceRef" v-bind="pick(getFormProps, aFormPropKeys)" :model="model">
-		<slot name="formContent" />
+		<slot />
 	</Form>
 </template>
 
@@ -32,6 +32,7 @@ const instance = {
 	...formMethods
 };
 
+console.log(pick(getFormProps.value, aFormPropKeys));
 createFromInstance(instance);
 defineExpose(instance);
 </script>

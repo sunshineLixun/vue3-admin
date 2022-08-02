@@ -7,7 +7,7 @@ import { useTableFromState } from "./hooks/useTableFromState";
 import { tableFormProps } from "./types";
 import styles from "./table-form.module.scss";
 
-const TableForm = defineComponent({
+const QueryFilter = defineComponent({
 	props: tableFormProps,
 	setup(props, { attrs, expose, slots }) {
 		const state = useTableFromState({ props, attrs, slots });
@@ -46,7 +46,7 @@ const TableForm = defineComponent({
 					ref={baseFromRef}
 					class={styles["search-form"]}
 					v-slots={{
-						formContent: FormContent
+						default: FormContent
 					}}
 					{...rest}
 				></BaseForm>
@@ -55,4 +55,4 @@ const TableForm = defineComponent({
 	}
 });
 
-export { TableForm };
+export { QueryFilter };

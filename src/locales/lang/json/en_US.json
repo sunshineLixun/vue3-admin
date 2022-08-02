@@ -5,7 +5,8 @@
 		},
 		"form": {
 			"form": "From",
-			"basicForm": "BasicForm"
+			"basicForm": "BasicForm",
+			"queryFilter": "QueryFilter"
 		},
 		"table": {
 			"table": "Table",

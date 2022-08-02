@@ -1,14 +1,14 @@
 import type { ExtractPropTypes, PropType } from "vue";
 import type { CSSProperties } from "@vue/runtime-dom";
 import { baseFormProps } from "@/components/core/form/base-form/types";
-import type { TableForm } from "./table-form";
-import { formProps, type FormProps } from "ant-design-vue/es/form";
+import type { QueryFilter } from "./table-form";
+import type { FormProps } from "ant-design-vue/es/form";
 import type { RowProps } from "ant-design-vue/lib/grid/Row";
 
 export const baseFormPropsKeys = Object.keys(baseFormProps);
 
 export const tableFormProps = {
-	...formProps(),
+	...baseFormProps,
 	/**表单布局 */
 	layout: {
 		type: String as PropType<FormProps["layout"]>,
@@ -43,4 +43,4 @@ export const tableFormProps = {
 	}
 };
 export type TableFormProps = Partial<ExtractPropTypes<typeof tableFormProps>>;
-export type TablePormInstance = InstanceType<typeof TableForm>;
+export type TablePormInstance = InstanceType<typeof QueryFilter>;
