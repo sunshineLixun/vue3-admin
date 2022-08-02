@@ -4,17 +4,6 @@ import { Layout } from "@/router/layout";
 export const routes: RouteRecordRaw[] = [
 	{
 		path: "/",
-		name: "layout",
-		redirect: "/dashboard/index",
-		component: Layout,
-		meta: {
-			title: "routes.dashboard.dashboard",
-			icon: "icon-twitter",
-			keepAlive: true
-		}
-	},
-	{
-		path: "/dashboard",
 		name: "dashboard",
 		redirect: "/dashboard/index",
 		component: Layout,

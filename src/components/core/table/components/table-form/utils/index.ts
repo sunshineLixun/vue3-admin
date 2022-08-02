@@ -1,1 +1,3 @@
-export * from "./span-config";
+import { getSpanConfig } from "./span-config";
+
+export { getSpanConfig };

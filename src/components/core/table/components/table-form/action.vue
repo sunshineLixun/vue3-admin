@@ -13,9 +13,9 @@
 			重置
 		</Button>
 		<Button class="expand" type="link" @click="onCollapsed">
-			{{ props.collapsed ? "收起" : "展开" }}
-			<UpOutlined v-if="props.collapsed" />
-			<DownOutlined v-else-if="!props.collapsed" />
+			{{ !props.collapsed ? "收起" : "展开" }}
+			<UpOutlined v-if="!props.collapsed" />
+			<DownOutlined v-else-if="props.collapsed" />
 		</Button>
 	</Space>
 </template>

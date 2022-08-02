@@ -14,8 +14,15 @@ const CONFIG_SPAN_BREAKPOINTS: BreakPointType = {
 	xl: 1057,
 	xxl: Infinity
 };
+
+type BREAKPOINTSVALUESTYPE = [number, number, string][];
+
+type BREAKPOINTSTYPES = {
+	[key: string]: BREAKPOINTSVALUESTYPE;
+};
+
 /** 配置表单列变化的容器宽度断点 */
-const BREAKPOINTS = {
+const BREAKPOINTS: BREAKPOINTSTYPES = {
 	vertical: [
 		// [breakpoint, cols, layout]
 		[513, 1, "vertical"],
@@ -60,16 +67,24 @@ export const getSpanConfig = (layout: FormLayout, width: number, span?: SpanConf
 		};
 	}
 
-	const spanConfig =
+	const spanConfig: BREAKPOINTSVALUESTYPE =
 		span && typeof span !== "number"
 			? ["xs", "sm", "md", "lg", "xl", "xxl"].map(key => [CONFIG_SPAN_BREAKPOINTS[key], 24 / span[key], "horizontal"])
 			: BREAKPOINTS[layout || "default"];
 
-	const breakPoint =
-		(spanConfig || BREAKPOINTS.default).find(item => {
-			width < (item[0] as number) + 16;
-		}) || [];
+	const breakPoint = (spanConfig || BREAKPOINTS.default).find(
+		item => width < item[0] + 16 // 16 = 2 * (ant-row -8px margin)
+	);
+
+	if (breakPoint === undefined) {
+		return {
+			span: 0,
+			layout: "horizontal"
+		};
+	}
+
 	return {
+		// 每个控件占用span
 		span: 24 / (breakPoint[1] as number),
 		layout: breakPoint[2] as FormLayout
 	};

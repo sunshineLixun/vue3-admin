@@ -1,5 +1,6 @@
 import { unref } from "vue";
 import type { ProTableProps, TableChangeProps } from "../types";
+import type { BaseFromInstance } from "@/components/core/form/base-form/types";
 import type { UseTableState } from "./useTableState";
 import { merge } from "lodash";
 import { isObject } from "@/utils/is";
@@ -47,9 +48,9 @@ export function useTableMethods({ props, state }: UseTableMethodsParams) {
 		const [pagination] = rest;
 		let params = {};
 		if (tableFromRef.value) {
-			const values = await unref(tableFromRef)?.baseFromRef?.validate();
+			const values = await (unref(tableFromRef)?.$refs.baseFromRef as BaseFromInstance)?.validate();
 			if (values) {
-				params = unref(tableFromRef)?.baseFromRef?.handleFormValues(values) || {};
+				params = (unref(tableFromRef)?.$refs.baseFromRef as BaseFromInstance)?.handleFormValues(values) || {};
 			}
 		}
 		paginationRef.value = merge(paginationRef.value, pagination);
