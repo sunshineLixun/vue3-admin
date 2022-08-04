@@ -1,7 +1,6 @@
 import type { PropType, ExtractPropTypes, VNode } from "vue";
 import { formProps, type FormProps } from "ant-design-vue/es/form";
 import type BaseFrom from "./base-form.vue";
-import { isObject } from "@/utils/is";
 import type { SubmitterProps } from "./components/submitter/types";
 
 export const aFormPropKeys = Object.keys(formProps());
@@ -15,6 +14,14 @@ export const commonFormProps = {
 	},
 	submitter: {
 		type: Object as PropType<false | SubmitterProps>
+	},
+	/**表单提交 */
+	onFinish: {
+		type: Function as PropType<(fromModel: Recordable<any>) => void>
+	},
+	/**重置表单 */
+	onrReset: {
+		type: Function as PropType<(fromModel: Recordable<any>) => void>
 	}
 };
 
@@ -29,16 +36,6 @@ export const baseFormProps = {
 		default: true
 	}
 };
-
-export const baseFromEmits = {
-	/**表单提交 */
-	finish: (fromModel: Recordable<any>) => isObject(fromModel),
-	/**重置表单 */
-	reset: (fromModel: Recordable<any>) => isObject(fromModel)
-};
-
-export type BaseFromEmits = typeof baseFromEmits;
-
 export type CommonFormProps = Partial<ExtractPropTypes<typeof commonFormProps>>;
 
 // 属性全部转化为可选的

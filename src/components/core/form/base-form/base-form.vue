@@ -8,14 +8,13 @@
 import { defineProps, defineExpose, useAttrs } from "vue";
 import { Form } from "ant-design-vue";
 import { pick } from "lodash";
-import { baseFromEmits, aFormPropKeys, baseFormProps } from "./types";
+import { aFormPropKeys, baseFormProps } from "./types";
 import { useFormState } from "./hooks/useFormState";
 import { useFromEvents } from "./hooks/useFormEvents";
 import { useFormMethods } from "./hooks/useFormMethods";
 import { createFromInstance } from "./hooks/useFormInstance";
 
 const props = defineProps(baseFormProps);
-const emit = defineEmits(baseFromEmits);
 const attrs = useAttrs();
 
 const fromState = useFormState({ props, attrs });
@@ -24,7 +23,7 @@ const { model, formInstanceRef, getFormProps } = fromState;
 const formMethods = useFormMethods();
 const { handleFormValues } = formMethods;
 
-const formEvents = useFromEvents({ ...fromState, emit, handleFormValues });
+const formEvents = useFromEvents({ ...fromState, handleFormValues, props });
 
 const instance = {
 	...fromState,

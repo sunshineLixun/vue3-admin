@@ -25,7 +25,7 @@ const Submitter = defineComponent({
 						type={"primary"}
 						key="submit"
 						{...submitButtonProps}
-						icon={slots.submitIcon?.()}
+						icon={submitButtonProps.icon || slots.submitIcon?.()}
 						onClick={e => {
 							if (!submitButtonProps.preventDefault) {
 								submit();
@@ -43,7 +43,7 @@ const Submitter = defineComponent({
 					<Button
 						key="reset"
 						{...resetButtonProps}
-						icon={slots.resetIcon?.()}
+						icon={resetButtonProps.icon || slots.resetIcon?.()}
 						onClick={e => {
 							if (!resetButtonProps.preventDefault) {
 								reset();

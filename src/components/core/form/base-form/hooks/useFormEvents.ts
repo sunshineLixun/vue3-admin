@@ -1,18 +1,18 @@
 import { unref } from "vue";
-import type { BaseFromEmits } from "../types";
 import type { FormState } from "./index";
 import type { FormMethods } from "./useFormMethods";
 import type { NamePath } from "ant-design-vue/lib/form/interface";
+import type { BaseFormPropsType } from "../types";
 
 export type EventsParams = FormState & {
-	emit: EmitFn<BaseFromEmits>;
+	props: BaseFormPropsType;
 	handleFormValues: FormMethods["handleFormValues"];
 };
 
 export type FormEvents = ReturnType<typeof useFromEvents>;
 
 export const useFromEvents = (params: EventsParams) => {
-	const { formInstanceRef, emit, handleFormValues, model } = params;
+	const { formInstanceRef, handleFormValues, model, props } = params;
 	/**
 	 * 校验表单数据
 	 */
@@ -28,7 +28,7 @@ export const useFromEvents = (params: EventsParams) => {
 			const values = await validate();
 			if (values) {
 				const res = handleFormValues(values);
-				emit("finish", res);
+				props.onFinish?.(res);
 			}
 		} catch (error) {
 			return Promise.reject(error);
