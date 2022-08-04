@@ -4,6 +4,7 @@ import { baseFormProps } from "@/components/core/form/base-form/types";
 import type { QueryFilter } from "./table-form";
 import type { FormProps } from "ant-design-vue/es/form";
 import type { RowProps } from "ant-design-vue/lib/grid/Row";
+import type { ButtonProps } from "ant-design-vue";
 
 export const baseFormPropsKeys = Object.keys(baseFormProps);
 
@@ -40,6 +41,9 @@ export const tableFormProps = {
 	preserve: {
 		type: Boolean as PropType<boolean>,
 		default: true
+	},
+	submitButtonProps: {
+		type: Object as PropType<ButtonProps>
 	}
 };
 export type TableFormProps = Partial<ExtractPropTypes<typeof tableFormProps>>;

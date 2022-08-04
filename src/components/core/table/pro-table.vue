@@ -1,5 +1,5 @@
 <template>
-	<QueryFilter ref="tableFromRef" v-if="props.showSearch" v-bind="props.formProps" @finish="handleSumbit">
+	<QueryFilter ref="tableFromRef" v-if="props.showSearch" v-bind="getFormProps" @finish="handleSumbit">
 		<slot />
 	</QueryFilter>
 	<Table v-bind="getTableProps" :dataSource="dataSource" @change="onTableChange" />
@@ -15,7 +15,7 @@ import { useTableMethods } from "./hooks/useTableMethods";
 const props = defineProps(proTableProps);
 
 const state = useProTableState({ props });
-const { tableFromRef, dataSource, getTableProps } = state;
+const { tableFromRef, dataSource, getTableProps, getFormProps } = state;
 
 const { handleSumbit, fetch, onTableChange } = useTableMethods({ props, state });
 

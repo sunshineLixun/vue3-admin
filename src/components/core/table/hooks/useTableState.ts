@@ -48,13 +48,22 @@ export const useProTableState = ({ props }: UseProTableStateParams) => {
 		return propsData;
 	});
 
+	const getFormProps = computed(() => {
+		const props = unref(getProps);
+		return {
+			...props.formProps,
+			loading: unref(loadingRef)
+		};
+	});
+
 	return {
 		tableFromRef,
 		dataSource,
 		loadingRef,
 		paginationRef,
 		getProps,
-		getTableProps
+		getTableProps,
+		getFormProps
 	};
 };
 

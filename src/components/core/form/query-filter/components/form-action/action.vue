@@ -1,6 +1,6 @@
 <template>
 	<Space :style="props.style" class="btn-searchs">
-		<Button type="primary" @click="submit">
+		<Button type="primary" @click="submit" v-bind="props.submitButtonProps">
 			<template #icon>
 				<SearchOutlined />
 			</template>
@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-import { Space, Button } from "ant-design-vue";
+import { Space, Button, type ButtonProps } from "ant-design-vue";
 import type { CSSProperties } from "@vue/runtime-dom";
 import { SearchOutlined, UndoOutlined, DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 import { useFormInstance } from "@/components/core/form/base-form/hooks/useFormInstance";
@@ -30,6 +30,7 @@ import { useFormInstance } from "@/components/core/form/base-form/hooks/useFormI
 type ActionsProps = {
 	style?: CSSProperties;
 	collapsed?: boolean;
+	submitButtonProps?: ButtonProps;
 };
 
 const { submit, resetForm } = useFormInstance();

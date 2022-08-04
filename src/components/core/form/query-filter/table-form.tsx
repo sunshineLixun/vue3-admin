@@ -1,6 +1,6 @@
 import { defineComponent, unref } from "vue";
 import { Row, Col, Form } from "ant-design-vue";
-import Action from "./action.vue";
+import Action from "./components/form-action/action.vue";
 import { merge } from "lodash";
 import { BaseForm } from "@/components/core/form/base-form";
 import { useTableFromState } from "./hooks/useTableFromState";
