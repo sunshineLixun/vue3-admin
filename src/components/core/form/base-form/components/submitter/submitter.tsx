@@ -1,16 +1,14 @@
 import { defineComponent } from "vue";
 import { submitterProps } from "./types";
 import { Button, Space } from "ant-design-vue";
-import { omit } from "lodash";
 
 const Submitter = defineComponent({
-	props: submitterProps(),
-	setup(props) {
+	props: submitterProps,
+	slots: ["submitIcon", "resetIcon"],
+	setup(props, { slots }) {
 		return () => {
-			const { onSubmit, onReset, searchConfig, submitButtonProps = {}, resetButtonProps = {}, render } = props;
-			if (render === false) {
-				return null;
-			}
+			const { onSubmit, onReset, searchConfig, submitButtonProps, resetButtonProps = {} } = props;
+
 			const { submitText = "提交", resetText = "重置" } = searchConfig || {};
 
 			const submit = () => {
@@ -26,7 +24,8 @@ const Submitter = defineComponent({
 					<Button
 						type={"primary"}
 						key="submit"
-						{...(omit(submitButtonProps), ["preventDefault"])}
+						{...submitButtonProps}
+						icon={slots.submitIcon?.()}
 						onClick={e => {
 							if (!submitButtonProps.preventDefault) {
 								submit();
@@ -43,7 +42,8 @@ const Submitter = defineComponent({
 				doms.push(
 					<Button
 						key="reset"
-						{...omit(resetButtonProps, ["preventDefault"])}
+						{...resetButtonProps}
+						icon={slots.resetIcon?.()}
 						onClick={e => {
 							if (!resetButtonProps.preventDefault) {
 								reset();
@@ -56,17 +56,16 @@ const Submitter = defineComponent({
 				);
 			}
 
-			const renderDom = render ? render({ ...props }, doms) : doms;
-			if (Array.isArray(renderDom)) {
-				if (renderDom.length === 0) {
-					return null;
+			if (Array.isArray(doms)) {
+				if (doms.length === 0) {
+					return undefined;
 				}
-				if (renderDom.length === 1) {
-					return renderDom[0];
+				if (doms.length === 1) {
+					return doms[0];
 				}
-				return <Space>{renderDom}</Space>;
+				return <Space>{doms}</Space>;
 			}
-			return renderDom;
+			return doms;
 		};
 	}
 });

@@ -32,7 +32,6 @@ const instance = {
 	...formMethods
 };
 
-console.log(pick(getFormProps.value, aFormPropKeys));
 createFromInstance(instance);
 defineExpose(instance);
 </script>

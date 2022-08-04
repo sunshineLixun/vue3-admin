@@ -1,16 +1,32 @@
-import type { PropType, ExtractPropTypes } from "vue";
+import type { PropType, ExtractPropTypes, VNode } from "vue";
 import { formProps, type FormProps } from "ant-design-vue/es/form";
 import type BaseFrom from "./base-form.vue";
 import { isObject } from "@/utils/is";
+import type { SubmitterProps } from "./components/submitter/types";
 
-export const aFormPropKeys = Object.keys(formProps);
+export const aFormPropKeys = Object.keys(formProps());
 
 /** baseForm基础props */
-export const baseFormProps = {
+export const commonFormProps = {
 	...formProps(),
 	layout: {
 		type: String as PropType<FormProps["layout"]>,
 		default: "horizontal"
+	},
+	submitter: {
+		type: Object as PropType<false | SubmitterProps>
+	}
+};
+
+export const baseFormProps = {
+	...commonFormProps,
+	contentRender: {
+		type: Function as PropType<(items: VNode[], submitter: SubmitterProps | undefined) => VNode>
+	},
+	/** @name 是否回车提交 默认为true */
+	isKeyPressSubmit: {
+		type: Boolean as PropType<boolean>,
+		default: true
 	}
 };
 
@@ -22,6 +38,8 @@ export const baseFromEmits = {
 };
 
 export type BaseFromEmits = typeof baseFromEmits;
+
+export type CommonFormProps = Partial<ExtractPropTypes<typeof commonFormProps>>;
 
 // 属性全部转化为可选的
 export type BaseFormPropsType = Partial<ExtractPropTypes<typeof baseFormProps>>;

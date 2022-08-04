@@ -1,17 +1,13 @@
 <template>
 	<Space :style="props.style" class="btn-searchs">
-		<Button type="primary" @click="submit" v-bind="props.submitButtonProps">
-			<template #icon>
+		<Submitter @submit="submit" @reset="resetForm" :reset-button-props="{}" :submit-button-props="{}">
+			<template #submitIcon>
 				<SearchOutlined />
 			</template>
-			查询
-		</Button>
-		<Button @click="resetForm">
-			<template #icon>
+			<template #resetIcon>
 				<UndoOutlined />
 			</template>
-			重置
-		</Button>
+		</Submitter>
 		<Button class="expand" type="link" @click="onCollapsed">
 			{{ !props.collapsed ? "收起" : "展开" }}
 			<UpOutlined v-if="!props.collapsed" />
@@ -22,15 +18,15 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-import { Space, Button, type ButtonProps } from "ant-design-vue";
+import { Space, Button } from "ant-design-vue";
 import type { CSSProperties } from "@vue/runtime-dom";
 import { SearchOutlined, UndoOutlined, DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 import { useFormInstance } from "@/components/core/form/base-form/hooks/useFormInstance";
+import { Submitter } from "@/components/core/form/base-form/components/submitter";
 
 type ActionsProps = {
 	style?: CSSProperties;
 	collapsed?: boolean;
-	submitButtonProps?: ButtonProps;
 };
 
 const { submit, resetForm } = useFormInstance();
