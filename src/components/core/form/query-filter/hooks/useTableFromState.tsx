@@ -4,7 +4,7 @@ import { Col } from "ant-design-vue";
 import type { TableFormProps } from "../types";
 import type { QueryFilter } from "../table-form";
 import type { BaseFromInstance } from "@/components/core/form/base-form/types";
-import { getSpanConfig } from "../utils";
+import { getSpanConfig } from "../components/form-action/utils";
 
 export type UseTableFormStateParams = {
 	props: TableFormProps;
