@@ -19,8 +19,12 @@ export const commonFormProps = {
 	onFinish: {
 		type: Function as PropType<(fromModel: Recordable<any>) => void>
 	},
+	/**表单提交 */
+	onSubmit: {
+		type: Function as PropType<(fromModel: Recordable<any>) => void>
+	},
 	/**重置表单 */
-	onrReset: {
+	onReset: {
 		type: Function as PropType<(fromModel: Recordable<any>) => void>
 	}
 };

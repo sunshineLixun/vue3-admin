@@ -23,6 +23,7 @@ export function useTableMethods({ props, state }: UseTableMethodsParams) {
 			...unref(props.formProps?.model),
 			...params
 		};
+		// 如果有分页器
 		if (enablePagination) {
 			queryParams = merge(queryParams, {
 				current: pagination.current,
@@ -40,26 +41,37 @@ export function useTableMethods({ props, state }: UseTableMethodsParams) {
 		}
 	}
 
+	async function getFormParams() {
+		let params = {};
+		if (tableFromRef.value) {
+			// 获取表单数据
+			const values = await (unref(tableFromRef)?.$refs.baseFromRef as BaseFromInstance)?.validate();
+			if (values) {
+				params = (unref(tableFromRef)?.$refs.baseFromRef as BaseFromInstance)?.handleFormValues(values) || {};
+			}
+		}
+		return params;
+	}
+
 	function handleSumbit(params = {}) {
 		fetch(params);
 	}
 
 	const onTableChange = async (...rest: TableChangeProps) => {
 		const [pagination] = rest;
-		let params = {};
-		if (tableFromRef.value) {
-			const values = await (unref(tableFromRef)?.$refs.baseFromRef as BaseFromInstance)?.validate();
-			if (values) {
-				params = (unref(tableFromRef)?.$refs.baseFromRef as BaseFromInstance)?.handleFormValues(values) || {};
-			}
-		}
+		let params = await getFormParams();
 		paginationRef.value = merge(paginationRef.value, pagination);
 		fetch(params);
+	};
+
+	const onReset = () => {
+		fetch();
 	};
 
 	return {
 		handleSumbit,
 		fetch,
-		onTableChange
+		onTableChange,
+		onReset
 	};
 }

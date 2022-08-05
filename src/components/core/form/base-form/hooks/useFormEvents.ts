@@ -17,18 +17,26 @@ export const useFromEvents = (params: EventsParams) => {
 	 * 校验表单数据
 	 */
 	const validate = async (nameList?: NamePath[] | undefined) => {
-		return unref(formInstanceRef)?.validate(nameList);
+		return await unref(formInstanceRef)?.validate(nameList);
 	};
 
 	/**
 	 * 表单提交
 	 */
 	const handleSubmit = async () => {
+		if (!unref(formInstanceRef)) {
+			return;
+		}
 		try {
 			const values = await validate();
 			if (values) {
 				const res = handleFormValues(values);
-				props.onFinish?.(res);
+				if (props.onFinish) {
+					props.onFinish(res);
+				}
+				if (props.onSubmit) {
+					props.onSubmit(res);
+				}
 			}
 		} catch (error) {
 			return Promise.reject(error);
@@ -46,7 +54,7 @@ export const useFromEvents = (params: EventsParams) => {
 	const resetFields = (name?: NamePath) => {
 		// TODO: 恢复默认值
 		unref(formInstanceRef)?.resetFields(name);
-		emit("reset", model);
+		props.onReset?.(model);
 	};
 
 	return {

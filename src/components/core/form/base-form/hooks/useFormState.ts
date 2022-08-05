@@ -21,7 +21,6 @@ export const useFormState = ({ props, attrs }: useFormStateParams) => {
 			...formPropsRef.value
 		} as BaseFormPropsType;
 	});
-
 	return {
 		model,
 		formInstanceRef,

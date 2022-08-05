@@ -1,5 +1,5 @@
 <template>
-	<QueryFilter ref="tableFromRef" v-if="props.showSearch" v-bind="getFormProps" @finish="handleSumbit">
+	<QueryFilter ref="tableFromRef" v-if="props.showSearch" v-bind="getFormProps" @finish="handleSumbit" @reset="onReset">
 		<slot />
 	</QueryFilter>
 	<Table v-bind="getTableProps" :dataSource="dataSource" @change="onTableChange" />
@@ -17,7 +17,7 @@ const props = defineProps(proTableProps);
 const state = useProTableState({ props });
 const { tableFromRef, dataSource, getTableProps, getFormProps } = state;
 
-const { handleSumbit, fetch, onTableChange } = useTableMethods({ props, state });
+const { handleSumbit, fetch, onTableChange, onReset } = useTableMethods({ props, state });
 
 onMounted(() => {
 	fetch();
