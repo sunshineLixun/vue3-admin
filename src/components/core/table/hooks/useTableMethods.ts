@@ -53,7 +53,7 @@ export function useTableMethods({ props, state }: UseTableMethodsParams) {
 		return params;
 	}
 
-	function handleSumbit(params = {}) {
+	function handleSubmit(params = {}) {
 		fetch(params);
 	}
 
@@ -69,7 +69,7 @@ export function useTableMethods({ props, state }: UseTableMethodsParams) {
 	};
 
 	return {
-		handleSumbit,
+		handleSubmit,
 		fetch,
 		onTableChange,
 		onReset

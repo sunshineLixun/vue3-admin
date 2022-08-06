@@ -20,9 +20,3 @@ export interface Result<TData> {
 	data: ShallowRef<TData>;
 	error: Ref<string>;
 }
-
-export interface EffectResult<TData> {
-	effecLoading: Ref<boolean>;
-	effectData: ShallowRef<TData>;
-	effecError: Ref<string>;
-}

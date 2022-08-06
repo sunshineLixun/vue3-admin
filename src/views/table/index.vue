@@ -1,38 +1,38 @@
 <template>
 	<ProTable v-bind="proTableProps">
-		<Form.Item name="name">
+		<FormItem name="name">
 			<Input v-model:value="formData.name" placeholder="姓名" allowClear />
-		</Form.Item>
-		<Form.Item name="gender">
+		</FormItem>
+		<FormItem name="gender">
 			<Select v-model:value="formData.gender" :options="selectData" allowClear placeholder="请选择性别" />
-		</Form.Item>
-		<Form.Item name="height">
+		</FormItem>
+		<FormItem name="height">
 			<Input v-model:value="formData.height" placeholder="请输入身高" allowClear />
-		</Form.Item>
-		<Form.Item name="time">
+		</FormItem>
+		<FormItem name="time">
 			<DatePicker v-model:value="formData.time" placeholder="请选择时间" allowClear />
-		</Form.Item>
-		<Form.Item name="weight">
+		</FormItem>
+		<FormItem name="weight">
 			<Input v-model:value="formData.weight" placeholder="请输入体重" allowClear />
-		</Form.Item>
-		<Form.Item name="navigation">
+		</FormItem>
+		<FormItem name="navigation">
 			<ApiSelect v-model:value="formData.navigation" :datas="navigaDatas" placeholder="请选择民族" />
-		</Form.Item>
-		<Form.Item name="birthday">
+		</FormItem>
+		<FormItem name="birthday">
 			<DatePicker v-model:value="formData.birthday" placeholder="请选择出生日期" allowClear />
-		</Form.Item>
-		<Form.Item name="course">
+		</FormItem>
+		<FormItem name="course">
 			<Input v-model:value="formData.course" placeholder="请输入班级" allowClear />
-		</Form.Item>
+		</FormItem>
 	</ProTable>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
-import { Form, Input, Select, DatePicker } from "ant-design-vue";
+import { FormItem, Input, Select, DatePicker } from "ant-design-vue";
 import type { ColumnsType } from "ant-design-vue/es/table/interface";
 import { listApi } from "@/api/modules/list";
 import { ApiSelect } from "@/components/basic/select";
-import type { SelectOptionData } from "@/api/interface/index";
+import type { SelectOptionData } from "@/api/interface";
 import { ProTable } from "@/components/core/table";
 import type { FormProps, ProTableProps } from "@/components/core/table/types";
 

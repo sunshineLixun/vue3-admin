@@ -2,8 +2,9 @@ import type { PropType, ExtractPropTypes, VNode } from "vue";
 import { formProps, type FormProps } from "ant-design-vue/es/form";
 import type BaseFrom from "./base-form.vue";
 import type { SubmitterProps } from "./components/submitter/types";
+import { isObject } from "@/utils/is";
 
-export const aFormPropKeys = Object.keys(formProps());
+// export const aFormPropKeys = Object.keys(formProps());
 
 /** baseForm基础props */
 export const commonFormProps = {
@@ -34,12 +35,20 @@ export const baseFormProps = {
 	contentRender: {
 		type: Function as PropType<(items: VNode[], submitter: SubmitterProps | undefined) => VNode>
 	},
-	/** @name 是否回车提交 默认为true */
+	/** 是否回车提交 默认为true */
 	isKeyPressSubmit: {
 		type: Boolean as PropType<boolean>,
 		default: true
 	}
 };
+
+export const baseFormEmit = {
+	finish: (values: Recordable<any>) => isObject(values),
+	submit: (values: Recordable<any>) => isObject(values)
+};
+
+export type BaseFormEmit = typeof baseFormEmit;
+
 export type CommonFormProps = Partial<ExtractPropTypes<typeof commonFormProps>>;
 
 // 属性全部转化为可选的

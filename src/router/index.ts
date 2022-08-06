@@ -3,7 +3,7 @@ import { Layout } from "@/router/layout";
 
 export const routes: RouteRecordRaw[] = [
 	{
-		path: "/",
+		path: "/dashboard",
 		name: "dashboard",
 		redirect: "/dashboard/index",
 		component: Layout,

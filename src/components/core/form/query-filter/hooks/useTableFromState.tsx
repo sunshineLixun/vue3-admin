@@ -1,4 +1,4 @@
-import { ref, computed, unref, watchEffect, cloneVNode, isVNode } from "vue";
+import { ref, computed, unref, watch, cloneVNode, isVNode } from "vue";
 import type { SetupContext, VNode, VNodeProps } from "vue";
 import { Col } from "ant-design-vue";
 import type { TableFormProps } from "../types";
@@ -46,18 +46,25 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 		return Math.max(1, 24 / unref(spanSize).span - 1);
 	});
 
-	const childrens = slots.default ? slots.default().flatMap(v => v.children as VNode[]) : [];
+	let children: VNode[] = [];
+	// 如果是ProTable类似组件多层嵌套slot，这里的slots.default()会是嵌套的slot
+	const isProTable = slots.default && slots.default().length === 1;
+	if (isProTable) {
+		children = slots.default ? slots.default().flatMap(v => v.children as VNode[]) : [];
+	} else {
+		children = slots.default ? slots.default() : [];
+	}
 
 	// 计算form.item占据的位置
 	function getDoms() {
-		// form.item占用的位置，计算offest保证查询/重置最一行的最后面
+		// form.item占用的位置，计算offset保证查询/重置最一行的最后面
 		let totalSpan = 0;
 		// form.item 总共占用的份数
 		let totalSize = 0;
 		//首个表单项是否占满第一行
 		let firstRowFull = false;
 		currentSpan.value = 0;
-		const formItems = childrens.map(
+		const formItems = children.map(
 			(child, index): { itemDom: VNode | null; colSpan: number; hidden: boolean; key?: VNodeProps["key"] } => {
 				const colSize = isVNode(child) ? child.props?.colSize ?? 1 : 1;
 				const colSpan = Math.min(unref(spanSize).span * colSize, 24);
@@ -102,7 +109,6 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 				};
 			}
 		);
-
 		doms.value = formItems.map(child => {
 			const { itemDom, colSpan, hidden, key } = child;
 
@@ -116,12 +122,11 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 			}
 			currentSpan.value += colSpan;
 
-			const colItem = (
+			return (
 				<Col key={key} span={colSpan}>
 					{itemDom}
 				</Col>
 			);
-			return colItem;
 		});
 	}
 
@@ -130,7 +135,8 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 		return 24 - offsetSpan;
 	});
 
-	watchEffect(getDoms);
+	getDoms();
+	watch(collapsed, getDoms);
 
 	return {
 		width,

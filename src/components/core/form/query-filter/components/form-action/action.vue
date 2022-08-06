@@ -1,5 +1,5 @@
 <template>
-	<Space :style="props.style" class="btn-searchs">
+	<Space :style="props.style" class="btn-search">
 		<Submitter @submit="submit" @reset="resetForm" :reset-button-props="{}" :submit-button-props="{}">
 			<template #submitIcon>
 				<SearchOutlined />
@@ -43,7 +43,7 @@ const onCollapsed = () => {
 </script>
 
 <style lang="scss" scoped>
-.btn-searchs {
+.btn-search {
 	display: flex;
 	align-items: flex-start;
 	justify-content: end;

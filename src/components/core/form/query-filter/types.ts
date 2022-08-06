@@ -42,9 +42,10 @@ export const tableFormProps = {
 		type: Boolean as PropType<boolean>,
 		default: true
 	},
+	/** 提交按钮的props*/
 	submitButtonProps: {
 		type: Object as PropType<ButtonProps>
 	}
 };
 export type TableFormProps = Partial<ExtractPropTypes<typeof tableFormProps>>;
-export type TablePormInstance = InstanceType<typeof QueryFilter>;
+export type TableFormInstance = InstanceType<typeof QueryFilter>;

@@ -15,14 +15,14 @@ const CONFIG_SPAN_BREAKPOINTS: BreakPointType = {
 	xxl: Infinity
 };
 
-type BREAKPOINTSVALUESTYPE = [number, number, string][];
+type BreakPointValueType = [number, number, string][];
 
-type BREAKPOINTSTYPES = {
-	[key: string]: BREAKPOINTSVALUESTYPE;
+type BreakPointsType = {
+	[key: string]: BreakPointValueType;
 };
 
 /** 配置表单列变化的容器宽度断点 */
-const BREAKPOINTS: BREAKPOINTSTYPES = {
+const BREAKPOINTS: BreakPointsType = {
 	vertical: [
 		// [breakpoint, cols, layout]
 		[513, 1, "vertical"],
@@ -67,7 +67,7 @@ export const getSpanConfig = (layout: FormLayout, width: number, span?: SpanConf
 		};
 	}
 
-	const spanConfig: BREAKPOINTSVALUESTYPE =
+	const spanConfig: BreakPointValueType =
 		span && typeof span !== "number"
 			? ["xs", "sm", "md", "lg", "xl", "xxl"].map(key => [CONFIG_SPAN_BREAKPOINTS[key], 24 / span[key], "horizontal"])
 			: BREAKPOINTS[layout || "default"];

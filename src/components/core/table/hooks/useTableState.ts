@@ -1,5 +1,5 @@
 import { ref, shallowRef, computed, unref } from "vue";
-import type { TableFromInstance } from "../components/table-form/hooks/useTableFromState";
+import type { TableFormInstance } from "@/components/core/form/query-filter/types";
 import type { TableProps } from "ant-design-vue";
 import type { ProTableProps } from "../types";
 import { omit } from "lodash";
@@ -11,7 +11,7 @@ export type UseProTableStateParams = {
 };
 
 export const useProTableState = ({ props }: UseProTableStateParams) => {
-	const tableFromRef = ref<TableFromInstance>();
+	const tableFromRef = ref<TableFormInstance>();
 	const dataSource = shallowRef<any[]>([]);
 	const loadingRef = ref(false);
 	const paginationRef = ref<NonNullable<Pagination>>(false);
