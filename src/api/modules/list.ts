@@ -1,4 +1,4 @@
-import { useService } from "../index";
+import { useService } from "@/api";
 import { List } from "../interface/modules/list";
 // import type { Params } from "@/hooks/useAntdTable/types";
 

@@ -1,4 +1,4 @@
-import { useService } from "../index";
+import { useService } from "@/api";
 import { Login } from "../interface/modules/login";
 
 const http = useService({
