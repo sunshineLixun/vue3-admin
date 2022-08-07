@@ -3,9 +3,9 @@ import { Layout } from "@/router/layout";
 
 export const routes: RouteRecordRaw[] = [
 	{
-		path: "/dashboard",
+		path: "/",
 		name: "dashboard",
-		redirect: "/dashboard/index",
+		redirect: "/dashboard",
 		component: Layout,
 		meta: {
 			title: "routes.dashboard.dashboard",
@@ -13,7 +13,7 @@ export const routes: RouteRecordRaw[] = [
 		},
 		children: [
 			{
-				path: "index",
+				path: "dashboard",
 				name: "dashboard",
 				component: () => import("@/views/dashboard/index.vue"),
 				meta: {

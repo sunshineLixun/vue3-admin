@@ -11,7 +11,7 @@ const QueryFilter = defineComponent({
 	setup(props, { attrs, expose, slots }) {
 		const state = useTableFromState({ props, attrs, slots });
 
-		const { baseFromRef, getFormProps, collapsed, spanSize, offset, doms } = state;
+		const { baseFromRef, getFormProps, collapsed, spanSize, offset, doms, needCollapseRender } = state;
 
 		const onCollapsed = (_collapsed: boolean) => {
 			collapsed.value = _collapsed;
@@ -30,7 +30,7 @@ const QueryFilter = defineComponent({
 						{unref(doms)}
 						<Col offset={unref(offset)} span={unref(spanSize).span}>
 							<Form.Item colon={false}>
-								<Action collapsed={unref(collapsed)} onCollapsed={onCollapsed} />
+								<Action collapsed={unref(collapsed)} collapseRender={unref(needCollapseRender)} onCollapsed={onCollapsed} />
 							</Form.Item>
 						</Col>
 					</Row>

@@ -8,7 +8,7 @@
 				<UndoOutlined />
 			</template>
 		</Submitter>
-		<Button class="expand" type="link" @click="onCollapsed">
+		<Button v-if="props.collapseRender" class="expand" type="link" @click="onCollapsed">
 			{{ !props.collapsed ? "收起" : "展开" }}
 			<UpOutlined v-if="!props.collapsed" />
 			<DownOutlined v-else-if="props.collapsed" />
@@ -25,13 +25,20 @@ import { useFormInstance } from "@/components/core/form/base-form/hooks/useFormI
 import { Submitter } from "@/components/core/form/base-form/components/submitter";
 
 type ActionsProps = {
+	// 样式
 	style?: CSSProperties;
+	// 是否展开
 	collapsed?: boolean;
+	// 收起按钮的 render
+	collapseRender?: boolean;
 };
 
 const { submit, resetForm } = useFormInstance();
 
-const props = defineProps<ActionsProps>();
+const props = withDefaults(defineProps<ActionsProps>(), {
+	collapsed: false,
+	collapseRender: true
+});
 
 const emit = defineEmits<{
 	(e: "collapsed", collapsed: boolean): void;

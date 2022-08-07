@@ -19,6 +19,7 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 	const baseFromRef = ref<BaseFromInstance>();
 	const doms = ref<(VNode | null)[]>([]);
 	const currentSpan = ref(0);
+	const needCollapseRender = ref<boolean | undefined>();
 
 	const { layout = "horizontal", span, defaultColsNumber } = unref(propsRef);
 	const collapsed = ref(unref(propsRef).defaultCollapsed);
@@ -47,8 +48,8 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 	});
 
 	let children: VNode[] = [];
-	// 如果是ProTable类似组件多层嵌套slot，这里的slots.default()会是嵌套的slot
-	const isProTable = slots.default && slots.default().length === 1;
+	// 如果是ProTable类似组件多层嵌套slot，这里的slots.default()会是嵌套的slot 并且slot的key是_default
+	const isProTable = slots.default && slots.default().length === 1 && slots.default()?.[0].props?.key === "_default";
 	if (isProTable) {
 		children = slots.default ? slots.default().flatMap(v => v.children as VNode[]) : [];
 	} else {
@@ -128,6 +129,7 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 				</Col>
 			);
 		});
+		needCollapseRender.value = !(totalSpan < 24 || totalSize <= unref(showLength));
 	}
 
 	const offset = computed(() => {
@@ -136,7 +138,7 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 	});
 
 	getDoms();
-	watch(collapsed, getDoms);
+	watch([collapsed, showLength, spanSize], getDoms);
 
 	return {
 		width,
@@ -146,7 +148,8 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 		showLength,
 		spanSize,
 		offset,
-		doms
+		doms,
+		needCollapseRender
 	};
 };
 export type TableFromInstance = InstanceType<typeof QueryFilter>;
