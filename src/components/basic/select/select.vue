@@ -1,6 +1,6 @@
 <template>
-	<Select v-bind="props">
-		<Select.Option v-for="item in _datas" :key="item.value">{{ item.title }}</Select.Option>
+	<Select v-bind="props" v-model:value="selectValue">
+		<Option v-for="item in _dataSource" :key="item.value">{{ item.title }}</Option>
 	</Select>
 </template>
 
@@ -8,10 +8,11 @@
 import { computed, shallowRef, ref, watch, watchEffect, defineProps } from "vue";
 import type { PropType } from "vue";
 import { Select } from "ant-design-vue";
-import { selectProps } from "ant-design-vue/es/select";
+import { selectProps, type SelectValue } from "ant-design-vue/es/select";
 import type { ResponsetData, SelectOptionData } from "@/api/interface";
 import { isFunction } from "@/utils/is";
 import { useRequest } from "@/hooks/useRequest";
+const Option = Select.Option;
 
 interface Emits {
 	(e: "update:value", val: string | number): void;
@@ -19,14 +20,18 @@ interface Emits {
 
 const props = defineProps({
 	...selectProps(),
+	// 默认值
+	defaultValue: {
+		type: [Array, Object, String, Number] as PropType<SelectValue>
+	},
 	api: {
 		type: Function as PropType<(arg?: any) => Promise<ResponsetData>>
 	},
-	datas: {
+	dataSource: {
 		type: Array as PropType<SelectOptionData[]>
 	},
 	params: {
-		type: Object,
+		type: Object as PropType<object>,
 		default: () => {}
 	},
 	isShowFirst: {
@@ -37,12 +42,19 @@ const props = defineProps({
 
 const emit = defineEmits<Emits>();
 
-const selectValue = ref(props.value);
+const selectValue = ref(props.value === undefined ? props.defaultValue : props.value);
 const options = shallowRef<SelectOptionData[]>([]);
 
-const _datas = computed(() => {
-	return options.value.length > 0 ? options.value : props.datas;
+const _dataSource = computed(() => {
+	return options.value.length > 0 ? options.value : props.dataSource;
 });
+
+watch(
+	() => props.value,
+	() => {
+		selectValue.value = props.value;
+	}
+);
 
 watch(
 	() => props.params,

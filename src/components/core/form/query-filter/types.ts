@@ -32,6 +32,10 @@ export const tableFormProps = {
 	defaultColsNumber: {
 		type: Number as PropType<number>
 	},
+	/** 是否折叠超出的表单项，用于受控模式*/
+	collapsed: {
+		type: Boolean as PropType<boolean>
+	},
 	/**默认状态下是否折叠超出的表单项 */
 	defaultCollapsed: {
 		type: Boolean as PropType<boolean>,
