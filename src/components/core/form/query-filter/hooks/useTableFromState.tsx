@@ -1,6 +1,7 @@
 import { ref, computed, unref, watch, cloneVNode, isVNode } from "vue";
 import type { SetupContext, VNode, VNodeProps } from "vue";
 import { Col } from "ant-design-vue";
+import { useResizeObserver } from "@vueuse/core";
 import type { TableFormProps } from "../types";
 import type { QueryFilter } from "../table-form";
 import type { BaseFromInstance } from "@/components/core/form/base-form/types";
@@ -25,6 +26,13 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 	const collapsed = ref(unref(propsRef).defaultCollapsed);
 
 	const width = ref((typeof unref(propsRef).style?.width === "number" ? unref(propsRef).style?.width : defaultWidth) as number);
+
+	// 监听视图窗口大小
+	useResizeObserver(baseFromRef, entries => {
+		const entry = entries[0];
+		const rect = entry.contentRect;
+		width.value = rect.width;
+	});
 
 	const getFormProps = computed(() => {
 		return {

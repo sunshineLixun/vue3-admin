@@ -37,7 +37,6 @@ const QueryFilter = defineComponent({
 				</>
 			);
 		};
-		//TODO: add FormItem label
 		return () => {
 			return (
 				<BaseForm

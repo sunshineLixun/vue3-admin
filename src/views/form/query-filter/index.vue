@@ -1,9 +1,9 @@
 <template>
 	<QueryFilter :model="formModel" @finish="handleSubmit">
-		<FormItem name="name">
+		<FormItem name="name" label="应用名称" required>
 			<Input v-model:value="formModel.name" placeholder="请输入" />
 		</FormItem>
-		<FormItem name="creater">
+		<FormItem name="creater" label="创建人">
 			<Input v-model:value="formModel.creater" placeholder="请输入" />
 		</FormItem>
 	</QueryFilter>
