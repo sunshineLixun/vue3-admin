@@ -34,7 +34,8 @@ export const tableFormProps = {
 	},
 	/** 是否折叠超出的表单项，用于受控模式*/
 	collapsed: {
-		type: Boolean as PropType<boolean>
+		type: Boolean as PropType<boolean>,
+		default: undefined
 	},
 	/**默认状态下是否折叠超出的表单项 */
 	defaultCollapsed: {
@@ -49,6 +50,10 @@ export const tableFormProps = {
 	/** 提交按钮的props*/
 	submitButtonProps: {
 		type: Object as PropType<ButtonProps>
+	},
+	/** 切换表单折叠状态时的回调*/
+	onCollapsed: {
+		type: Function as PropType<(collapsed: boolean) => void>
 	}
 };
 export type TableFormProps = Partial<ExtractPropTypes<typeof tableFormProps>>;

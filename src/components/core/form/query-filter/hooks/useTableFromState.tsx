@@ -23,7 +23,7 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 	const needCollapseRender = ref<boolean | undefined>();
 
 	const { layout = "horizontal", span, defaultColsNumber } = unref(propsRef);
-	const collapsed = ref(unref(propsRef).collapsed === undefined ? unref(propsRef).defaultCollapsed : unref(propsRef).collapsed);
+	const collapsed = ref(unref(propsRef)?.collapsed === undefined ? unref(propsRef).defaultCollapsed : unref(propsRef).collapsed);
 
 	const width = ref((typeof unref(propsRef).style?.width === "number" ? unref(propsRef).style?.width : defaultWidth) as number);
 

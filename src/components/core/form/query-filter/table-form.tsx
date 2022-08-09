@@ -8,12 +8,15 @@ import styles from "./table-form.module.scss";
 
 const QueryFilter = defineComponent({
 	props: tableFormProps,
-	setup(props, { attrs, expose, slots }) {
+	setup(props, { attrs, expose, slots, emit }) {
 		const state = useTableFromState({ props, attrs, slots });
 
 		const { baseFromRef, getFormProps, collapsed, spanSize, offset, doms, needCollapseRender } = state;
 
 		const onCollapsed = (_collapsed: boolean) => {
+			if (typeof props.onCollapsed === "function") {
+				emit("collapsed", _collapsed);
+			}
 			collapsed.value = _collapsed;
 		};
 
