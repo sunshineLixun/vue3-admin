@@ -1,6 +1,6 @@
 <template>
 	<Space :style="props.style" class="btn-search">
-		<Submitter @submit="submit" @reset="resetForm" :reset-button-props="{}" :submit-button-props="{}">
+		<Submitter @submit="submit" @reset="resetForm" :reset-button-props="{}" :submit-button-props="props.submitButtonProps || {}">
 			<template #submitIcon>
 				<SearchOutlined />
 			</template>
@@ -23,6 +23,7 @@ import type { CSSProperties } from "@vue/runtime-dom";
 import { SearchOutlined, UndoOutlined, DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 import { useFormInstance } from "@/components/core/form/base-form/hooks/useFormInstance";
 import { Submitter } from "@/components/core/form/base-form/components/submitter";
+import type { ButtonProps } from "ant-design-vue/es/button";
 
 type ActionsProps = {
 	// 样式
@@ -31,6 +32,8 @@ type ActionsProps = {
 	collapsed?: boolean;
 	// 收起按钮的 render
 	collapseRender?: boolean;
+	/** 提交按钮的props*/
+	submitButtonProps?: ButtonProps;
 };
 
 const { submit, resetForm } = useFormInstance();

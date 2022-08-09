@@ -33,7 +33,12 @@ const QueryFilter = defineComponent({
 						{unref(doms)}
 						<Col offset={unref(offset)} span={unref(spanSize).span}>
 							<Form.Item colon={false}>
-								<Action collapsed={unref(collapsed)} collapseRender={unref(needCollapseRender)} onCollapsed={onCollapsed} />
+								<Action
+									collapsed={unref(collapsed)}
+									collapseRender={unref(needCollapseRender)}
+									submitButtonProps={getFormProps.value.submitButtonProps}
+									onCollapsed={onCollapsed}
+								/>
 							</Form.Item>
 						</Col>
 					</Row>

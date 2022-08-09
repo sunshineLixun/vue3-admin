@@ -30,7 +30,8 @@ export const tableFormProps = {
 	},
 	/**自定义折叠状态下默认显示的表单控件数量，没有设置或小于 0，则显示一行控件; 数量大于等于控件数量则隐藏展开按钮 */
 	defaultColsNumber: {
-		type: Number as PropType<number>
+		type: Number as PropType<number>,
+		default: undefined
 	},
 	/** 是否折叠超出的表单项，用于受控模式*/
 	collapsed: {
@@ -46,6 +47,11 @@ export const tableFormProps = {
 	preserve: {
 		type: Boolean as PropType<boolean>,
 		default: true
+	},
+	/** 每一行是否有分割线 */
+	split: {
+		type: Boolean as PropType<boolean>,
+		default: undefined
 	},
 	/** 提交按钮的props*/
 	submitButtonProps: {

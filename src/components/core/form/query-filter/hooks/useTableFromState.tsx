@@ -1,6 +1,6 @@
 import { ref, computed, unref, watch, cloneVNode, isVNode } from "vue";
 import type { SetupContext, VNode, VNodeProps } from "vue";
-import { Col } from "ant-design-vue";
+import { Col, Divider } from "ant-design-vue";
 import { useResizeObserver, type MaybeElementRef } from "@vueuse/core";
 import type { TableFormProps } from "../types";
 import type { QueryFilter } from "../table-form";
@@ -18,11 +18,10 @@ const defaultWidth = document?.body?.clientWidth || 1024;
 export const useTableFromState = ({ props, attrs, slots }: UseTableFormStateParams) => {
 	const propsRef = ref<TableFormProps>(props);
 	const baseFromRef = ref<BaseFromInstance>();
-	const doms = ref<(VNode | null)[]>([]);
+	const doms = ref<(VNode | VNode[] | null)[]>([]);
 	const currentSpan = ref(0);
 	const needCollapseRender = ref<boolean | undefined>();
 
-	const { layout = "horizontal", span, defaultColsNumber } = unref(propsRef);
 	const collapsed = ref(unref(propsRef)?.collapsed === undefined ? unref(propsRef).defaultCollapsed : unref(propsRef).collapsed);
 
 	const width = ref((typeof unref(propsRef).style?.width === "number" ? unref(propsRef).style?.width : defaultWidth) as number);
@@ -43,13 +42,13 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 
 	/**根据屏幕宽度确定 每个表单项占据的span*/
 	const spanSize = computed(() => {
-		return getSpanConfig(layout, unref(width) + 16, span);
+		return getSpanConfig(unref(propsRef).layout || "horizontal", unref(width) + 16, unref(propsRef).span);
 	});
 
 	/**计算每行最大能显示多少个Form表单项 */
 	const showLength = computed(() => {
-		if (defaultColsNumber !== undefined) {
-			return defaultColsNumber;
+		if (unref(propsRef).defaultColsNumber !== undefined) {
+			return unref(propsRef).defaultColsNumber!;
 		}
 		// 查询/重置按钮会占用一个格子
 		return Math.max(1, 24 / unref(spanSize).span - 1);
@@ -72,6 +71,9 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 		let totalSize = 0;
 		//首个表单项是否占满第一行
 		let firstRowFull = false;
+
+		let itemLength = 0;
+
 		currentSpan.value = 0;
 		const formItems = children.map(
 			(child, index): { itemDom: VNode | null; colSpan: number; hidden: boolean; key?: VNodeProps["key"] } => {
@@ -90,6 +92,8 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 				const hidden =
 					child.props?.hidden ||
 					(unref(collapsed) && (firstRowFull || totalSize > unref(showLength) - 1) && !!index && totalSpan >= 24);
+
+				itemLength += 1;
 
 				const itemKey = (isVNode(child) && (child.key || `${child.props?.name}`)) || index;
 
@@ -118,7 +122,7 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 				};
 			}
 		);
-		doms.value = formItems.map(child => {
+		doms.value = formItems.map((child, index) => {
 			const { itemDom, colSpan, hidden, key } = child;
 
 			if (hidden) {
@@ -129,13 +133,25 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 				totalSpan += 24 - (unref(currentSpan) % 24);
 				currentSpan.value += 24 - (unref(currentSpan) % 24);
 			}
-			currentSpan.value += colSpan;
 
-			return (
+			let colItem = (
 				<Col key={key} span={colSpan}>
 					{itemDom}
 				</Col>
 			);
+
+			currentSpan.value += colSpan;
+
+			// split: true &&  currentSpan为最后一个 && 当前的item不是最后一个
+			if (unref(propsRef).split && unref(currentSpan) % 24 === 0 && index < itemLength) {
+				return [
+					colItem,
+					<Col span="24" key="line">
+						<Divider style={{ margin: "8px 0" }} />
+					</Col>
+				];
+			}
+			return colItem;
 		});
 		needCollapseRender.value = !(totalSpan < 24 || totalSize <= unref(showLength));
 	}

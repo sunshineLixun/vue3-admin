@@ -1,5 +1,14 @@
 <template>
-	<QueryFilter ref="tableFromRef" v-if="props.showSearch" v-bind="getFormProps" @finish="handleSubmit" @reset="onReset">
+	<QueryFilter
+		ref="tableFromRef"
+		v-if="props.showSearch"
+		v-bind="getFormProps"
+		:submitButtonProps="{
+			loading: getFormProps.loading
+		}"
+		@finish="handleSubmit"
+		@reset="onReset"
+	>
 		<slot />
 	</QueryFilter>
 	<Table v-bind="getTableProps" :dataSource="dataSource" @change="onTableChange" />
