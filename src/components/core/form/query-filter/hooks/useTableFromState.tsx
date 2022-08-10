@@ -1,6 +1,8 @@
-import { ref, computed, unref, watch, cloneVNode, isVNode } from "vue";
+import { ref, computed, unref, watch } from "vue";
 import type { SetupContext, VNode, VNodeProps } from "vue";
 import { Col, Divider } from "ant-design-vue";
+import { cloneElement } from "ant-design-vue/es/_util/vnode";
+import { isValidElement } from "ant-design-vue/es/_util/props-util";
 import { useResizeObserver, type MaybeElementRef } from "@vueuse/core";
 import type { TableFormProps } from "../types";
 import type { QueryFilter } from "../table-form";
@@ -77,7 +79,7 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 		currentSpan.value = 0;
 		const formItems = children.map(
 			(child, index): { itemDom: VNode | null; colSpan: number; hidden: boolean; key?: VNodeProps["key"] } => {
-				const colSize = isVNode(child) ? child.props?.colSize ?? 1 : 1;
+				const colSize = isValidElement(child) ? child.props?.colSize ?? 1 : 1;
 				const colSpan = Math.min(unref(spanSize).span * colSize, 24);
 
 				totalSize += colSize;
@@ -95,9 +97,9 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 
 				itemLength += 1;
 
-				const itemKey = (isVNode(child) && (child.key || `${child.props?.name}`)) || index;
+				const itemKey = (isValidElement(child) && (child.key || `${child.props?.name}`)) || index;
 
-				if (isVNode(child) && hidden) {
+				if (isValidElement(child) && hidden) {
 					if (!unref(getFormProps).preserve) {
 						return {
 							itemDom: null,
@@ -106,7 +108,7 @@ export const useTableFromState = ({ props, attrs, slots }: UseTableFormStatePara
 						};
 					} else {
 						return {
-							itemDom: cloneVNode(child, {
+							itemDom: cloneElement(child, {
 								hidden: true,
 								key: itemKey || index
 							}),
