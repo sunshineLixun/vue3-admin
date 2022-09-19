@@ -3,10 +3,10 @@
 		<FormItem name="name" label="应用名称" required>
 			<Input v-model:value="formModel.name" placeholder="请输入" />
 		</FormItem>
-		<FormItem name="creater" label="创建人">
+		<FormItem name="creater" label="创建人" required>
 			<Input v-model:value="formModel.creater" placeholder="请输入" />
 		</FormItem>
-		<FormItem name="sex" label="性别">
+		<FormItem name="sex" label="性别" required>
 			<Select v-model:value="formModel.sex">
 				<SelectOption v-for="item in sex" :value="item.value" :key="item.value">{{ item.label }}</SelectOption>
 			</Select>
