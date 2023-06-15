@@ -4,7 +4,7 @@ import { fileURLToPath, URL } from "url";
 import type { UserConfigExport, ConfigEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import { createStyleImportPlugin, AndDesignVueResolve } from "vite-plugin-style-import";
+// import { createStyleImportPlugin, AndDesignVueResolve } from "vite-plugin-style-import";
 import vueI18n from "@intlify/vite-plugin-vue-i18n";
 import { viteMockServe } from "vite-plugin-mock";
 import VueTypeImports from "vite-plugin-vue-type-imports";
@@ -40,9 +40,9 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           setupProdMockServer();
         `
 			}),
-			createStyleImportPlugin({
-				resolves: [AndDesignVueResolve()]
-			}),
+			// createStyleImportPlugin({
+			// 	resolves: [AndDesignVueResolve()]
+			// }),
 			vueI18n({
 				// if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
 				// compositionOnly: false,
