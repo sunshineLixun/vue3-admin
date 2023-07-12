@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, shallowRef, ref, watch, watchEffect, defineProps } from "vue";
+import { computed, shallowRef, ref, watch, watchEffect } from "vue";
 import type { PropType } from "vue";
 import { Select } from "ant-design-vue";
 import { selectProps, type SelectValue } from "ant-design-vue/es/select";
@@ -17,6 +17,7 @@ const Option = Select.Option;
 interface Emits {
 	(e: "update:value", val: string | number): void;
 }
+
 
 const props = defineProps({
 	...selectProps(),

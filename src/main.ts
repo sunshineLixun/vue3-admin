@@ -6,5 +6,6 @@ import { i18n } from "@/locales";
 
 import "ant-design-vue/dist/antd.css";
 import "@ant-design-vue/pro-form/dist/style.css";
+import "virtual:uno.css";
 
 createApp(App).use(router).use(store).use(i18n).mount("#app");

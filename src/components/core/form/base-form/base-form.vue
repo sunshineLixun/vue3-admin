@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineExpose, useAttrs } from "vue";
+import {  useAttrs } from "vue";
 import { Form } from "ant-design-vue";
 import { baseFormProps, baseFormEmit } from "./types";
 import { useFormState } from "./hooks/useFormState";

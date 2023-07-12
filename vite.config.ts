@@ -2,12 +2,12 @@ import path from "path";
 import { fileURLToPath, URL } from "url";
 
 import type { UserConfigExport, ConfigEnv } from "vite";
-import vue from "@vitejs/plugin-vue";
-import vueJsx from "@vitejs/plugin-vue-jsx";
+import Vue from "@vitejs/plugin-vue";
+import VueJSX from "@vitejs/plugin-vue-jsx";
 // import { createStyleImportPlugin, AndDesignVueResolve } from "vite-plugin-style-import";
-import vueI18n from "@intlify/vite-plugin-vue-i18n";
+import VueI18n from "@intlify/vite-plugin-vue-i18n";
 import { viteMockServe } from "vite-plugin-mock";
-import VueTypeImports from "vite-plugin-vue-type-imports";
+import UnoCSS from "unocss/vite";
 // import Components from "unplugin-vue-components/vite";
 // import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 
@@ -26,9 +26,9 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
 			}
 		},
 		plugins: [
-			vue(),
-			VueTypeImports(),
-			vueJsx(),
+			Vue(),
+			VueJSX(),
+			UnoCSS(),
 			viteMockServe({
 				ignore: /^_/, // 忽略自动读取以_开头的文件
 				mockPath: "mock",
@@ -43,7 +43,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
 			// createStyleImportPlugin({
 			// 	resolves: [AndDesignVueResolve()]
 			// }),
-			vueI18n({
+			VueI18n({
 				// if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
 				// compositionOnly: false,
 

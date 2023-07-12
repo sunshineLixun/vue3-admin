@@ -17,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 import { Space, Button } from "ant-design-vue";
 import type { CSSProperties } from "@vue/runtime-dom";
 import { SearchOutlined, UndoOutlined, DownOutlined, UpOutlined } from "@ant-design/icons-vue";

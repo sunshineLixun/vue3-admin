@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, onMounted } from "vue";
+import { onMounted } from "vue";
 import { Table } from "ant-design-vue";
 import { proTableProps } from "./types";
 import { QueryFilter } from "@/components/core/form/query-filter";
