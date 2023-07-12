@@ -137,8 +137,7 @@ function onCollapsed(collapsed: boolean) {
 	console.log(collapsed);
 }
 
-function onReset(params:any) { 
-    console.log(params)
+function onReset(params: any) {
+	console.log(params);
 }
-
 </script>

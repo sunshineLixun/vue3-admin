@@ -18,7 +18,6 @@ interface Emits {
 	(e: "update:value", val: string | number): void;
 }
 
-
 const props = defineProps({
 	...selectProps(),
 	// 默认值
