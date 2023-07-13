@@ -1,6 +1,6 @@
 <template>
 	<div mt-20px flex justify-center>
-		{{ t("routes.dashboard.dashboard") }}	
+		{{ t("routes.dashboard.dashboard") }}
 	</div>
 </template>
 
@@ -8,4 +8,3 @@
 import { useI18nv } from "@/hooks/useI18n";
 const { t } = useI18nv();
 </script>
-
